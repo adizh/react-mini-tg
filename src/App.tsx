@@ -10,38 +10,16 @@ import {
 
 import Main from './pages/Main';
 import About from './pages/About';
+import Login from './pages/Login';
 
 export const App: FC = () => {
 
-  // useEffect(() => {
-  //   return bindMiniAppCSSVars(miniApp, themeParams);
-  // }, [miniApp, themeParams]);
-
-  // useEffect(() => {
-  //   return bindThemeParamsCSSVars(themeParams);
-  // }, [themeParams]);
-
-  // useEffect(() => {
-  //   return viewport && bindViewportCSSVars(viewport);
-  // }, [viewport]);
-
-  // // Create new application navigator and attach it to the browser history, so it could modify
-  // // it and listen to its changes.
-  // const navigator = useMemo(() => initNavigator('app-navigation-state'), []);
-  // const [location, reactNavigator] = useIntegration(navigator);
-
-  // // Don't forget to attach the navigator to allow it to control the BackButton state as well
-  // // as browser history.
-  // useEffect(() => {
-  //   navigator.attach();
-  //   return () => navigator.detach();
-  // }, [navigator]);
-
-  return (
+ return (
   <AppRoot className='section'>
      <Routes>
         <Route path="/react-mini-tg" element={<Main />} />
         <Route path="/react-mini-tg/about" element={<About />} />
+        <Route path="/react-mini-tg/login" element={<Login />} />
         </Routes>
   </AppRoot>
          

@@ -1,7 +1,8 @@
  import type { ComponentType } from 'react';
 
-import About from '../pages/About';
+
 import Main from '../pages/Main';
+import Login from '../pages/Login';
 
 interface Route {
   path: string;
@@ -20,7 +21,9 @@ import {
     RouterProvider,
   } from "react-router-dom";
 
+
   export const  router  = createBrowserRouter([
      { path: '/react-mini-tg', Component: Main },
-  { path: '/react-mini-tg/about', Component: About},
+  { path: '/react-mini-tg/about', Component: Login},
+  { path: '/react-mini-tg/login', Component: Login},
   ]);

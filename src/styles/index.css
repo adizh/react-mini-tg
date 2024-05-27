@@ -71,4 +71,15 @@ h1 {
 }
 .footer .blue-btn {
   margin-bottom: 12px;
+}
+
+.login-section {
+  margin-top: 24px;
+}
+
+.grey-text {
+  font-size: 14px;
+  line-height: 20px;
+  color: #7E848D;
+  font-weight: 400;
 }/*# sourceMappingURL=index.css.map */

@@ -10,12 +10,14 @@ body{
     max-width: 375px;
     width:100%;
     box-sizing: border-box;
+    height:812px;
 
 }
 
 .basic-text{
     font-weight: 400;
 }
+
 h1{
     font-size: 28px;
     line-height: 32px;
@@ -55,6 +57,18 @@ h1{
     width: 335px;
     bottom:38px;
     .blue-btn{
-        margin-bottom: 12px;
+      margin-bottom: 12px;
+ }
+ }
+
+.login-section{
+    margin-top: 24px;
 }
+
+.grey-text{
+    font-size: 14px;
+    line-height: 20px;
+    color:#7E848D;
+    font-weight: 400;
+
 }
