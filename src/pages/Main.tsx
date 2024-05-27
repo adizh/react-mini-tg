@@ -8,6 +8,7 @@ function Main() {
     const navigate = useNavigate();
     const baseURL = import.meta.env.BASE_URL;
 const tg=window.Telegram.WebApp as any;
+tg.isClosingConfirmationEnabled=false;
 console.log('tg',tg)
 tg.expand()
 useEffect(()=>{
