@@ -10,6 +10,9 @@ function Main() {
 const tg=window.Telegram.WebApp as any;
 tg.isClosingConfirmationEnabled=false;
 tg.disableClosingConfirmation()
+tg.SettingsButton.isVisible=true;
+
+
 console.log('tg',tg)
 tg.expand()
 useEffect(()=>{

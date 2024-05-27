@@ -9,9 +9,11 @@ body{
     font-style: normal;
     max-width: 375px;
     width:100%;
+    
     box-sizing: border-box;
     height:--tg-viewport-stable-height;
     touch-action: none !important;
+    position: fixed;
 
 }
 
