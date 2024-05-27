@@ -1,10 +1,9 @@
-
 @import './colors.scss';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 body{
     background: $bg-color;
     color:#fff;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;;
     font-optical-sizing: auto;
     font-style: normal;
     max-width: 375px;
@@ -13,9 +12,20 @@ body{
     box-sizing: border-box;
     height:--tg-viewport-stable-height;
     touch-action: none !important;
-
+    margin: 0;
+    padding: 0;
 
 }
+
+@media (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+  
+    h1, h2, h3, h4, h5, h6 {
+      font-size: 16px;
+    }
+  }
 
 .basic-text{
     font-weight: 400;
@@ -32,7 +42,7 @@ h1{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 80px;
+    margin-top: 100px;
 
 }
 .logo-img{
