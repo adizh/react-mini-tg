@@ -1,14 +1,3 @@
-// import { SDKProvider } from '@tma.js/sdk-react';
-
-
-// export default function Root() {
-//   return (
-//     <SDKProvider acceptCustomStyles debug>
-//       <div>My application!</div>
-//     </SDKProvider>
-//   );
-// }
-
 import { useIntegration } from '@tma.js/react-router-integration';
 import {
   bindMiniAppCSSVars,
@@ -27,7 +16,6 @@ import {
   Router,
   Routes,
 } from 'react-router-dom';
-
 
 import Main from './pages/Main';
 import About from './pages/About';
@@ -59,7 +47,7 @@ export const App: FC = () => {
   // }, [navigator]);
 
   return (
-  <AppRoot>
+  <AppRoot className='section'>
      <Routes>
         <Route path="/react-mini-tg" element={<Main />} />
         <Route path="/react-mini-tg/about" element={<About />} />
