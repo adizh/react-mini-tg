@@ -59,11 +59,13 @@ export const App: FC = () => {
   // }, [navigator]);
 
   return (
-  
-          <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/about" element={<About />} />
+  <AppRoot>
+     <Routes>
+        <Route path="/react-mini-tg" element={<Main />} />
+        <Route path="/react-mini-tg/about" element={<About />} />
         </Routes>
+  </AppRoot>
+         
     
   );
 };

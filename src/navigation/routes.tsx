@@ -21,6 +21,6 @@ import {
   } from "react-router-dom";
 
   export const  router  = createBrowserRouter([
-     { path: '/', Component: Main },
-  { path: '/about', Component: About},
+     { path: '/react-mini-tg', Component: Main },
+  { path: '/react-mini-tg/about', Component: About},
   ]);

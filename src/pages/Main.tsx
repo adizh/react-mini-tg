@@ -6,7 +6,7 @@ function Main() {
     Main page
   </p>
 
-<Link to='/about'>About link</Link>
+<Link to='/react-mini-tg/about'>About link</Link>
 
   </div>;
 }
