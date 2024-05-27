@@ -9,6 +9,7 @@ function Main() {
     const baseURL = import.meta.env.BASE_URL;
 const tg=window.Telegram.WebApp as any;
 tg.isClosingConfirmationEnabled=false;
+tg.disableClosingConfirmation()
 console.log('tg',tg)
 tg.expand()
 useEffect(()=>{
