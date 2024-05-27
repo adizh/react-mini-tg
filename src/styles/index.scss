@@ -7,11 +7,54 @@ body{
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    max-width: 375px;
+    width:100%;
+    box-sizing: border-box;
+
 }
 
-
+.basic-text{
+    font-weight: 400;
+}
 h1{
     font-size: 28px;
     line-height: 32px;
     font-weight: 700;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 80px;
+
+}
+.logo-img{
+    margin-bottom: 24px;
+}
+
+.header-h1{
+    margin-bottom: 8px;
+}
+.blue-btn{
+    background: #4361EE;
+    color:#FFF;
+    @extend %button
+}
+.white-btn{
+    background: white;
+    @extend %button
+}
+.footer {
+    padding: 0 20px;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+    position: absolute;
+    width: 375px;
+    bottom:38px;
+    .blue-btn{
+        margin-bottom: 12px;
+}
 }
