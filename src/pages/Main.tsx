@@ -8,10 +8,11 @@ function Main() {
     const navigate = useNavigate();
     const baseURL = import.meta.env.BASE_URL;
 const tg=window.Telegram.WebApp as any;
-tg.isClosingConfirmationEnabled=false;
-tg.disableClosingConfirmation()
-tg.SettingsButton.isVisible=true;
 
+tg.disableClosingConfirmation(true)
+tg.SettingsButton.isVisible=true;
+tg.ready()
+tg.isClosingConfirmationEnabled = true;
 
 console.log('tg',tg)
 tg.expand()
