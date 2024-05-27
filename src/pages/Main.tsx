@@ -16,9 +16,22 @@ tg.isClosingConfirmationEnabled = true;
 
 console.log('tg',tg)
 tg.expand()
-useEffect(()=>{
+useEffect(() => {
+    const overflow = 100;
+    document.body.style.overflowY = 'hidden';
+    document.body.style.marginTop = `${overflow}px`;
+    document.body.style.height = `${window.innerHeight + overflow}px`;
+    document.body.style.paddingBottom = `${overflow}px`;
+    window.scrollTo(0, overflow);
 
-},[])
+    return () => {
+      // Cleanup styles when the component is unmounted
+      document.body.style.overflowY = '';
+      document.body.style.marginTop = '';
+      document.body.style.height = '';
+      document.body.style.paddingBottom = '';
+    };
+  }, []);
   return <div>
 
 <div className="header">
