@@ -25,13 +25,42 @@ useEffect(() => {
     window.scrollTo(0, overflow);
 
     return () => {
-      // Cleanup styles when the component is unmounted
       document.body.style.overflowY = '';
       document.body.style.marginTop = '';
       document.body.style.height = '';
       document.body.style.paddingBottom = '';
     };
   }, []);
+  const TouchHandlerComponent = ({ scrollableEl }) => {
+    useEffect(() => {
+      let ts;
+  
+      const onTouchStart = (e) => {
+        ts = e.touches[0].clientY;
+      };
+  
+      const onTouchMove = (e) => {
+        if (scrollableEl) {
+          const scroll = scrollableEl.scrollTop;
+          const te = e.changedTouches[0].clientY;
+          if (scroll <= 0 && ts < te) {
+            e.preventDefault();
+          }
+        } else {
+          e.preventDefault();
+        }
+      };
+  
+      document.documentElement.addEventListener('touchstart', onTouchStart, { passive: false });
+      document.documentElement.addEventListener('touchmove', onTouchMove, { passive: false });
+  
+      return () => {
+        document.documentElement.removeEventListener('touchstart', onTouchStart);
+        document.documentElement.removeEventListener('touchmove', onTouchMove);
+      };
+    }, [scrollableEl]);
+
+}
   return <div>
 
 <div className="header">
