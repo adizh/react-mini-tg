@@ -1,69 +1,69 @@
-// import "./App.css";
-// import { TonConnectButton } from "@tonconnect/ui-react";
-// import { Counter } from "./components/Counter";
-// import { Jetton } from "./components/Jetton";
-// import { TransferTon } from "./components/TransferTon";
-// import styled from "styled-components";
-// import { Button, FlexBoxCol, FlexBoxRow } from "./components/styled/styled";
-// import { useTonConnect } from "./hooks/useTonConnect";
-// import { CHAIN } from "@tonconnect/protocol";
-// import "@twa-dev/sdk";
+// import { SDKProvider } from '@tma.js/sdk-react';
 
-// const StyledApp = styled.div`
-//   background-color: #e8e8e8;
-//   color: black;
 
-//   @media (prefers-color-scheme: dark) {
-//     background-color: #222;
-//     color: white;
-//   }
-//   min-height: 100vh;
-//   padding: 20px 20px;
-// `;
-
-// const AppContainer = styled.div`
-//   max-width: 900px;
-//   margin: 0 auto;
-// `;
-
-// function App() {
-//   const { network } = useTonConnect();
-
+// export default function Root() {
 //   return (
-
-//     <div>Hello</div>
-//     // <StyledApp>
-//     //   <AppContainer>
-//     //     <FlexBoxCol>
-//     //       <FlexBoxRow>
-//     //         <TonConnectButton />
-//     //         <Button>
-//     //           {network
-//     //             ? network === CHAIN.MAINNET
-//     //               ? "mainnet"
-//     //               : "testnet"
-//     //             : "N/A"}
-//     //         </Button>
-//     //       </FlexBoxRow>
-//     //       <Counter />
-//     //       <TransferTon />
-//     //       <Jetton />
-//     //     </FlexBoxCol>
-//     //   </AppContainer>
-//     // </StyledApp>
+//     <SDKProvider acceptCustomStyles debug>
+//       <div>My application!</div>
+//     </SDKProvider>
 //   );
 // }
 
-// export default App;
+import { useIntegration } from '@tma.js/react-router-integration';
+import {
+  bindMiniAppCSSVars,
+  bindThemeParamsCSSVars,
+  bindViewportCSSVars,
+  initNavigator, useLaunchParams,
+  useMiniApp,
+  useThemeParams,
+  useViewport,
+} from '@tma.js/sdk-react';
+import { AppRoot } from '@telegram-apps/telegram-ui';
+import { type FC, useEffect, useMemo } from 'react';
+import {
+  Navigate,
+  Route,
+  Router,
+  Routes,
+} from 'react-router-dom';
 
 
-import { SDKProvider } from '@tma.js/sdk-react';
+import Main from './pages/Main';
+import About from './pages/About';
 
+export const App: FC = () => {
 
-export default function Root() {
+  // useEffect(() => {
+  //   return bindMiniAppCSSVars(miniApp, themeParams);
+  // }, [miniApp, themeParams]);
+
+  // useEffect(() => {
+  //   return bindThemeParamsCSSVars(themeParams);
+  // }, [themeParams]);
+
+  // useEffect(() => {
+  //   return viewport && bindViewportCSSVars(viewport);
+  // }, [viewport]);
+
+  // // Create new application navigator and attach it to the browser history, so it could modify
+  // // it and listen to its changes.
+  // const navigator = useMemo(() => initNavigator('app-navigation-state'), []);
+  // const [location, reactNavigator] = useIntegration(navigator);
+
+  // // Don't forget to attach the navigator to allow it to control the BackButton state as well
+  // // as browser history.
+  // useEffect(() => {
+  //   navigator.attach();
+  //   return () => navigator.detach();
+  // }, [navigator]);
+
   return (
-    <SDKProvider acceptCustomStyles debug>
-      <div>My application!</div>
-    </SDKProvider>
+  
+          <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/about" element={<About />} />
+        </Routes>
+    
   );
-}
+};
