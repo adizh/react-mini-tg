@@ -81,10 +81,12 @@ width: $screen-width;
 
 
  .bottom-part{
-    padding: 0 20px;
+left:0;
+right:0;
     position: absolute;
+    margin:0 auto;
     width: 335px;
-    bottom:0px;
+    bottom:38px;
  }
 
 .login-section{
