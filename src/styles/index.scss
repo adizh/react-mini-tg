@@ -1,5 +1,12 @@
 @import './colors.scss';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body{
     background: $bg-color;
     color:#fff;
@@ -8,13 +15,10 @@ body{
     font-style: normal;
     max-width: 375px;
     width:100%;
-    box-sizing: border-box;
     height:--tg-viewport-stable-height;
-    touch-action: none !important;
-    margin: 0;
-    padding: 0;
-
+ 
 }
+
 
 @media (max-width: 768px) {
     body {
@@ -73,8 +77,25 @@ h1{
  }
  }
 
+
+ .bottom-part{
+    padding: 0 20px;
+    position: absolute;
+    width: 335px;
+    bottom:38px;
+  
+ }
+
 .login-section{
     margin-top: 24px;
+
+    input{
+        margin-top: 39px;
+    }
+
+    h1{
+        margin-bottom: 8px;
+    }
 }
 
 .grey-text{
@@ -83,4 +104,25 @@ h1{
     color:#7E848D;
     font-weight: 400;
 
+}
+
+.section{
+    padding:20px;
+}
+
+.basic-input{
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border: none;
+    width: 100%;
+    color:$text-color;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    &::placeholder{
+        color:$input-plach-text;
+        font-size: 10px;
+        line-height: 12px;
+    }
 }

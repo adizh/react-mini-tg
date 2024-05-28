@@ -9,7 +9,11 @@ function Login() {
     </p>
 
 
-    <input type="text" className='basic-input' />
+    <input type="text" className='basic-input'placeholder="Nickname" />
+
+    <div className='bottom-part'>
+      <button className="blue-btn">Login</button>
+    </div>
   </div>;
 }
 

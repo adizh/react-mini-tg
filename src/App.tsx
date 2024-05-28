@@ -11,6 +11,7 @@ import {
 import Main from './pages/Main';
 import About from './pages/About';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 export const App: FC = () => {
 
@@ -20,6 +21,7 @@ export const App: FC = () => {
         <Route path="/react-mini-tg" element={<Main />} />
         <Route path="/react-mini-tg/about" element={<About />} />
         <Route path="/react-mini-tg/login" element={<Login />} />
+        <Route path="/react-mini-tg/register" element={<Register />} />
         </Routes>
   </AppRoot>
          
