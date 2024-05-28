@@ -16,6 +16,22 @@ import Home from './pages/Home';
 
 export const App: FC = () => {
 
+  useEffect(() => {
+    const overflow = 100;
+    document.body.style.overflowY = 'hidden';
+    document.body.style.marginTop = `${overflow}px`;
+    document.body.style.height = `${window.innerHeight + overflow}px`;
+   // document.body.style.paddingBottom = `${overflow}px`;
+    window.scrollTo(0, overflow);
+
+    return () => {
+      document.body.style.overflowY = '';
+      document.body.style.marginTop = '';
+      document.body.style.height = '';
+     // document.body.style.paddingBottom = '';
+    };
+  }, []);
+
  return (
   <AppRoot className='section'>
      <Routes>

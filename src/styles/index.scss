@@ -83,7 +83,7 @@ width: $screen-width;
  .bottom-part{
 left:0;
 right:0;
-    position: absolute;
+    position: fixed;
     margin:0 auto;
     width: 335px;
     bottom:38px;
@@ -106,8 +106,9 @@ right:0;
     line-height: 20px;
     color:#7E848D;
     font-weight: 400;
-
 }
+
+
 
 .basic-white-text{
     color:white;

@@ -1,6 +1,6 @@
 import Footer from '../components/Footer';
 import '../styles/home.scss';
-
+import MainLogo from '../assets/images/main-home.png'
 
 function Home() {
   return <div>
@@ -40,12 +40,15 @@ You have 10 available tasks</span></div>
 
 
     <div className="main-content">
-        <div className="main-logo-content"></div>
+        <div className="main-logo-content" >
+
+          <span>Balance</span>
+          <p>0 MDC</p>
+        </div>
 
         <button className="blue-btn">
         Start mining
         </button>
-
 
 <div className="home-game">
 <div>
