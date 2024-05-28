@@ -1,5 +1,20 @@
+import { useNavigate } from 'react-router-dom';
+function Login() { 
+  
+  const navigate = useNavigate();
+  const tg=window.Telegram.WebApp;
 
-function Login() {
+console.log('tg',tg)
+
+console.log("window.Telegram",window.Telegram)
+tg.expand();
+const btn= tg.BackButton;
+
+btn.show()
+
+btn.onClick(()=>{
+navigate(-1);
+})
   return <div className='login-section'>
     
     <h1>Login</h1>

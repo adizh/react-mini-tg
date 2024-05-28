@@ -16,8 +16,6 @@ function exitError(error) {
   process.exit(1);
 }
 
-
-
 let githubUsername, githubRepo, botUsername;
 
 (async () => {
@@ -68,6 +66,9 @@ let githubUsername, githubRepo, botUsername;
       },
     }
   ).catch(exitError);
+
+
+
 
   if (resp.status === 200) {
     console.log(

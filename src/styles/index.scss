@@ -13,10 +13,9 @@ body{
     font-family: "Montserrat", sans-serif;;
     font-optical-sizing: auto;
     font-style: normal;
-    max-width: 375px;
-    width:100%;
-    height:--tg-viewport-stable-height;
- 
+    max-width: $screen-width;
+    width:100%; 
+    height:--tg-viewport-height;
 }
 
 
@@ -65,12 +64,15 @@ h1{
     @extend %button
 }
 .footer {
-    padding: 0 20px;
    display: flex;
    justify-content: center;
    flex-direction: column;
-    position: absolute;
-    width: 335px;
+   margin:0 auto;
+   left:0;
+   right:0;
+   position: fixed;
+padding:0 20px;
+width: $screen-width;
     bottom:38px;
     .blue-btn{
       margin-bottom: 12px;
@@ -82,8 +84,7 @@ h1{
     padding: 0 20px;
     position: absolute;
     width: 335px;
-    bottom:38px;
-  
+    bottom:0px;
  }
 
 .login-section{
@@ -106,6 +107,13 @@ h1{
 
 }
 
+.basic-white-text{
+    color:white;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
 .section{
     padding:20px;
 }
@@ -125,4 +133,19 @@ h1{
         font-size: 10px;
         line-height: 12px;
     }
+}
+
+
+.active-link{
+    color:#4361EE;
+}
+
+
+.home-game{
+    border-radius: 16px;
+    background: $footer-bg;
+    padding:16px;
+    margin-top: 46px;
+    @include flex(row,space-between,start)
+
 }

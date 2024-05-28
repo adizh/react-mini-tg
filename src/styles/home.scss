@@ -1,0 +1,44 @@
+@import '../styles/colors.scss';
+
+.user-logo{
+    background: green;
+    border-radius: 50%;
+    width: 40px;
+    height:40px;
+}
+
+.profile{
+@include flex(row,start,center);
+gap:8px;
+}
+
+
+.user-info{
+    @include flex(column,start,start);
+}
+
+.tasks{
+    border-radius: 8px;
+    background:$footer-bg;
+    padding:4px 8px;
+
+
+}
+.tasks-icon{
+    @include flex(row,center,center);
+gap:8px;
+}
+
+.home-header{
+    @include flex(row,space-between,start)
+}
+
+.home-tasks{
+    @include flex(column,start,flex-end);
+    gap:4px;
+}
+.home-game{
+    h1{
+        margin-bottom: 4px;
+    }
+}
