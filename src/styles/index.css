@@ -52,7 +52,7 @@ h1 {
 }
 
 .blue-btn {
-  background: #4361EE;
+  background: $purple;
   color: #FFF;
 }
 

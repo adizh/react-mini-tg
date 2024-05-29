@@ -13,7 +13,9 @@ import About from './pages/About';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
+
 import Friends from './pages/Friends';
+import Boost from './pages/Boost';
 
 export const App: FC = () => {
 
@@ -42,6 +44,7 @@ export const App: FC = () => {
         <Route path="/react-mini-tg/register" element={<Register />} />
         <Route path="/react-mini-tg/home" element={<Home />} />
         <Route path="/react-mini-tg/friends" element={<Friends />} />
+        <Route path="/react-mini-tg/boost" element={<Boost />} />
       </Routes>
   </AppRoot>
          

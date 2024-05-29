@@ -1,5 +1,6 @@
 @import './colors.scss';
 
+
 footer{
     background: $footer-bg;
     max-width: 100%;
@@ -8,16 +9,19 @@ footer{
     position: fixed;
     bottom:0;
     left:0;
-padding:0;
+    padding:0;
 
     @include flex(row,space-around,center);
-    a{
+    div{
         @include flex(column,center,center);  
         text-decoration: none;
         color:white;
         gap:4px;
         font-size: 12px;
         line-height: 18px;
+        &:hover{
+            cursor: pointer;
+        }
     }
 
 }
