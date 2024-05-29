@@ -15,7 +15,6 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 
 import Friends from './pages/Friends';
-import Boost from './pages/Boost';
 
 export const App: FC = () => {
 
