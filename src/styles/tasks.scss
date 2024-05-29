@@ -1,0 +1,43 @@
+@import '../styles/colors.scss';
+
+
+.tasks-header{
+text-align: center;
+}
+
+.tasks-section{
+    h1{
+        margin-bottom: 8px;
+    }
+}
+
+.tasks-block{
+    margin-top: 24px;
+    .white-btn{
+        padding: 2px 12px;
+        border-radius: 12px;
+    }
+}
+
+
+.tasks-block-list {
+    margin-top: 12px;
+    background: $bg-color2;
+    border-radius: 16px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr) repeat(4, 1fr); 
+    align-items: center; 
+    
+  
+}
+
+.tasks-block-list > div:first-child {
+    grid-column: span 8; 
+    @include flex(row,start,center);
+    gap:10px;
+}
+
+.tasks-block-list > div:last-child {
+    grid-column: span 4;
+}

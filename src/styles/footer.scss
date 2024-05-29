@@ -12,7 +12,7 @@ footer{
     padding:0;
 
     @include flex(row,space-around,center);
-    div{
+    a{
         @include flex(column,center,center);  
         text-decoration: none;
         color:white;
