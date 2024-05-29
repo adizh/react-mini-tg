@@ -12,8 +12,8 @@ function Footer() {
 
 
     const goTo = (link:string) => {
-     // event.preventDefault()
-    // setActiveLink(link);
+   
+    setActiveLink(link);
       navigate(`/react-mini-tg${link}`);
 };
 
@@ -21,10 +21,7 @@ const updateLink =(link:string)=>{
   setActiveLink(link);
 }
 
-// useEffect(() => {
-//   const link = activeLink
-//   setActiveLink(link)
-// }, [activeLink])
+
 
   return <footer>
     <div onClick={()=>goTo('/home')} className={activeLink==='/home'?'active-link':''}>
