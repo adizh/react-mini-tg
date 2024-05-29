@@ -1,5 +1,5 @@
 @import './colors.scss';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Onest:ital,wght@0,100..900;1,100..900&display=swap');
 
 *{
     margin: 0;
@@ -10,7 +10,7 @@
 body{
     background: $bg-color;
     color:#fff;
-    font-family: "Montserrat", sans-serif;;
+    font-family: "Onest", sans-serif;;
     font-optical-sizing: auto;
     font-style: normal;
     width:100%; 
@@ -60,11 +60,13 @@ h2{
 .header-h1{
     margin-bottom: 8px;
 }
+
 .blue-btn{
     background: $purple;
     color:#FFF;
     @extend %button
 }
+
 .white-btn{
     background: white;
     @extend %button;

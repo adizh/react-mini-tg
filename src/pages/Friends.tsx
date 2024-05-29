@@ -21,7 +21,7 @@ function Friends() {
 
     <div className='friends-box'>
         <div className='friends-icon'>
-            <img src={RemovePeson} alt='no friends'/>
+            <img height={24} src={RemovePeson} alt='no friends'/>
             <p className='no-friends-title'>You don't have any invited friends.</p>
             <p className='no-friends-body'>For each invited friend you will receive 10 MDC</p>
             <p className='you-can-invite'>You can invite 3 friends</p>

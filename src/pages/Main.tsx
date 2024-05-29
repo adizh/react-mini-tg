@@ -18,8 +18,8 @@ const navigate = useNavigate();
 <div className='footer'>
 <button className="blue-btn" onClick={()=>navigate(`/react-mini-tg/register`)}>Create account</button>
 <button className="blue-btn" onClick={()=>navigate(`/react-mini-tg/home`)}>home</button>
-<button className="blue-btn" onClick={()=>navigate(`/react-mini-tg/friends`)}>friends</button>
-<button className="blue-btn" onClick={()=>navigate(`/react-mini-tg/tasks`)}>tasks</button>
+{/* <button className="blue-btn" onClick={()=>navigate(`/react-mini-tg/friends`)}>friends</button>
+<button className="blue-btn" onClick={()=>navigate(`/react-mini-tg/tasks`)}>tasks</button> */}
 <button className="white-btn" onClick={()=>navigate(`/react-mini-tg/login`)}>Login</button>
 </div>
   </div>;
