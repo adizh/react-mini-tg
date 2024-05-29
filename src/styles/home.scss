@@ -81,3 +81,38 @@ gap:8px;
     }
 }
   
+.percentage-line-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 22px;
+    color: white; 
+    margin-top: 20px;
+    padding:14px 10px;
+    border-radius: 16px;
+  }
+  
+  .percentage-line-fill {
+    transition: width 0.3s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+  
+  .percentage-line-text {
+    position: relative;
+    z-index: 1;
+  }
+  
+
+  .main-content{
+    .grey-text{
+        margin-top: 12px;
+        text-align: center;
+    }
+  }

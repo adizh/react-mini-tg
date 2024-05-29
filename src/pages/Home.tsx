@@ -4,30 +4,22 @@ import MainLogo from '../assets/images/main-home.png'
 import { useEffect, useState } from 'react';
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
+
 import {useNavigate} from 'react-router-dom'
+import PercentageLine from '../components/PercentageLine';
 function Home() {
   const navigate = useNavigate();
   const [rating, setRating] = useState(0) 
   const tg=window.Telegram.WebApp;
 const [userName,setUserName]=useState('')
-  console.log('tg',tg)
+
 tg.expand();
-const btn= tg.BackButton;
-
-btn.show()
-
-
-
-btn.onClick(()=>{
-navigate(-1);
-});
+console.log('tg initDataUnsafe',tg.initDataUnsafe)
 
 useEffect(()=>{
   setUserName(tg.initDataUnsafe.user?.first_name as string)
-return ()=>{
-  btn.hide() 
-}
-})
+
+},[])
 const StarDrawing = (
   <path
     d="M7.06732 10.3676L7.00065 10.4343L6.92732 10.3676C3.76065 7.49431 1.66732 5.59431 1.66732 3.66764C1.66732 2.33431 2.66732 1.33431 4.00065 1.33431C5.02732 1.33431 6.64732 2.42764 7.00065 3.33431C7.35398 2.42764 8.97398 1.33431 10.0007 1.33431C11.334 1.33431 12.334 2.33431 12.334 3.66764C12.334 5.59431 10.2407 7.49431 7.06732 10.3676ZM10.0007 0.000976562C8.84065 0.000976562 7.72732 0.540977 7.00065 1.38764C6.27398 0.540977 5.16065 0.000976562 4.00065 0.000976562C1.94732 0.000976562 0.333984 1.60764 0.333984 3.66764C0.333984 6.18098 2.60065 8.24098 6.03398 11.3543L7.00065 12.2343L7.96732 11.3543C11.4007 8.24098 13.6673 6.18098 13.6673 3.66764C13.6673 1.60764 12.054 0.000976562 10.0007 0.000976562Z"
@@ -76,12 +68,19 @@ You have 10 available tasks</span></div>
 
           <span>Balance</span>
           <p>0 MDC</p>
+   
+
         </div>
 
         <button className="blue-btn">
         Start mining
         </button>
 
+
+        <PercentageLine percentage={40}/>
+
+        <p className='grey-text'>1 hour 52 minutes</p>
+     
 <div className="home-game">
 <div>
 <h1>

@@ -3,27 +3,23 @@ import '../styles/tasks.scss';
 import {useEffect} from 'react'
 
 function Tasks() {
-    const navigate=useNavigate()
+  const navigate=useNavigate()
   const tg=window.Telegram.WebApp;
   tg.expand();
-
-
   const btn= tg.BackButton;
+  btn.show()
 
-btn.show()
+  btn.onClick(()=>{
+  navigate(-1);
+  });
 
-btn.onClick(()=>{
-navigate(-1);
-});
 useEffect(()=>{
-
     return ()=>{
       btn.hide() 
     }
-    },[])
+})
 
-
-  return <div>
+return <div>
     <div className='tasks-section'>
         <div className="tasks-header">
         <h1>Tasks</h1>
