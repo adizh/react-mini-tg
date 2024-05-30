@@ -1,10 +1,20 @@
 import { useEffect } from "react";
 import LogoImg from '../assets/images/mdc-logo.png';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import AppContext from '../components/AppContext';
 
 function Main() {
+  const navigate = useNavigate();
+  const tg = window.Telegram.WebApp;
+  useEffect(()=>{
+tg.expand()
+  },[])
 
-const navigate = useNavigate();
+  const myContext = useContext(AppContext);
+console.log('myContext',myContext)
+
+
   return   <div>
 
 <div className="header">
@@ -22,7 +32,7 @@ const navigate = useNavigate();
 <button className="blue-btn" onClick={()=>navigate(`/react-mini-tg/tasks`)}>tasks</button> */}
 {/* <button className="white-btn" onClick={()=>navigate(`/react-mini-tg/login`)}>Login</button> */}
 </div>
-  </div>;
+</div>;
 
 }
 

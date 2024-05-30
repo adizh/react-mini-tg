@@ -16,6 +16,8 @@ import Home from './pages/Home';
 import Boost from './pages/Boost';
 import Friends from './pages/Friends';
 import Tasks from './pages/Tasks';
+import AppContext from './components/AppContext';
+import http from './http';
 
 export const App: FC = () => {
 
@@ -50,6 +52,7 @@ export const App: FC = () => {
 
  return (
   <AppRoot className='section' style={{ overflow: 'auto', height: '100vh' }}>
+    <AppContext.Provider value={http}>
      <Routes>
         <Route path="/react-mini-tg" element={<Main />} />
         <Route path="/react-mini-tg/about" element={<About />} />
@@ -60,6 +63,7 @@ export const App: FC = () => {
         <Route path="/react-mini-tg/boost" element={<Boost />} />
         <Route path="/react-mini-tg/tasks" element={<Tasks />} />
       </Routes>
+      </AppContext.Provider>
   </AppRoot>
          
     
