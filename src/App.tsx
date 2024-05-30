@@ -19,30 +19,33 @@ import Tasks from './pages/Tasks';
 
 export const App: FC = () => {
 
-  // useEffect(() => {
-  //   const overflow = 100;
-  //   document.body.style.overflowY = 'hidden';
-  //   document.body.style.marginTop = `${overflow}px`;
-  //   document.body.style.height = `${window.innerHeight + overflow}px`;
-  //  document.body.style.paddingBottom = `${overflow}px`;
-  //  //window.scrollTo(0, overflow);
+  useEffect(() => {
+    const overflow = 100;
+    document.body.style.overflowY = 'hidden';
+    document.body.style.marginTop = `${overflow}px`;
+    document.body.style.height = `${window.innerHeight + overflow}px`;
+ //  document.body.style.paddingBottom = `${overflow}px`;
+   window.scrollTo(0, overflow);
 
-  //   return () => {
-  //    document.body.style.overflowY = '';
-  //     document.body.style.marginTop = '';
-  //     document.body.style.height = '';
-  //    document.body.style.paddingBottom = '';
-  //   };
-  // }, []);
-const tg=window.Telegram.WebApp
+    return () => {
+     document.body.style.overflowY = '';
+      document.body.style.marginTop = '';
+      document.body.style.height = '';
+    // document.body.style.paddingBottom = '';
+  //   window.scrollTo(0,0)
+    };
+  });
+// const tg=window.Telegram.WebApp;
 
-tg.onEvent('viewportChanged', testhandler) 
-function testhandler(){
-  console.log('viewportChanged?????')
-	if (tg.isExpanded){
-	    tg.expand()
-    }
-}
+// console.log('tg',tg)
+
+// tg.onEvent('viewportChanged', testhandler) 
+// function testhandler(){
+//   console.log('viewportChanged?????')
+// 	if (tg.isExpanded){
+// 	    tg.expand()
+//     }
+// }
  
 
  return (
