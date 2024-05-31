@@ -4,7 +4,7 @@ import MiniBlue from '../assets/images/cars/mini-blue.png';
 import { useEffect, useState } from 'react';
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
-
+import { on } from '@tma.js/sdk';
 import { useNavigate } from 'react-router-dom'
 import PercentageLine from '../components/PercentageLine';
 function Home() {
@@ -22,6 +22,14 @@ function Home() {
 
 },[])
 
+const data = JSON.stringify({
+  eventType: 'web_app_setup_back_button',
+  eventData: {
+    is_visible: true,
+  },
+});
+
+window.parent.postMessage(data, 'https://web.telegram.org/k/#@jobot_jobot');
 
 useEffect(() => {
 //   const overflow = 100
