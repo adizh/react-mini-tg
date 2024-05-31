@@ -1,122 +1,112 @@
-@import '../styles/colors.scss';
+@import "../styles/colors.scss";
 
 .user-logo {
-    background: green;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+  background: green;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 
 .profile {
-    @include flex(row, start, center);
-    gap: 8px;
+  @include flex(row, start, center);
+  gap: 8px;
 }
 
 .user-info {
-    @include flex(column, start, start);
+  @include flex(column, start, start);
 }
 
 .tasks {
-    border-radius: 8px;
-    background: $footer-bg;
-    padding: 4px 8px;
-
-
+  border-radius: 8px;
+  background: $footer-bg;
+  padding: 4px 8px;
 }
 
 .tasks-icon {
-    @include flex(row, center, center);
-    gap: 8px;
+  @include flex(row, center, center);
+  gap: 8px;
 }
 
-
 .home-header {
-    @include flex(row, space-between, start)
+  @include flex(row, space-between, start);
 }
 
 .home-tasks {
-    @include flex(column, start, flex-end);
-    gap: 4px;
+  @include flex(column, start, flex-end);
+  gap: 4px;
 }
-
-;
-
 
 .home-game {
-    h1 {
-        margin-bottom: 4px;
-        font-size: 20px;
-        line-height: 26px;
-    }
+  h1 {
+    margin-bottom: 4px;
+    font-size: 20px;
+    line-height: 26px;
+  }
 
-    .grey-text {
-        margin: 4px 0 8px 0;
-    }
+  .grey-text {
+    margin: 4px 0 8px 0;
+  }
 
-
-    button {
-        padding: 4px 42px;
-        margin-top: 8px;
-    }
+  button {
+    padding: 4px 42px;
+    margin-top: 8px;
+  }
 }
 
-
 .main-logo-content {
-    width: 100%;
-    height: 210px;
-    background: url('../assets/images/main-home.png') center no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 16px;
-    margin-top: 28px;
+  width: 100%;
+  height: 210px;
+  background: url("../assets/images/main-home.png") center no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  margin-top: 28px;
 
-    span {
-        font-size: 16px;
-        line-height: 22px;
-        color: $input-plach-text;
+  span {
+    font-size: 16px;
+    line-height: 22px;
+    color: $input-plach-text;
+  }
 
-    }
-
-    p {
-        font-size: 36px;
-        line-height: 42px;
-    }
+  p {
+    font-size: 36px;
+    line-height: 42px;
+  }
 }
 
 .percentage-line-container {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    line-height: 22px;
-    color: white;
-    margin-top: 20px;
-    padding: 14px 10px;
-    border-radius: 16px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 22px;
+  color: white;
+  margin-top: 20px;
+  padding: 14px 10px;
+  border-radius: 16px;
 }
 
 .percentage-line-fill {
-    transition: width 0.3s ease-in-out;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+  transition: width 0.3s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .percentage-line-text {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
-
 .main-content {
-    .grey-text {
-        margin-top: 12px;
-        text-align: center;
-    }
+  .grey-text {
+    margin-top: 12px;
+    text-align: center;
+  }
 }

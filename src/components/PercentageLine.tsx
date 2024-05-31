@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React from "react";
 
 interface PercentageLineProps {
   percentage: number;
@@ -10,12 +9,19 @@ interface PercentageLineProps {
 
 const PercentageLine: React.FC<PercentageLineProps> = ({
   percentage,
-  backgroundColor = '#262938',
-  fillColor = '#4361EE',
+  backgroundColor = "#262938",
+  fillColor = "#4361EE",
 }) => {
   return (
-    <div className="percentage-line-container" style={{  backgroundColor }}>
-      <div className="percentage-line-fill" style={{ width: `${percentage}%`, height: '100%', backgroundColor: fillColor }}></div>
+    <div className="percentage-line-container" style={{ backgroundColor }}>
+      <div
+        className="percentage-line-fill"
+        style={{
+          width: `${percentage}%`,
+          height: "100%",
+          backgroundColor: fillColor,
+        }}
+      ></div>
       <div className="percentage-line-text">Mining {percentage}%</div>
     </div>
   );

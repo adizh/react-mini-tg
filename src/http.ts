@@ -1,8 +1,7 @@
 // http.js
 import axios, { AxiosInstance, AxiosError } from "axios";
 
-
-const url = 'https://racing.mydatacoin.io'
+const url = "https://racing.mydatacoin.io";
 
 const http: AxiosInstance = axios.create({
   baseURL: url,
@@ -27,11 +26,7 @@ http.interceptors.response.use(
       console.error("Error:", error.message);
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default http;
-
-
-
-

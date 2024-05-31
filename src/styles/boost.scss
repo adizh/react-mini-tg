@@ -1,40 +1,38 @@
-@import '../styles/colors.scss';
+@import "../styles/colors.scss";
 
-.each-car{
-    background: $footer-bg;
-    border-radius: 16px;
-    padding:12px;
-    @include flex(row, space-between,center);
-    margin-bottom: 16px;
+.each-car {
+  background: $footer-bg;
+  border-radius: 16px;
+  padding: 12px;
+  @include flex(row, space-between, center);
+  margin-bottom: 16px;
 }
 
-.car-info{
-    @include flex(column,start,start); 
-    gap:8px;
+.car-info {
+  @include flex(column, start, start);
+  gap: 8px;
 }
 
-.blue-btn1{
-    background: $main-color;
-    color:#FFF;
-    height: 40px;
-    width: 170px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    @extend %button
+.blue-btn1 {
+  background: $main-color;
+  color: #fff;
+  height: 40px;
+  width: 170px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @extend %button;
 }
 
-.inactive-btn{
-    background: $bg-color;
-    color:#FFF;
-    height: 40px;
-    width: 170px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    @extend %button
+.inactive-btn {
+  background: $bg-color;
+  color: #fff;
+  height: 40px;
+  width: 170px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @extend %button;
 }
-
-

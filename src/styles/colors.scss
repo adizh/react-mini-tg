@@ -1,34 +1,31 @@
-$bg-color:#171923;
-$main-color: #4361EE;
-$gray: #7E848D;
-$bg-color2:#262938;
+$bg-color: #171923;
+$main-color: #4361ee;
+$gray: #7e848d;
+$bg-color2: #262938;
 $text-color: #333333;
-$input-plach-text:#7E848D;
-$footer-bg:#262938;
-$screen-width:375px;
-$purple:#4361EE;
+$input-plach-text: #7e848d;
+$footer-bg: #262938;
+$screen-width: 375px;
+$purple: #4361ee;
 
-
-
-%button{
-    font-size: 16px;
-    line-height: 22px;
-    font-weight: 400;
-    text-align: center;
-    border-radius: 16px;
-    outline: none;
-    border:none;
-    padding:14px 10px 14px 10px;
-    width: 100%;
-    &:hover{
-        cursor: pointer;
-    }
+%button {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  text-align: center;
+  border-radius: 16px;
+  outline: none;
+  border: none;
+  padding: 14px 10px 14px 10px;
+  width: 100%;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-
-@mixin flex($position, $justify-content,$align-items){
-    display: flex;
-    flex-direction:$position;
-    justify-content: $justify-content;
-    align-items: $align-items;
+@mixin flex($position, $justify-content, $align-items) {
+  display: flex;
+  flex-direction: $position;
+  justify-content: $justify-content;
+  align-items: $align-items;
 }

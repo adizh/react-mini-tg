@@ -1,14 +1,8 @@
 import React from "react";
 
+type AppContextType = {};
 
-type AppContextType = {
- 
-};
-
-
-const defaultContextValue: AppContextType = {
-
-};
+const defaultContextValue: AppContextType = {};
 
 const AppContext = React.createContext<AppContextType>(defaultContextValue);
 
