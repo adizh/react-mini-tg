@@ -1,7 +1,7 @@
 import Footer from '../components/Footer';
 import '../styles/home.scss';
 import MiniBlue from '../assets/images/cars/mini-blue.png';
-import { useEffect, useState } from 'react';
+import { useEffect, useState ,useRef} from 'react';
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import { on } from '@tma.js/sdk';
@@ -13,46 +13,50 @@ function Home() {
   const tg = window.Telegram.WebApp;
   const [userName, setUserName] = useState('')
 
-  tg.expand();
+  //tg.expand();
   console.log('tg initDataUnsafe', tg.initDataUnsafe)
   console.log('tg', tg)
 
   useEffect(() => {
     setUserName(tg.initDataUnsafe.user?.first_name as string)
-
 },[])
 
-const data = JSON.stringify({
-  eventType: 'web_app_setup_back_button',
-  eventData: {
-    is_visible: true,
-  },
-});
 
-window.parent.postMessage(data, 'https://web.telegram.org/k/#@jobot_jobot');
+const scrollableRef = useRef<HTMLDivElement | null>(null);
 
-useEffect(() => {
-//   const overflow = 100
+
+function ensureDocumentIsScrollable() {
+  const isScrollable =
+    document.documentElement.scrollHeight > window.innerHeight;
+  if (!isScrollable) {
+    document.documentElement.style.setProperty(
+      "height",
+      "calc(100vh + 1px)",
+      "important"
+    );
+  }
+}
+
+// function preventCollapse() {
+//   const overflow = -100
 // document.body.style.overflowY = 'hidden'
 // document.body.style.marginTop = `${overflow}px`
-// document.body.style.height = window.innerHeight + overflow + "px"
-// document.body.style.paddingBottom = `${overflow}px`
-// window.scrollTo(0, overflow)
-//   const overflow = 100;
-//   document.body.style.overflowY = 'hidden';
-//   document.body.style.marginTop = `${overflow}px`;
-//   document.body.style.height = `${window.innerHeight + overflow}px`;
-// //  document.body.style.paddingBottom = `${overflow}px`;
-//  window.scrollTo(0, overflow);
+// document.body.style.height = window.innerHeight+"px"
 
-//   return () => {
-//    document.body.style.overflowY = '';
-//     document.body.style.marginTop = '';
-//     document.body.style.height = '';
-//   // document.body.style.paddingBottom = '';
-// //   window.scrollTo(0,0)
-//   };
-});
+// window.scrollTo(0, overflow)
+// }
+
+
+
+// useEffect(()=>{
+//   ensureDocumentIsScrollable()
+// },[])
+// useEffect(() => {
+//   scrollableRef.current?.addEventListener('touchstart', preventCollapse);  
+//  return () => scrollableRef.current?.removeEventListener('touchstart', preventCollapse);
+//   }, [scrollableRef]);
+
+
 const StarDrawing = (
   <path
     d="M7.06732 10.3676L7.00065 10.4343L6.92732 10.3676C3.76065 7.49431 1.66732 5.59431 1.66732 3.66764C1.66732 2.33431 2.66732 1.33431 4.00065 1.33431C5.02732 1.33431 6.64732 2.42764 7.00065 3.33431C7.35398 2.42764 8.97398 1.33431 10.0007 1.33431C11.334 1.33431 12.334 2.33431 12.334 3.66764C12.334 5.59431 10.2407 7.49431 7.06732 10.3676ZM10.0007 0.000976562C8.84065 0.000976562 7.72732 0.540977 7.00065 1.38764C6.27398 0.540977 5.16065 0.000976562 4.00065 0.000976562C1.94732 0.000976562 0.333984 1.60764 0.333984 3.66764C0.333984 6.18098 2.60065 8.24098 6.03398 11.3543L7.00065 12.2343L7.96732 11.3543C11.4007 8.24098 13.6673 6.18098 13.6673 3.66764C13.6673 1.60764 12.054 0.000976562 10.0007 0.000976562Z"
@@ -68,7 +72,7 @@ const customStyles = {
 
 
   return <div>
-    <div className='home-section'>
+    <div className='home-section scrollable-element' ref={scrollableRef}>
       <div className="home-header">
         <div className="profile">
           <div className='user-logo'></div>
@@ -89,6 +93,66 @@ const customStyles = {
           </div>
           <div className="tasks-info"><span className='grey-text'>
             You have 10 available tasks</span></div>
+        </div>
+      </div>
+      <div className="main-content">
+        <div className="main-logo-content" >
+          <span>Balance</span>
+          <p>0 MDC</p>
+        </div>
+        <button className="blue-btn">
+          Start mining
+        </button>
+        <PercentageLine percentage={40} />
+        <p className='grey-text'>1 hour 52 minutes</p>
+
+        <div className="home-game">
+          <div>
+            <h1>
+              Racing Game
+            </h1>
+            <p className='grey-text'>Play to earn more MDC!</p>
+            <Rating
+              style={{ maxWidth: 180 }}
+              value={rating}
+              onChange={setRating}
+              itemStyles={customStyles}
+            />
+            <button className="white-btn">Play</button>
+          </div>
+          <div>
+            <img width={55} src={MiniBlue} alt="car" />
+          </div>
+        </div>
+      </div>
+      <div className="main-content">
+        <div className="main-logo-content" >
+          <span>Balance</span>
+          <p>0 MDC</p>
+        </div>
+        <button className="blue-btn">
+          Start mining
+        </button>
+        <PercentageLine percentage={40} />
+        <p className='grey-text'>1 hour 52 minutes</p>
+
+        <div className="home-game">
+          <div>
+            <h1>
+              Racing Game
+            </h1>
+            <p className='grey-text'>Play to earn more MDC!</p>
+            <Rating
+              style={{ maxWidth: 180 }}
+              value={rating}
+              onChange={setRating}
+              itemStyles={customStyles}
+            />
+            <button className="white-btn">Play</button>
+          </div>
+          <div>
+            <img width={55} src={MiniBlue} alt="car" />
+          </div>
         </div>
       </div>
       <div className="main-content">

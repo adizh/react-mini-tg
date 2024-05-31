@@ -12,10 +12,6 @@
     gap: 8px;
 }
 
-.home-section {
-    margin-bottom: 90px;
-}
-
 .user-info {
     @include flex(column, start, start);
 }

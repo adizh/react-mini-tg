@@ -15,7 +15,10 @@ body{
     font-style: normal;
     width:100%; 
 }
-
+.scrollable-element {
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+}
 
 @media (max-width: 768px) {
     body {

@@ -23,9 +23,10 @@ function Register() {
   console.log('initDataRaw',initDataRaw)
 
 tg.expand();
+
 const btn= tg.BackButton;
 
-btn.show()
+btn.show();
 
 btn.onClick(()=>{
 navigate(-1);

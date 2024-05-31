@@ -20,38 +20,48 @@ import AppContext from './components/AppContext';
 import http from './http';
 
 export const App: FC = () => {
+ const scrollableRef = useRef<HTMLDivElement | null>(null);
+
+
+  function ensureDocumentIsScrollable() {
+    const isScrollable =
+      document.documentElement.scrollHeight > window.innerHeight;
+    if (!isScrollable) {
+      document.documentElement.style.setProperty(
+        "height",
+        "calc(100vh + 1px)",
+        "important"
+      );
+    }
+  }
+
+  function preventCollapse() {
+      document.body.style.overflowY = 'hidden';
+     document.body.style.height = `${window.innerHeight + 100}px`;
+     document.body.style.marginTop = `${100}px`;
+      window.scrollTo(0, 100);
+  }
+
+
+
+  useEffect(()=>{
+    ensureDocumentIsScrollable();
+   
+  },[])
 
   useEffect(() => {
-    const overflow = 100;
-    document.body.style.overflowY = 'hidden';
-    document.body.style.marginTop = `${overflow}px`;
-    document.body.style.height = `${window.innerHeight + overflow}px`;
- //  document.body.style.paddingBottom = `${overflow}px`;
-   window.scrollTo(0, overflow);
-
-    return () => {
-     document.body.style.overflowY = '';
-      document.body.style.marginTop = '';
-      document.body.style.height = '';
-    // document.body.style.paddingBottom = '';
-  //   window.scrollTo(0,0)
-    };
-  });
-// const tg=window.Telegram.WebApp;
-
-// console.log('tg',tg)
-
-// tg.onEvent('viewportChanged', testhandler) 
-// function testhandler(){
-//   console.log('viewportChanged?????')
-// 	if (tg.isExpanded){
-// 	    tg.expand()
-//     }
-// }
- 
+  scrollableRef.current?.addEventListener('touchstart', preventCollapse);  
+    return () => {scrollableRef.current?.removeEventListener('touchstart', preventCollapse)
+  
+      document.body.style.overflowY = '';
+       document.body.style.marginTop = '';
+       document.body.style.height = '';
+       window.scrollTo(0,0)
+  }
+  }, [scrollableRef]);
 
  return (
-  <AppRoot className='section' style={{ overflow: 'auto', height: '100vh' }}>
+  <AppRoot className='section scrollable-element' ref={scrollableRef} style={{ overflow: 'auto', height: '100vh' }}>
     <AppContext.Provider value={http}>
      <Routes>
         <Route path="/react-mini-tg" element={<Main />} />
