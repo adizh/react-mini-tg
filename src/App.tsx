@@ -61,7 +61,7 @@ export const App: FC = () => {
   }, [scrollableRef]);
 
  return (
-  <AppRoot className='section scrollable-element' ref={scrollableRef} style={{ overflow: 'auto', height: '100vh' }}>
+  <AppRoot className='section scrollable-element' ref={scrollableRef}>
     <AppContext.Provider value={http}>
      <Routes>
         <Route path="/react-mini-tg" element={<Main />} />

@@ -20,8 +20,6 @@ function Register() {
   };
 
 
-  console.log('initDataRaw',initDataRaw)
-
 tg.expand();
 
 const btn= tg.BackButton;

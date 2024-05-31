@@ -1,6 +1,6 @@
 @import './colors.scss';
 @import url('https://fonts.googleapis.com/css2?family=Onest:ital,wght@0,100..900;1,100..900&display=swap');
-
+$margin-bottom:130px;
 *{
     margin: 0;
     padding: 0;
@@ -19,7 +19,9 @@ body{
     overflow-y: scroll;
     overscroll-behavior: contain;
 }
-
+.home-section{
+    margin-bottom: $margin-bottom;
+}
 @media (max-width: 768px) {
     body {
       font-size: 14px;

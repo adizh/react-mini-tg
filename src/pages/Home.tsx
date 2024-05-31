@@ -13,7 +13,7 @@ function Home() {
   const tg = window.Telegram.WebApp;
   const [userName, setUserName] = useState('')
 
-  //tg.expand();
+  tg.expand();
   console.log('tg initDataUnsafe', tg.initDataUnsafe)
   console.log('tg', tg)
 
@@ -21,40 +21,6 @@ function Home() {
     setUserName(tg.initDataUnsafe.user?.first_name as string)
 },[])
 
-
-const scrollableRef = useRef<HTMLDivElement | null>(null);
-
-
-function ensureDocumentIsScrollable() {
-  const isScrollable =
-    document.documentElement.scrollHeight > window.innerHeight;
-  if (!isScrollable) {
-    document.documentElement.style.setProperty(
-      "height",
-      "calc(100vh + 1px)",
-      "important"
-    );
-  }
-}
-
-// function preventCollapse() {
-//   const overflow = -100
-// document.body.style.overflowY = 'hidden'
-// document.body.style.marginTop = `${overflow}px`
-// document.body.style.height = window.innerHeight+"px"
-
-// window.scrollTo(0, overflow)
-// }
-
-
-
-// useEffect(()=>{
-//   ensureDocumentIsScrollable()
-// },[])
-// useEffect(() => {
-//   scrollableRef.current?.addEventListener('touchstart', preventCollapse);  
-//  return () => scrollableRef.current?.removeEventListener('touchstart', preventCollapse);
-//   }, [scrollableRef]);
 
 
 const StarDrawing = (
@@ -71,8 +37,8 @@ const customStyles = {
 
 
 
-  return <div>
-    <div className='home-section scrollable-element' ref={scrollableRef}>
+  return <div style={{ overflow: 'auto', height: '100vh' }}>
+    <div className='home-section'>
       <div className="home-header">
         <div className="profile">
           <div className='user-logo'></div>
