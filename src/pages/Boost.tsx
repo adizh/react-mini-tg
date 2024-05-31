@@ -10,7 +10,7 @@ import SportBlue from '../assets/images/cars/sport-blue.png';
 import Police from '../assets/images/cars/police.png';
 import Racing from '../assets/images/cars/racing.png';
 import Achieved from '../assets/images/achieved.png';
-
+import Loader from "../components/Loader";
 import '../styles/boost.scss';
 import {Boost as BoostType} from '../types/Boost'
 import {useState,useEffect} from 'react';
@@ -18,8 +18,9 @@ import http from "../http";
 function Boost() {
 const [allBoosts,setAllBoosts]=useState([])
 const carImages=[Achieved,VanPink,YellowCar,RetroGreen,MonsterPink,Ambulance,SportYellow,SportBlue,Police,Racing]
-
+const [loading,setLoading]=useState(false)
 const fetchAllBoosts=async()=>{
+    setLoading(true)
     try{
 const response = await http('/api/v1/Boost/get-all-boosters');
 console.log('fetchAllBoosts response',response);
@@ -30,22 +31,22 @@ const imgAddedBoosts = response.data.map((item:BoostType,index:number)=>{
 setAllBoosts(imgAddedBoosts);
 
 console.log('imgAddedBoosts',imgAddedBoosts)
-
 }
-
-
     }catch(err){
         console.log(err)
+    }finally{
+        setLoading(false)
     }
 }
 useEffect(()=>{
     fetchAllBoosts()
-},[])
+},[]);
+
     return <div className='scroll-section'>
-        <div className="home-section">
+  
+  {loading ?       <Loader/> :   <div className="home-section">
             <div className="boost-cars ">
                 <div className="main-content">
-                    
                     {allBoosts?.map((item:BoostType,index:number)=>(
   <div className="each-car" key={item?.id}>
   <div className="car-info">
@@ -68,7 +69,8 @@ useEffect(()=>{
                 </div>
             </div>
             <Footer />
-        </div>
+        </div>}
+      
     </div>;
 }
 

@@ -26,6 +26,11 @@ body{
 .home-section{
     margin-bottom: $margin-bottom;
   
+
+}
+
+.loader{
+    @include flex(column,center,center)
 }
 @media (max-width: 768px) {
     body {
