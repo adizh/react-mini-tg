@@ -12,152 +12,59 @@ import Racing from '../assets/images/cars/racing.png';
 import Achieved from '../assets/images/achieved.png';
 
 import '../styles/boost.scss';
-
+import {Boost as BoostType} from '../types/Boost'
+import {useState,useEffect} from 'react';
+import http from "../http";
 function Boost() {
+const [allBoosts,setAllBoosts]=useState([])
+const carImages=[Achieved,VanPink,YellowCar,RetroGreen,MonsterPink,Ambulance,SportYellow,SportBlue,Police,Racing]
+
+const fetchAllBoosts=async()=>{
+    try{
+const response = await http('/api/v1/Boost/get-all-boosters');
+console.log('fetchAllBoosts response',response);
+if(response.status===200){
+const imgAddedBoosts = response.data.map((item:BoostType,index:number)=>{
+    return {...item, localImg: carImages[index]}
+})
+setAllBoosts(imgAddedBoosts);
+
+console.log('imgAddedBoosts',imgAddedBoosts)
+
+}
+
+
+    }catch(err){
+        console.log(err)
+    }
+}
+useEffect(()=>{
+    fetchAllBoosts()
+},[])
     return <div>
         <div className="home-section">
             <div className="boost-cars ">
                 <div className="main-content">
                     
-                    {/* LVL 1 */}
-                    <div className="each-car">
-                        <div className="car-info">
-                            <h2>LVL 1 <img height={20} src={Achieved} alt="achieved" /></h2>
-                            <p className="grey-text">
-                                Default - 1x
-                            </p>
-                            <button className="inactive-btn">Current lvl</button>
-                        </div>
-                        <div className="car-img">
-                            <img width={55} src={MiniBlue} alt="car" />
-                        </div>
-                    </div>
+                    {allBoosts?.map((item:BoostType,index:number)=>(
+  <div className="each-car">
+  <div className="car-info">
+      <h2>{item?.levelName}<img height={20} src={item?.localImg} alt="achieved" /></h2>
+      <p className="grey-text">
+        {item?.price} MDC -
+          {item?.boosterLevel}
+      </p>
+    {index===0 ?  <button className="inactive-btn" >Current lvl</button> :  <button className="blue-btn1">Upgrade</button>}
+     
+  </div>
+  <div className="car-img">
+      <img width={55} src={item?.localImg} alt="car" />
+  </div>
+</div>
+                    ))}
+              
 
-                    {/* LVL 2 */}
-                    <div className="each-car">
-                        <div className="car-info">
-                            <h2>LVL 2</h2>
-                            <p className="grey-text">
-                                10 MDC – 1.25x
-                            </p>
-                            <button className="blue-btn1">Upgrade</button>
-                        </div>
-                        <div className="car-img">
-                            <img width={55} src={VanPink} alt="car" />
-                        </div>
-                    </div>
 
-                    {/* LVL 3 */}
-                    <div className="each-car">
-                        <div className="car-info">
-                            <h2>LVL 3</h2>
-                            <p className="grey-text">
-                                15 MDC – 1.5x
-                            </p>
-                            <button className="blue-btn1">Upgrade</button>
-                        </div>
-                        <div className="car-img">
-                            <img width={55} src={YellowCar} alt="car" />
-                        </div>
-                    </div>
-
-                    {/* LVL 4 */}
-                    <div className="each-car">
-                        <div className="car-info">
-                            <h2>LVL 4</h2>
-                            <p className="grey-text">
-                                15 MDC – 1.62x
-                            </p>
-                            <button className="blue-btn1">Upgrade</button>
-                        </div>
-                        <div className="car-img">
-                            <img width={55} src={RetroGreen} alt="car" />
-                        </div>
-                    </div>
-
-                    {/* LVL 5 */}
-                    <div className="each-car">
-                        <div className="car-info">
-                            <h2>LVL 5</h2>
-                            <p className="grey-text">
-                                15 MDC – 1.75x
-                            </p>
-                            <button className="blue-btn1">Upgrade</button>
-                        </div>
-                        <div className="car-img">
-                            <img width={55} src={MonsterPink} alt="car" />
-                        </div>
-                    </div>
-
-                    {/* LVL 6 */}
-                    <div className="each-car">
-                        <div className="car-info">
-                            <h2>LVL 6</h2>
-                            <p className="grey-text">
-                                15 MDC – 1.8x
-                            </p>
-                            <button className="blue-btn1">Upgrade</button>
-                        </div>
-                        <div className="car-img">
-                            <img width={55} src={Ambulance} alt="car" />
-                        </div>
-                    </div>
-
-                    {/* LVL 7 */}
-                    <div className="each-car">
-                        <div className="car-info">
-                            <h2>LVL 7</h2>
-                            <p className="grey-text">
-                                15 MDC – 1.9x
-                            </p>
-                            <button className="blue-btn1">Upgrade</button>
-                        </div>
-                        <div className="car-img">
-                            <img width={55} src={SportYellow} alt="car" />
-                        </div>
-                    </div>
-
-                    {/* LVL 8 */}
-                    <div className="each-car">
-                        <div className="car-info">
-                            <h2>LVL 8</h2>
-                            <p className="grey-text">
-                                15 MDC – 2x
-                            </p>
-                            <button className="blue-btn1">Upgrade</button>
-                        </div>
-                        <div className="car-img">
-                            <img width={55} src={SportBlue} alt="car" />
-                        </div>
-                    </div>
-
-                    {/* LVL 9 */}
-                    <div className="each-car">
-                        <div className="car-info">
-                            <h2>LVL 9</h2>
-                            <p className="grey-text">
-                                15 MDC – 2.1x
-                            </p>
-                            <button className="blue-btn1">Upgrade</button>
-                        </div>
-                        <div className="car-img">
-                            <img width={55} src={Police} alt="car" />
-                        </div>
-                    </div>
-
-                    {/* LVL 10 */}
-                    <div className="each-car">
-                        <div className="car-info">
-                            <h2>LVL 10</h2>
-                            <p className="grey-text">
-                                15 MDC – 2.25x
-                            </p>
-                            <button className="blue-btn1">Upgrade</button>
-                        </div>
-                        <div className="car-img">
-                            <img width={55} src={Racing} alt="car" />
-                        </div>
-                    </div>
                 </div>
             </div>
             <Footer />
