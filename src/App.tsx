@@ -39,6 +39,7 @@ export const App: FC = () => {
       document.body.style.overflowY = 'hidden';
      document.body.style.height = `${window.innerHeight + 100}px`;
      document.body.style.marginTop = `${100}px`;
+     document.body.style.paddingBottom = `${100}px`
       window.scrollTo(0, 100);
   }
 
@@ -52,7 +53,7 @@ export const App: FC = () => {
   useEffect(() => {
   scrollableRef.current?.addEventListener('touchstart', preventCollapse);  
     return () => {scrollableRef.current?.removeEventListener('touchstart', preventCollapse)
-  
+    document.body.style.paddingBottom=''
       document.body.style.overflowY = '';
        document.body.style.marginTop = '';
        document.body.style.height = '';

@@ -41,13 +41,13 @@ console.log('imgAddedBoosts',imgAddedBoosts)
 useEffect(()=>{
     fetchAllBoosts()
 },[])
-    return <div>
+    return <div className='scroll-section'>
         <div className="home-section">
             <div className="boost-cars ">
                 <div className="main-content">
                     
                     {allBoosts?.map((item:BoostType,index:number)=>(
-  <div className="each-car">
+  <div className="each-car" key={item?.id}>
   <div className="car-info">
       <h2>{item?.levelName}<img height={20} src={item?.localImg} alt="achieved" /></h2>
       <p className="grey-text">

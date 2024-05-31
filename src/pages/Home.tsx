@@ -37,7 +37,7 @@ const customStyles = {
 
 
 
-  return <div style={{ overflow: 'auto', height: '100vh' }}>
+  return <div className='scroll-section'>
     <div className='home-section'>
       <div className="home-header">
         <div className="profile">

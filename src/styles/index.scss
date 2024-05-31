@@ -19,8 +19,13 @@ body{
     overflow-y: scroll;
     overscroll-behavior: contain;
 }
+.scroll-section{
+    overflow: auto;
+    height: 100vh;
+}
 .home-section{
     margin-bottom: $margin-bottom;
+  
 }
 @media (max-width: 768px) {
     body {
