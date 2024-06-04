@@ -4,7 +4,6 @@ import MiniBlue from "../assets/images/cars/mini-blue.png";
 import { useEffect, useState, useRef } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import { on } from "@tma.js/sdk";
 import { useNavigate } from "react-router-dom";
 import PercentageLine from "../components/PercentageLine";
 function Home() {
@@ -18,7 +17,7 @@ function Home() {
   console.log("tg", tg);
 
   useEffect(() => {
-    setUserName(tg.initDataUnsafe.user?.first_name as string);
+    setUserName(tg.initDataUnsafe.user?.first_name as string);  
   }, []);
 
   const StarDrawing = (
@@ -89,65 +88,14 @@ function Home() {
                 onChange={setRating}
                 itemStyles={customStyles}
               />
-              <button className="white-btn">Play</button>
+              <button className="white-btn" onClick={()=>navigate('/react-mini-tg/game')}>Play</button>
             </div>
             <div>
               <img width={55} src={MiniBlue} alt="car" />
             </div>
           </div>
         </div>
-        <div className="main-content">
-          <div className="main-logo-content">
-            <span>Balance</span>
-            <p>0 MDC</p>
-          </div>
-          <button className="blue-btn">Start mining</button>
-          <PercentageLine percentage={40} />
-          <p className="grey-text">1 hour 52 minutes</p>
-
-          <div className="home-game">
-            <div>
-              <h1>Racing Game</h1>
-              <p className="grey-text">Play to earn more MDC!</p>
-              <Rating
-                style={{ maxWidth: 180 }}
-                value={rating}
-                onChange={setRating}
-                itemStyles={customStyles}
-              />
-              <button className="white-btn">Play</button>
-            </div>
-            <div>
-              <img width={55} src={MiniBlue} alt="car" />
-            </div>
-          </div>
-        </div>
-        <div className="main-content">
-          <div className="main-logo-content">
-            <span>Balance</span>
-            <p>0 MDC</p>
-          </div>
-          <button className="blue-btn">Start mining</button>
-          <PercentageLine percentage={40} />
-          <p className="grey-text">1 hour 52 minutes</p>
-
-          <div className="home-game">
-            <div>
-              <h1>Racing Game</h1>
-              <p className="grey-text">Play to earn more MDC!</p>
-              <Rating
-                style={{ maxWidth: 180 }}
-                value={rating}
-                onChange={setRating}
-                itemStyles={customStyles}
-              />
-              <button className="white-btn">Play</button>
-            </div>
-            <div>
-              <img width={55} src={MiniBlue} alt="car" />
-            </div>
-          </div>
-        </div>
+        
       </div>
       <Footer />
     </div>

@@ -12,9 +12,11 @@ import Friends from "./pages/Friends";
 import Tasks from "./pages/Tasks";
 import AppContext from "./components/AppContext";
 import http from "./http";
+import Game from "./pages/Game";
 
 export const App: FC = () => {
   const scrollableRef = useRef<HTMLDivElement | null>(null);
+  const telegram=window.Telegram.WebApp;
 
   function ensureDocumentIsScrollable() {
     const isScrollable =
@@ -38,6 +40,10 @@ export const App: FC = () => {
 
   useEffect(() => {
     ensureDocumentIsScrollable();
+    telegram.headerColor='#171923';
+    telegram.themeParams.bg_color='#EB3F3F';
+    telegram.themeParams.secondary_bg_color='#EB3F3F';
+    telegram.themeParams.button_color='#EB3F3F';
   }, []);
 
   useEffect(() => {
@@ -64,6 +70,7 @@ export const App: FC = () => {
           <Route path="/react-mini-tg/friends" element={<Friends />} />
           <Route path="/react-mini-tg/boost" element={<Boost />} />
           <Route path="/react-mini-tg/tasks" element={<Tasks />} />
+          <Route path="/react-mini-tg/game" element={<Game />} />
         </Routes>
       </AppContext.Provider>
     </AppRoot>

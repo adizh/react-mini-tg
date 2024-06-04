@@ -7,6 +7,7 @@
 //   interface Window {
 //     Telegram: TelegramWebApp;
 //   }
+
 import { Telegram } from "@twa-dev/types";
 
 declare global {
