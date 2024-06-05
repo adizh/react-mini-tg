@@ -1,0 +1,100 @@
+import { useState, useEffect } from 'react';
+import PercentageLine from './PercentageLine';
+
+function Mining() {
+  const getTwelveHoursLaterFromStorage = () => {
+    const storedValue = localStorage.getItem('unixTimestampTwelveHoursLater');
+    return storedValue ? parseInt(storedValue, 10) : 0;
+  };
+
+
+  const localSavedMining= localStorage.getItem('isMiningStarted')  && localStorage.getItem('isMiningStarted')  ==='true' ? true :false
+  const [isMiningStarted, setStartMining] = useState(localSavedMining);
+  const [timeLeft, setTimeLeft] = useState('');
+  const [percentage, setPercentage] = useState(0);
+  const [currentTime, setCurrentTime] = useState(localStorage.getItem('currentUnixTime') ? localStorage.getItem('currentUnixTime') :0);
+  const [twelveHoursLater, setTwelveHoursLater] = useState(getTwelveHoursLaterFromStorage);
+  const [claim,setClaim]=useState(false)
+
+  const convertUnixTime = (time:number) => {
+    const dateFromUnixTimestamp = new Date(time * 1000);
+    const hours = dateFromUnixTimestamp.getHours();
+    const minutes = dateFromUnixTimestamp.getMinutes();
+    const seconds = dateFromUnixTimestamp.getSeconds();
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return formattedTime;
+  };
+
+  const startMining = () => {
+    setStartMining(true);
+    const currentUnixTime = Math.floor(new Date().getTime() / 1000);
+    localStorage.setItem('isMiningStarted','true')
+    const twelveHoursLaterUnixTime = currentUnixTime + 12 * 60 * 60;
+    const twoMinutesLaterUnixTime = currentUnixTime + 2 * 60;
+    setTwelveHoursLater(twoMinutesLaterUnixTime);
+    setCurrentTime(currentUnixTime);
+
+    localStorage.setItem("currentUnixTime", currentUnixTime.toString());
+    localStorage.setItem(
+      "unixTimestampTwelveHoursLater",
+      twoMinutesLaterUnixTime.toString(),
+    );
+  };
+
+  useEffect(() => {
+    if (!isMiningStarted) return;
+
+    const totalDuration = 12 * 60 * 60; 
+    const totalDuration2 = 2 * 60
+    const intervalId = setInterval(() => {
+      const currentUnixTime = Math.floor(new Date().getTime() / 1000);
+      const newTimeLeft = twelveHoursLater - currentUnixTime;
+
+      if (newTimeLeft <= 0) {
+        clearInterval(intervalId);
+        setTimeLeft('00:00:00');
+        setPercentage(100);
+        setStartMining(false)
+        setClaim(true)
+        localStorage.setItem('isMiningStarted','false')
+        localStorage.removeItem('currentUnixTime')
+        localStorage.removeItem('twoMinutesLaterUnixTime')
+        localStorage.removeItem('isMiningStarted')
+      
+      } else {
+        const hours = Math.floor(newTimeLeft / 3600);
+        const minutes = Math.floor((newTimeLeft % 3600) / 60);
+        const seconds = newTimeLeft % 60;
+        const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        setTimeLeft(formattedTime);
+
+        const elapsed = totalDuration2 - newTimeLeft;
+        const percentageComplete =+((elapsed / totalDuration2) * 100).toFixed(2)
+        console.log('percentageComplete',percentageComplete)
+        console.log('newTimeLeft',newTimeLeft)
+        console.log('elapsed',elapsed);
+        console.log('totalDuration',totalDuration)
+        setPercentage(+percentageComplete);
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [isMiningStarted, twelveHoursLater]);
+
+  return (
+    <div>
+      {isMiningStarted ? (
+        <PercentageLine percentage={percentage} />
+      ) : claim ?   <button className="blue-btn" onClick={startMining}>
+      Claim
+    </button>:  (
+        <button className="blue-btn" onClick={startMining}>
+          Start mining
+        </button>
+      )}
+      {isMiningStarted && <p className="grey-text">{timeLeft} left</p>}
+    </div>
+  );
+}
+
+export default Mining;

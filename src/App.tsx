@@ -16,7 +16,7 @@ import Game from "./pages/Game";
 
 export const App: FC = () => {
   const scrollableRef = useRef<HTMLDivElement | null>(null);
-  const telegram=window.Telegram.WebApp;
+  const telegram = window.Telegram.WebApp;
 
   function ensureDocumentIsScrollable() {
     const isScrollable =
@@ -40,10 +40,10 @@ export const App: FC = () => {
 
   useEffect(() => {
     ensureDocumentIsScrollable();
-    telegram.headerColor='#171923';
-    telegram.themeParams.bg_color='#EB3F3F';
-    telegram.themeParams.secondary_bg_color='#EB3F3F';
-    telegram.themeParams.button_color='#EB3F3F';
+    telegram.headerColor = "#171923";
+    telegram.themeParams.bg_color = "#EB3F3F";
+    telegram.themeParams.secondary_bg_color = "#EB3F3F";
+    telegram.themeParams.button_color = "#EB3F3F";
   }, []);
 
   useEffect(() => {

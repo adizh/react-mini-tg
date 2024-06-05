@@ -5,19 +5,19 @@ import { useEffect, useState, useRef } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useNavigate } from "react-router-dom";
-import PercentageLine from "../components/PercentageLine";
+import Mining from "../components/Mining";
 function Home() {
   const navigate = useNavigate();
   const [rating, setRating] = useState(0);
+
   const tg = window.Telegram.WebApp;
   const [userName, setUserName] = useState("");
-
   tg.expand();
   console.log("tg initDataUnsafe", tg.initDataUnsafe);
   console.log("tg", tg);
 
   useEffect(() => {
-    setUserName(tg.initDataUnsafe.user?.first_name as string);  
+    setUserName(tg.initDataUnsafe.user?.first_name as string);
   }, []);
 
   const StarDrawing = (
@@ -30,6 +30,9 @@ function Home() {
     inactiveFillColor: "#7E848D",
   };
 
+
+
+ 
   return (
     <div className="scroll-section">
       <div className="home-section">
@@ -49,7 +52,6 @@ function Home() {
             <div className="tasks">
               <div className="tasks-icon">
                 <span className="basic-white-text">Tasks</span>
-
                 <svg
                   width="20"
                   height="22"
@@ -74,9 +76,8 @@ function Home() {
             <span>Balance</span>
             <p>0 MDC</p>
           </div>
-          <button className="blue-btn">Start mining</button>
-          <PercentageLine percentage={40} />
-          <p className="grey-text">1 hour 52 minutes</p>
+
+     <Mining/>
 
           <div className="home-game">
             <div>
@@ -88,14 +89,18 @@ function Home() {
                 onChange={setRating}
                 itemStyles={customStyles}
               />
-              <button className="white-btn" onClick={()=>navigate('/react-mini-tg/game')}>Play</button>
+              <button
+                className="white-btn"
+                onClick={() => navigate("/react-mini-tg/game")}
+              >
+                Play
+              </button>
             </div>
             <div>
               <img width={55} src={MiniBlue} alt="car" />
             </div>
           </div>
         </div>
-        
       </div>
       <Footer />
     </div>
