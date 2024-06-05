@@ -89,12 +89,12 @@ function Home() {
                 onChange={setRating}
                 itemStyles={customStyles}
               />
-              <button
+              <a
                 className="white-btn"
-                onClick={() => navigate("/react-mini-tg/game")}
+                href='game.html'
               >
                 Play
-              </button>
+              </a>
             </div>
             <div>
               <img width={55} src={MiniBlue} alt="car" />

@@ -70,7 +70,7 @@ export const App: FC = () => {
           <Route path="/react-mini-tg/friends" element={<Friends />} />
           <Route path="/react-mini-tg/boost" element={<Boost />} />
           <Route path="/react-mini-tg/tasks" element={<Tasks />} />
-          <Route path="/react-mini-tg/game" element={<Game />} />
+          {/* <Route path="/react-mini-tg/game" element={<Game />} /> */}
         </Routes>
       </AppContext.Provider>
     </AppRoot>

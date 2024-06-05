@@ -21,3 +21,6 @@ declare module 'racer' {
   export interface Racer {
   }
 }
+
+declare module 'gsap'
+declare module 'paper'

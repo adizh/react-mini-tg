@@ -1,16 +1,10 @@
-/**
- * @desc Simple Racer Game built with paper.js
- * @author Massimiliano Pesente
- */
+console.log("FILE IS RUNNING")
+let Racer = window.Racer || {};
 
-export let Racer = window.Racer || {};
 
-//Utils
 Racer.Utils = (function () {
-
     let _that = this;
     let _transform;
-
     function initialize() {
         let agent = navigator.userAgent.toLowerCase();
         if (agent.indexOf('firefox') !== -1) {
@@ -23,7 +17,6 @@ Racer.Utils = (function () {
     }
 
     return {
-
         init: function () {
             initialize();
         },
@@ -203,6 +196,8 @@ Racer.Track = function () {
         _canvas = document.getElementById('track_canvas');
         _context = _canvas.getContext('2d');
 
+
+        console.log('CANVAS IN RACRE KS',_canvas)
         let svg = document.getElementById('track');
         let layer = new Layer();
 
@@ -290,7 +285,6 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     }
 
     function render() {
-
         calculateSpeed();
         let trackOffset = _elapsed % _path.length;
         let trackPoint = _path?.getPointAt(trackOffset);
@@ -408,8 +402,13 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
         _rotation = parseFloat(_rotation.toFixed(20));
         _rotation = _rotation.toFixed(10);
         _position = point;
-        _position.x =_position && _position?.x && parseFloat(_position?.x?.toFixed(20));
-        _position.y =_position &&  _position?.y && parseFloat(_position?.y?.toFixed(20));
+        if (_position &&_position.x && _position.y ) {
+            _position.x = _position?.x ? parseFloat(_position.x?.toFixed(20)) : 0;
+            _position.y = _position?.y ? parseFloat(_position.y?.toFixed(20)) : 0;
+          } 
+
+        //_position.x =_position && _position?.x && parseFloat(_position?.x?.toFixed(20));
+       // _position.y =_position &&  _position?.y && parseFloat(_position?.y?.toFixed(20));
         updateCarPosition();
     }
 
