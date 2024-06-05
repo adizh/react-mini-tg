@@ -9,12 +9,13 @@ function Mining() {
 
 
   const localSavedMining= localStorage.getItem('isMiningStarted')  && localStorage.getItem('isMiningStarted')  ==='true' ? true :false
+  const localSavedClaim= localStorage.getItem('claim')  && localStorage.getItem('claim')  ==='true' ? true :false
   const [isMiningStarted, setStartMining] = useState(localSavedMining);
   const [timeLeft, setTimeLeft] = useState('');
   const [percentage, setPercentage] = useState(0);
   const [currentTime, setCurrentTime] = useState(localStorage.getItem('currentUnixTime') ? localStorage.getItem('currentUnixTime') :0);
   const [twelveHoursLater, setTwelveHoursLater] = useState(getTwelveHoursLaterFromStorage);
-  const [claim,setClaim]=useState(false)
+  const [claim,setClaim]=useState(localSavedClaim)
 
   const convertUnixTime = (time:number) => {
     const dateFromUnixTimestamp = new Date(time * 1000);
@@ -57,6 +58,7 @@ function Mining() {
         setStartMining(false)
         setClaim(true)
         localStorage.setItem('isMiningStarted','false')
+        localStorage.setItem('claim','true')
         localStorage.removeItem('currentUnixTime')
         localStorage.removeItem('twoMinutesLaterUnixTime')
         localStorage.removeItem('isMiningStarted')
