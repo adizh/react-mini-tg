@@ -63,6 +63,7 @@ function Mining() {
         setIsMiningLoading(true)
         localStorage.setItem('isMiningStarted','false')
         localStorage.setItem('claim','true')
+        setPercentage(0)
         localStorage.removeItem('currentUnixTime')
         localStorage.removeItem('twoMinutesLaterUnixTime')
         localStorage.removeItem('isMiningStarted')

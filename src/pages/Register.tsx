@@ -8,7 +8,7 @@ function Register() {
   const tg = window.Telegram.WebApp;
 
   const makeRequest = () => {
-    fetch("https://4a5e-31-186-54-131.ngrok-free.app/api/v1/User/authorize", {
+    fetch("https://756f-31-186-54-131.ngrok-free.app/api/v1/User/authorize", {
       method: "POST",
       headers: {
         Authorization: `tma ${initDataRaw}`,

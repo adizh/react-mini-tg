@@ -1,0 +1,192 @@
+
+
+   * {
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            color:white !important;
+        }
+
+        div#track_container {
+            width: 900px;
+            height: 420px;
+            margin: auto;
+            margin-top: 100px;
+            position: relative;
+        }
+
+        div#track_car {
+            width: 25px;
+            height: 26px;
+            position: absolute;
+        }
+
+        svg#track {
+            width: 900px;
+            height: 420px;
+            position: absolute;
+            visibility: hidden;
+        }
+
+        canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 900px;
+            height: 420px;
+            z-index: 1;
+        }
+
+        div#track_car div.image {
+            width: 25px;
+            height: 26px;
+            background-image: url('../assets/images/cars/ambulance.png');
+            background-size: 100%;
+            top: -13px;
+            left: -12px;
+            position: absolute;
+            z-index: 5;
+        }
+
+        div.ui {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+        }
+
+
+        div.ui a.start {
+            display: block;
+            position: absolute;
+            background-color: #EB4333;
+            color: #fff;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 30px;
+            box-shadow: 5px 4px 0px 0px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            border-radius: 15px;
+            top: 20px;
+            left: 50%;
+            text-transform: uppercase;
+            width: 190px;
+            margin-left: -95px;
+            text-decoration: none;
+            visibility: hidden;
+        }
+
+        div.ui a.start:active {
+            margin-top: 1px;
+        }
+
+        div.ui div.ui-item {
+            width: 135px;
+            margin: auto;
+            text-align: left;
+            border-radius: 15px;
+            height: 30px;
+            line-height: 30px;
+            background: #fff;
+            position: absolute;
+            left: -200px;
+            padding-left: 30px;
+            box-shadow: 5px 4px 0px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        div.ui div.ui-item.best-score {
+            left: auto;
+            right: -200px;
+            top: 20px;
+            width: 140px;
+            font-size: 10px;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        div.ui div.ui-item.best-score span {
+            font-size: 10px;
+            color: #EB4333;
+        }
+
+        div.ui div.ui-item.score {
+            top: 20px;
+            font-size: 14px;
+            width: 160px;
+        }
+
+        div.ui div.ui-item.score span {
+            font-size: 16px;
+            color: #EB4333;
+        }
+
+        div.ui div.ui-item.lifes {
+            top: 60px;
+        }
+
+        div.ui div.ui-item.lifes ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            display: inline-block;
+            color: #EB4333;
+        }
+
+        div.ui div.ui-item.lifes ul li {
+            display: inline-block;
+            font-size: 12px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+            width: 100%;
+            display: none
+        }
+
+        footer a.cta {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 42px;
+            padding-right: 20px;
+            padding-left: 20px;
+            border: 2px solid #000;
+            margin: 0 10px 20px 0;
+            text-decoration: none;
+            opacity: .6;
+            transition: opacity 200ms ease-in-out
+        }
+
+        footer a.cta:hover {
+            opacity: 1
+        }
+
+        @media all and (min-width: 600px) {
+            footer {
+                display: block
+            }
+        }
+
+
+
+
+

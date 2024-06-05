@@ -15,3 +15,9 @@ declare global {
     Telegram: Telegram;
   }
 }
+
+
+declare module 'racer' {
+  export interface Racer {
+  }
+}
