@@ -5,12 +5,44 @@ import { useEffect, useState, useRef } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useNavigate } from "react-router-dom";
+import {
+  useBackButton,
+  useBackButtonRaw,
+  useViewport,
+  useViewportRaw,
+  useBiometryManagerRaw,
+  useClosingBehavior,
+} from '@tma.js/sdk-react';
+
+import { initClosingBehavior } from '@tma.js/sdk';
+import { initMiniApp } from '@tma.js/sdk';
 import Mining from "../components/Mining";
 function Home() {
   const navigate = useNavigate();
   const [rating, setRating] = useState(0);
-
+  //const vp = useViewport();
   const tg = window.Telegram.WebApp;
+//   const cloasing = useClosingBehavior()
+// const close=initClosingBehavior()
+// cloasing.enableConfirmation
+// const miniApp = initMiniApp();
+
+
+  // useEffect(() => {
+
+
+  // vp?.on('change',()=>{
+  //   tg.expand();
+  //   vp.expand()
+  //   miniApp[0].ready()
+
+
+  //   tg.isExpanded=true
+
+  // })
+  // }, [cloasing,vp]);
+
+
   const [userName, setUserName] = useState("");
   tg.expand();
   console.log("tg initDataUnsafe", tg.initDataUnsafe);
@@ -21,7 +53,7 @@ function Home() {
   }, []);
 
   const StarDrawing = (
-    <path d="M7.06732 10.3676L7.00065 10.4343L6.92732 10.3676C3.76065 7.49431 1.66732 5.59431 1.66732 3.66764C1.66732 2.33431 2.66732 1.33431 4.00065 1.33431C5.02732 1.33431 6.64732 2.42764 7.00065 3.33431C7.35398 2.42764 8.97398 1.33431 10.0007 1.33431C11.334 1.33431 12.334 2.33431 12.334 3.66764C12.334 5.59431 10.2407 7.49431 7.06732 10.3676ZM10.0007 0.000976562C8.84065 0.000976562 7.72732 0.540977 7.00065 1.38764C6.27398 0.540977 5.16065 0.000976562 4.00065 0.000976562C1.94732 0.000976562 0.333984 1.60764 0.333984 3.66764C0.333984 6.18098 2.60065 8.24098 6.03398 11.3543L7.00065 12.2343L7.96732 11.3543C11.4007 8.24098 13.6673 6.18098 13.6673 3.66764C13.6673 1.60764 12.054 0.000976562 10.0007 0.000976562Z" />
+    <path d="M6.9987 12.2343L6.03203 11.3543C2.5987 8.24098 0.332031 6.18098 0.332031 3.66764C0.332031 1.60764 1.94536 0.000976562 3.9987 0.000976562C5.1587 0.000976562 6.27203 0.540977 6.9987 1.38764C7.72536 0.540977 8.8387 0.000976562 9.9987 0.000976562C12.052 0.000976562 13.6654 1.60764 13.6654 3.66764C13.6654 6.18098 11.3987 8.24098 7.96536 11.3543L6.9987 12.2343Z" />
   );
 
   const customStyles = {
@@ -89,8 +121,12 @@ function Home() {
                 onChange={setRating}
                 itemStyles={customStyles}
               />
+
+              {/* <button className="blue-btn"
+              onClick={()=>navigate('/react-mini-tg/game')}
+              >Play</button> */}
               <a
-                className="white-btn"
+                className="link-page white-btn"
                 href='game.html'
               >
                 Play

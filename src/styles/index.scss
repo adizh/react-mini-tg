@@ -176,3 +176,10 @@ h2 {
   margin-top: 46px;
   @include flex(row, space-between, start);
 }
+
+
+.link-page{
+margin-top: 8px;
+  text-decoration: none;
+  display: block;
+}
