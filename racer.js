@@ -1,4 +1,4 @@
-console.log("FILE IS RUNNING")
+
 let Racer = window.Racer || {};
 
 
@@ -124,7 +124,6 @@ Racer.Game = (function () {
         _scoreUI.innerHTML = _points;
         updateHearts();
         addListener();
-
         TweenMax.to("a.start", .1, {ease: Cubic.easeInOut, autoAlpha: 0});
         TweenMax.to("div.lifes", .6, {ease: Cubic.easeInOut, left: -20});
     }
