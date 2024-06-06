@@ -26,7 +26,7 @@ Racer.Utils = (function () {
         },
 
         drawLine: function (p1, p2, color, size) {
-            let col = color || '#AAE727';
+            let col = '#fff';
             let s = size || 0;
             return new Path({
                 segments: [p1, p2],
@@ -36,7 +36,7 @@ Racer.Utils = (function () {
         },
 
         drawPoint: function (p, color, size) {
-            let col = color || '#AAE727';
+            let col =  '#fff';
             let s = size || 2;
             let point = new Shape.Circle(p, s);
             point.fillColor = col;
@@ -333,7 +333,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     }
 
     function updateCarPosition() {
-        _car.style[Racer.Utils.getTransform()] = 'translate3d(' + _position?.x + 'px, ' + _position.y + 'px, 0px)rotate(' + _rotation + 'deg)';
+        _car.style[Racer.Utils.getTransform()] = 'translate3d(' + _position?.x + 'px, ' + _position.y + 'px, 0px)rotate(' + _rotation + 90 + 'deg)';
     }
 
     function renderCrash(point) {
@@ -365,8 +365,8 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
         let normalAtPoint = _path?.getNormalAt(offset_prev).multiply(1000 * direction);
 
 
-        let l1 = Racer.Utils.drawLine(point, point?.add(normalAtPosition), null, 1);
-        let l2 = Racer.Utils.drawLine(_path?.getPointAt(offset_prev), _path?.getPointAt(offset_prev).add(normalAtPoint), '#2895FF', 1);
+        let l1 = Racer.Utils.drawLine(point, point?.add(normalAtPosition), '#fff', 1);
+        let l2 = Racer.Utils.drawLine(_path?.getPointAt(offset_prev), _path?.getPointAt(offset_prev).add(normalAtPoint), '#fff', 1);
 
         let maxVelocity = Infinity;
         let intersection = l1.getIntersections(l2);
@@ -377,7 +377,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
             maxVelocity = Math.sqrt(distance * SLIDING_FRICTION);
 
             if (maxVelocity > 0 && _velocity.length > maxVelocity) {
-                _pathExit = Racer.Utils.drawLine(point, point?.add(_velocity.multiply(50)), null, 0);
+                _pathExit = Racer.Utils.drawLine(point, point?.add(_velocity.multiply(50)), '#fff', 0);
                 _elapsedExit = 0;
                 _rotationExit = ROTATION_ON_EXIT;
                 _throttle = 0;
