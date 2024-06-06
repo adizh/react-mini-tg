@@ -20,7 +20,7 @@ function Login() {
   });
 
   return (
-    <div className="login-section">
+    <div className="login-section section">
       <h1>Login</h1>
 
       <p className="grey-text">

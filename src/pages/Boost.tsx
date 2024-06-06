@@ -56,7 +56,7 @@ function Boost() {
   }, []);
 
   return (
-    <div className="scroll-section">
+    <div className="scroll-section section">
       {loading ? (
         <Loader />
       ) : (

@@ -34,7 +34,7 @@ function Register() {
     };
   });
   return (
-    <div className="login-section">
+    <div className="login-section section">
       <h1>Create account</h1>
       <p className="grey-text">
         We have created a unique MyDataCin address for you, which is similar to

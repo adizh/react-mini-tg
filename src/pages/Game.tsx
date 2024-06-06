@@ -18,7 +18,7 @@ function Game() {
     // Draw the view now:
     paper.View
  },[])
-  return <div>Game
+  return <div className='section'>Game
 
 
 <canvas id="myCanvas"></canvas>

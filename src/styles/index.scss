@@ -137,10 +137,13 @@ h2 {
   font-weight: 400;
 }
 
-.section {
+.section{
   padding: 20px;
 }
 
+.section .home-section{
+  padding:0;
+}
 .md-text-basic {
   color: white;
   font-size: 16px;

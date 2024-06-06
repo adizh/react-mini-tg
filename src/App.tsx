@@ -88,7 +88,7 @@ export const App: FC = () => {
 
   return (
     // <SDKProvider acceptCustomStyles debug>
-    <AppRoot className="section scrollable-element" ref={scrollableRef}>
+    <AppRoot className="scrollable-element" ref={scrollableRef}>
       <AppContext.Provider value={http}>
         <Routes>
           <Route path="/react-mini-tg" element={<Main />} />

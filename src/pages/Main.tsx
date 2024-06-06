@@ -15,7 +15,7 @@ function Main() {
   console.log("myContext", myContext);
 
   return (
-    <div>
+    <div className='section'>
       <div className="header">
         <img className="logo-img" width={150} src={LogoImg} alt="logo" />
         <h1 className="header-h1">MyDataCoin</h1>
