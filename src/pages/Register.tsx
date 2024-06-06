@@ -11,7 +11,7 @@ function Register() {
     fetch("https://a133-31-186-54-131.ngrok-free.app/api/v1/User/authorize", {
       method: "POST",
       headers: {
-        Authorization: `tma ${initDataRaw}`,
+        Authorization: `tma ${initData}`,
       },
     })
       .then((response) => response.json())
