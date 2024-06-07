@@ -19,7 +19,7 @@ import { initMiniApp } from '@tma.js/sdk';
 import Mining from "../components/Mining";
 function Home() {
   const navigate = useNavigate();
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(5);
   //const vp = useViewport();
   const tg = window.Telegram.WebApp;
 //   const cloasing = useClosingBehavior()
@@ -120,6 +120,7 @@ function Home() {
                 value={rating}
                 onChange={setRating}
                 itemStyles={customStyles}
+                isDisabled={true}
               />
 
               {/* <button className="blue-btn"

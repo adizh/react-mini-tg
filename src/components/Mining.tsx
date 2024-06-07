@@ -8,7 +8,6 @@ function Mining() {
   };
 
   const [isMiningLoading,setIsMiningLoading]=useState(true)
-
   const localSavedMining= localStorage.getItem('isMiningStarted')  && localStorage.getItem('isMiningStarted')  ==='true' ? true :false
   const localSavedClaim= localStorage.getItem('claim')  && localStorage.getItem('claim')  ==='true' ? true :false
   const [isMiningStarted, setStartMining] = useState(localSavedMining);
@@ -68,20 +67,13 @@ function Mining() {
         localStorage.removeItem('twoMinutesLaterUnixTime')
         localStorage.removeItem('isMiningStarted')
       } else {
-
-      
         const hours = Math.floor(newTimeLeft / 3600);
         const minutes = Math.floor((newTimeLeft % 3600) / 60);
         const seconds = newTimeLeft % 60;
         const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         setTimeLeft(formattedTime);
-
         const elapsed = totalDuration - newTimeLeft;
         const percentageComplete =+((elapsed / totalDuration) * 100).toFixed(2)
-        console.log('percentageComplete',percentageComplete)
-        console.log('newTimeLeft',newTimeLeft)
-        console.log('elapsed',elapsed);
-        console.log('totalDuration',totalDuration)
         setPercentage(+percentageComplete);
         setIsMiningLoading(false)
       }
@@ -95,31 +87,20 @@ function Mining() {
   }, [isMiningStarted, twelveHoursLater]);
 
   return (
-//     <div>
-//    {isMiningStarted ? (
-//      <PercentageLine percentage={percentage} />
-//     ) : claim ?   <button className="blue-btn" onClick={startMining}>
-//  Claim
-//    </button>:  (
-//       <button className="blue-btn" onClick={startMining}>
-//        Start mining
-//       </button>
-//      )}
-//      {isMiningStarted && <p className="grey-text">{timeLeft} left</p>}
-//    </div>
+
  <>
-   {!isMiningLoading  ?  <div>
+   {!isMiningLoading  ?  <div className='mining'>
     {isMiningStarted ? (
       <PercentageLine percentage={percentage} />
     ) : claim ?   <button className="blue-btn" onClick={startMining}>
     Claim
-  </button>:  (
+      </button>:  (
       <button className="blue-btn" onClick={startMining}>
         Start mining
       </button>
     )}
     {isMiningStarted && <p className="grey-text">{timeLeft} left</p>}
-  </div> : <div className='grey-text'>Loading...</div>}
+  </div> : <div className='grey-text centered'>Loading...</div>}
  </>
   );
 }

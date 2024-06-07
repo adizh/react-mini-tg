@@ -6,6 +6,7 @@ Racer.Utils = (function () {
     let _that = this;
     let _transform;
     function initialize() {
+
         let agent = navigator.userAgent.toLowerCase();
         if (agent.indexOf('firefox') !== -1) {
             _transform = 'MozTransform';
@@ -104,7 +105,6 @@ Racer.Game = (function () {
             TweenMax.to("a.start", .3, {ease: Cubic.easeInOut, autoAlpha: 1});
             TweenMax.to("div.lifes", .4, {ease: Cubic.easeInOut, left: -200});
             _car.afterCrash(false);
-
             if (_points > _maxPoints) {
                 if (_maxPoints === 0) {
                     TweenMax.to("div.best-score", .6, {ease: Cubic.easeInOut, right: -20});
@@ -163,7 +163,6 @@ Racer.Game = (function () {
         _life--;
         updateHearts();
         removeListener();
-
     }
 
     function updateHearts() {
@@ -194,19 +193,13 @@ Racer.Track = function () {
 
         _canvas = document.getElementById('track_canvas');
         _context = _canvas.getContext('2d');
-
-
-        console.log('CANVAS IN RACRE KS',_canvas)
         let svg = document.getElementById('track');
         let layer = new Layer();
 
         layer.importSVG(svg, function (path, svg) {
-
-            path.strokeColor = '#ECBB62';
-            path.strokeWidth = 12;
-
+            path.strokeColor = '#FFF';
+            path.strokeWidth = 9;
             _path = path?.children['circuit'];
-
         });
 
         paper.view.draw();
@@ -221,13 +214,11 @@ Racer.Track = function () {
 
 //Car Class
 Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
-
     let ACCELERATION = acceleration || 0.8;
     let FRICTION = friction || 0.9;
     let SPEED = speed || 20;
     let SLIDING_FRICTION = sliding_friction || 4.1;
     let ROTATION_ON_EXIT = 60;
-
     let _that = this;
     let _path = path;
     let _rotation, _elapsed, _velocity, _throttle;
@@ -242,14 +233,13 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
         _rotationExit = 0;
         _elapsedExit = 0;
 
-        _rotation = 0;
+        _rotation = 90;
         _elapsed = 0;
         _velocity = new Point(0, 0);
         _velocity.length = 0;
         _throttle = 0;
 
         _position = _path?.getPointAt(_elapsed);
-
         renderCar(_position);
     }
 
@@ -289,17 +279,13 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
         let trackPoint = _path?.getPointAt(trackOffset);
         let trackTangent = _path?.getTangentAt(trackOffset);
         let trackAngle = trackTangent.angle;
-
         _lastPoint = trackPoint;
         _velocity.angle = trackAngle;
-
         if (_in) {
-
             _elapsed += _velocity.length;
             if (_velocity.length > 0.1) {
                 renderCar(trackPoint);
             }
-
         } else {
             let trackOffsetExit = _elapsedExit % _pathExit.length;
             let trackPointExit = _pathExit.getPointAt(trackOffsetExit);
@@ -328,12 +314,11 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
         _position = _lastPoint;
         _position.x = parseFloat(_position?.x.toFixed(20));
         _position.y = parseFloat(_position?.y.toFixed(20));
-
         updateCarPosition();
     }
 
     function updateCarPosition() {
-        _car.style[Racer.Utils.getTransform()] = 'translate3d(' + _position?.x + 'px, ' + _position.y + 'px, 0px)rotate(' + _rotation + 90 + 'deg)';
+        _car.style[Racer.Utils.getTransform()] = 'translate3d(' + _position?.x + 'px, ' + _position.y + 'px, 0px)rotate(' + _rotation  + 'deg)';
     }
 
     function renderCrash(point) {
@@ -343,6 +328,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
         _position = point;
         _position.x = parseFloat(_position?.x.toFixed(20));
         _position.y = parseFloat(_position?.y.toFixed(20));
+
         updateCarPosition();
     }
 
@@ -401,13 +387,16 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
         _rotation = parseFloat(_rotation.toFixed(20));
         _rotation = _rotation.toFixed(10);
         _position = point;
+
+        console.log('rotation before +90',_rotation)
+        _rotation =( +_rotation+90).toString()
+
         if (_position &&_position.x && _position.y ) {
             _position.x = _position?.x ? parseFloat(_position.x?.toFixed(20)) : 0;
             _position.y = _position?.y ? parseFloat(_position.y?.toFixed(20)) : 0;
           } 
 
-        //_position.x =_position && _position?.x && parseFloat(_position?.x?.toFixed(20));
-       // _position.y =_position &&  _position?.y && parseFloat(_position?.y?.toFixed(20));
+          console.log("render car init postiio _rot",_rotation)
         updateCarPosition();
     }
 
