@@ -1,6 +1,11 @@
 
 let Racer = window.Racer || {};
 
+let livesFromLocal = localStorage.getItem('lives');
+let _life;
+if(livesFromLocal && livesFromLocal!=undefined){
+    _life= +livesFromLocal
+}
 
 Racer.Utils = (function () {
     let _that = this;
@@ -54,7 +59,6 @@ Racer.Utils = (function () {
 Racer.Game = (function () {
 
     let _track, _car;
-    let _life = 5;
     let _points = 0;
     let _maxPoints = 0;
     let _scoreUI, _hearts, _restartUI;
@@ -72,12 +76,18 @@ Racer.Game = (function () {
         _scoreUI = document.getElementsByClassName('points')[0];
         _scoreUI.innerHTML = _points;
 
-        _bestScoreUI = document.getElementsByClassName('best-points')[0];
+       // _bestScoreUI = document.getElementsByClassName('best-points')[0];
 
 
         _hearts = document.querySelectorAll("div.lifes li");
-        _restartUI = document.querySelector('a.start');
-        _restartUI.addEventListener("click", restartGame);
+        
+        console.log('lives in init', _life)
+
+        for(let i = _hearts.length - 1; i >= _hearts.length - (5 - _life); i--) {
+            _hearts[i].style.opacity = 0.2;
+        }
+     //   _restartUI = document.querySelector('a.start');
+      //  _restartUI.addEventListener("click", restartGame);
 
         window.addEventListener("CarCrashed", onCarCrashed);
         window.addEventListener("CarRunning", onCarRunning);
@@ -92,7 +102,7 @@ Racer.Game = (function () {
         console.log("Max points: ", _maxPoints);
 
         if (_maxPoints > 0) {
-            _bestScoreUI.innerHTML = _maxPoints.toString();
+          // _bestScoreUI.innerHTML = _maxPoints.toString();
             TweenMax.to("div.best-score", .6, {ease: Cubic.easeInOut, right: -20, delay: .8});
         }
     }
@@ -111,7 +121,7 @@ Racer.Game = (function () {
                 }
 
                 _maxPoints = _points;
-                _bestScoreUI.innerHTML = _maxPoints.toString();
+                //_bestScoreUI.innerHTML = _maxPoints.toString();
                 localStorage.setItem("bestScore", _maxPoints);
             }
         }
@@ -119,7 +129,7 @@ Racer.Game = (function () {
 
     function restartGame() {
         _car.reset();
-        _life = 5;
+      //  _life = 5;
         _points = 0;
         _scoreUI.innerHTML = _points;
         updateHearts();
@@ -160,9 +170,14 @@ Racer.Game = (function () {
     }
 
     function onCarCrashed(e) {
-        _life--;
-        updateHearts();
-        removeListener();
+        if(_life>0){
+            _life--;
+            updateHearts();
+            removeListener();
+        }
+     
+
+        localStorage.setItem('lives',_life.toString())
     }
 
     function updateHearts() {
@@ -170,6 +185,7 @@ Racer.Game = (function () {
             if (i < _life) _hearts[i].style.opacity = 1;
             else _hearts[i].style.opacity = .2;
         }
+        localStorage.setItem('lives',_life.toString())
     }
 
 
@@ -190,15 +206,14 @@ Racer.Track = function () {
     let _canvas, _context, _path;
 
     function initialize() {
-
         _canvas = document.getElementById('track_canvas');
         _context = _canvas.getContext('2d');
         let svg = document.getElementById('track');
         let layer = new Layer();
 
         layer.importSVG(svg, function (path, svg) {
-            path.strokeColor = '#FFF';
-            path.strokeWidth = 9;
+            path.strokeColor = '#7E848D';
+            path.strokeWidth = 8;
             _path = path?.children['circuit'];
         });
 
@@ -233,7 +248,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
         _rotationExit = 0;
         _elapsedExit = 0;
 
-        _rotation = 90;
+        _rotation = 180;
         _elapsed = 0;
         _velocity = new Point(0, 0);
         _velocity.length = 0;
@@ -307,18 +322,22 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     }
 
     function restartAfterCrash() {
-
         _rotation = _velocity.angle;
         _rotation = parseFloat(_rotation.toFixed(20));
         _rotation = _rotation.toFixed(10);
         _position = _lastPoint;
         _position.x = parseFloat(_position?.x.toFixed(20));
         _position.y = parseFloat(_position?.y.toFixed(20));
+
+
+
         updateCarPosition();
     }
 
     function updateCarPosition() {
-        _car.style[Racer.Utils.getTransform()] = 'translate3d(' + _position?.x + 'px, ' + _position.y + 'px, 0px)rotate(' + _rotation  + 'deg)';
+        _rotation= (+_rotation + 180).toString();
+        console.log('updateCarPosition is working _rotation',_rotation)
+        _car.style[Racer.Utils.getTransform()] = 'translate3d(' + _position?.x + 'px, ' + _position.y + 'px, 0px)rotate(' + _rotation     + 'deg)';
     }
 
     function renderCrash(point) {
@@ -389,7 +408,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
         _position = point;
 
         console.log('rotation before +90',_rotation)
-        _rotation =( +_rotation+90).toString()
+        _rotation =( +_rotation+270).toString()
 
         if (_position &&_position.x && _position.y ) {
             _position.x = _position?.x ? parseFloat(_position.x?.toFixed(20)) : 0;

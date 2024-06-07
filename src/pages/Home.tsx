@@ -51,7 +51,13 @@ function Home() {
   useEffect(() => {
     setUserName(tg.initDataUnsafe.user?.first_name as string);
   }, []);
+  const handlePlayClick = () => {
+    console.log('handlePlayClickhandlePlayClickhandlePlayClick')
 
+      window.location.href = 'game.html'; 
+
+    
+  };
 
 
 
@@ -108,15 +114,16 @@ function Home() {
               <p className="grey-text">Play to earn more MDC!</p>
             <GameLives/>
 
-              {/* <button className="blue-btn"
-              onClick={()=>navigate('/react-mini-tg/game')}
-              >Play</button> */}
-              <a
+              <button className="blue-btn"
+              onClick={()=>handlePlayClick()}
+              >Play</button>
+              {/* <a
+                href='#'
                 className="link-page white-btn"
-                href='game.html'
+              
               >
                 Play
-              </a>
+              </a> */}
             </div>
             <div>
               <img width={55} src={MiniBlue} alt="car" />
