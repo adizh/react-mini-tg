@@ -2,8 +2,7 @@ import Footer from "../components/Footer";
 import "../styles/home.scss";
 import MiniBlue from "../assets/images/cars/mini-blue.png";
 import { useEffect, useState, useRef } from "react";
-import { Rating } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
+
 import { useNavigate } from "react-router-dom";
 import {
   useBackButton,
@@ -17,9 +16,10 @@ import {
 import { initClosingBehavior } from '@tma.js/sdk';
 import { initMiniApp } from '@tma.js/sdk';
 import Mining from "../components/Mining";
+import GameLives from "../components/GameLives";
 function Home() {
   const navigate = useNavigate();
-  const [rating, setRating] = useState(5);
+
   //const vp = useViewport();
   const tg = window.Telegram.WebApp;
 //   const cloasing = useClosingBehavior()
@@ -52,15 +52,6 @@ function Home() {
     setUserName(tg.initDataUnsafe.user?.first_name as string);
   }, []);
 
-  const StarDrawing = (
-    <path d="M6.9987 12.2343L6.03203 11.3543C2.5987 8.24098 0.332031 6.18098 0.332031 3.66764C0.332031 1.60764 1.94536 0.000976562 3.9987 0.000976562C5.1587 0.000976562 6.27203 0.540977 6.9987 1.38764C7.72536 0.540977 8.8387 0.000976562 9.9987 0.000976562C12.052 0.000976562 13.6654 1.60764 13.6654 3.66764C13.6654 6.18098 11.3987 8.24098 7.96536 11.3543L6.9987 12.2343Z" />
-  );
-
-  const customStyles = {
-    itemShapes: StarDrawing,
-    activeFillColor: "#EB3F3F",
-    inactiveFillColor: "#7E848D",
-  };
 
 
 
@@ -115,13 +106,7 @@ function Home() {
             <div>
               <h1>Racing Game</h1>
               <p className="grey-text">Play to earn more MDC!</p>
-              <Rating
-                style={{ maxWidth: 180 }}
-                value={rating}
-                onChange={setRating}
-                itemStyles={customStyles}
-                isDisabled={true}
-              />
+            <GameLives/>
 
               {/* <button className="blue-btn"
               onClick={()=>navigate('/react-mini-tg/game')}

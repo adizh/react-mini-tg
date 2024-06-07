@@ -116,3 +116,13 @@ margin:0 $main-padding;
     margin-top: 12px;
   }
 }
+
+
+.game-lives{
+  @include flex(row,start,start);
+  gap:4px;
+  img{
+    width: 16px;
+    height:16px
+  }
+}
