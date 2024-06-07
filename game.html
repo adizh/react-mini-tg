@@ -153,44 +153,41 @@ font-weight: 700;
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/paper.js/0.10.3/paper-full.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src='racer.js'></script>
 <script>
-  
-  let navigating = false;
-
-function handleNavigation(event) {
-  if (!navigating) {
-    const userConfirmed = window.confirm('Are you sure you want to leave? Your progress will be lost.');
-    if (!userConfirmed) {
-      event.preventDefault();
-      history.pushState(null, '', location.href);
-    } else {
-      navigating = true; 
-      window.removeEventListener('popstate', handleNavigation);
-      window.history.back(); 
+      const tg = window.Telegram.WebApp;
+      const btn = tg.BackButton;
+      btn.show();
+      Racer.Game.init();
 
 
-    }
-  }
-}
+// function handleNavigation(event) {
+//   if (!navigating) {
+//     const userConfirmed = window.confirm('Are you sure you want to leave? Your progress will be lost.');
+//     if (!userConfirmed) {
+//       event.preventDefault();
+//       history.pushState(null, '', location.href);
+//     } else {
+//       navigating = true; 
+//       window.removeEventListener('popstate', handleNavigation);
+//       window.history.back(); 
+//       Racer.Game.restart()
 
-window.addEventListener('popstate', handleNavigation);
+
+//     }
+//   }
+// }
+
+// window.addEventListener('popstate', handleNavigation);
 
 
-window.addEventListener('beforeunload', (event) => {
-  const confirmationMessage = 'Are you sure you want to leave? Your progress will be lost.';
-  event.returnValue = confirmationMessage;
-  return confirmationMessage;
-});
 
-history.pushState(null, '', location.href);
+
+// history.pushState(null, '', location.href);
 
 
     </script>
-<script src='racer.js'></script>
-
-<script>
-    Racer.Game.init();
-</script>
 
 
 </body>
