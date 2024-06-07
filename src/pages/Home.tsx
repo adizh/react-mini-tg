@@ -19,7 +19,7 @@ import Mining from "../components/Mining";
 import GameLives from "../components/GameLives";
 function Home() {
   const navigate = useNavigate();
-
+const [lives,setLives]=useState(0)
   //const vp = useViewport();
   const tg = window.Telegram.WebApp;
 //   const cloasing = useClosingBehavior()
@@ -50,13 +50,14 @@ function Home() {
 
   useEffect(() => {
     setUserName(tg.initDataUnsafe.user?.first_name as string);
+
+    let livesFromLoc = localStorage.getItem('lives')
+    if(livesFromLoc && livesFromLoc!==undefined){
+      setLives(+livesFromLoc)
+    }
   }, []);
   const handlePlayClick = () => {
-    console.log('handlePlayClickhandlePlayClickhandlePlayClick')
-
       window.location.href = 'game.html'; 
-
-    
   };
 
 
@@ -114,16 +115,10 @@ function Home() {
               <p className="grey-text">Play to earn more MDC!</p>
             <GameLives/>
 
-              <button className="blue-btn"
+              <button className="blue-btn" 
               onClick={()=>handlePlayClick()}
               >Play</button>
-              {/* <a
-                href='#'
-                className="link-page white-btn"
-              
-              >
-                Play
-              </a> */}
+             
             </div>
             <div>
               <img width={55} src={MiniBlue} alt="car" />

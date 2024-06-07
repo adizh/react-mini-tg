@@ -21,6 +21,10 @@ body {
   overflow-y: scroll;
   overscroll-behavior: contain;
 }
+.blue-btn:disabled {
+  opacity: 0.5; 
+  cursor: not-allowed; 
+}
 .scroll-section {
   overflow: auto;
   height: 100vh;
