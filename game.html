@@ -3,15 +3,9 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-
-    <title>Demo | A racing game built with Paper.js</title>
-
-    <link href='//fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
+    <title>Game</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <script>
-       
-    </script>
-
+   
     <style>
 
         * {
@@ -29,7 +23,6 @@
             background-color: #171923;
             height: 100%;
             width: 100%;
-            font-family: 'Candal';
             overflow-x: hidden;
         }
 
@@ -211,18 +204,14 @@
 
 <body>
 
-<svg version="1.1" id="track" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-     y="0px"
-     viewBox="0 0 900 420" enable-background="new 0 0 300 420" xml:space="preserve">
-    <path id="circuit" fill="none" stroke="#ffffff" stroke-width="4" d="M19.28934,28.76481c58.0978,0,115.09131-7.61421,172.58883-7.61421c15.71037,0,51.93317-6.24572,55.83756,15.22843c2.03471,11.1909-21.84572,16.96938-29.61083,21.15059-41.09323,22.12712-90.81384,22.53699-135.36379,34.68697-14.25198,3.8869-30.48779,2.41165-36.37902,18.61252-1.03798,2.85445-5.9113,6.77544-3.3841,8.46024c2.67536,1.78357,6.09088-2.53807,9.30626-2.53807c45.65613,0,90.89954.36341,136.20981,3.3841c14.05988.93733,44.12976,3.33039,45.68528,21.99662c1.1808,14.16957-34.57622,20.99113-45.68528,22.84264-29.6328,4.9388-60.25457,5.95954-89.67851,11.84433-21.56278,4.31256-44.56804,11.84433-66.83587,11.84433"/>
+<svg id="track">
+    <path id="circuit"   stroke-width="4" d="M19.28934,28.76481c58.0978,0,115.09131-7.61421,172.58883-7.61421c15.71037,0,51.93317-6.24572,55.83756,15.22843c2.03471,11.1909-21.84572,16.96938-29.61083,21.15059-41.09323,22.12712-90.81384,22.53699-135.36379,34.68697-14.25198,3.8869-30.48779,2.41165-36.37902,18.61252-1.03798,2.85445-5.9113,6.77544-3.3841,8.46024c2.67536,1.78357,6.09088-2.53807,9.30626-2.53807c45.65613,0,90.89954.36341,136.20981,3.3841c14.05988.93733,44.12976,3.33039,45.68528,21.99662c1.1808,14.16957-34.57622,20.99113-45.68528,22.84264-29.6328,4.9388-60.25457,5.95954-89.67851,11.84433-21.56278,4.31256-44.56804,11.84433-66.83587,11.84433" stroke="#ffffff"  fill="none"/>
     </svg>
 
-   
-<!-- <svg id="track" xmlns="http://www.w3.org/2000/svg" 
+   <!-- <svg id="track" xmlns="http://www.w3.org/2000/svg" 
     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 300" shape-rendering="geometricPrecision" 
     text-rendering="geometricPrecision"><path id="circuit" d="M19.28934,28.76481c58.0978,0,115.09131-7.61421,172.58883-7.61421c15.71037,0,51.93317-6.24572,55.83756,15.22843c2.03471,11.1909-21.84572,16.96938-29.61083,21.15059-41.09323,22.12712-90.81384,22.53699-135.36379,34.68697-14.25198,3.8869-30.48779,2.41165-36.37902,18.61252-1.03798,2.85445-5.9113,6.77544-3.3841,8.46024c2.67536,1.78357,6.09088-2.53807,9.30626-2.53807c45.65613,0,90.89954.36341,136.20981,3.3841c14.05988.93733,44.12976,3.33039,45.68528,21.99662c1.1808,14.16957-34.57622,20.99113-45.68528,22.84264-29.6328,4.9388-60.25457,5.95954-89.67851,11.84433-21.56278,4.31256-44.56804,11.84433-66.83587,11.84433" fill="none" stroke="#3f5787" stroke-width="0.6"/></svg> -->
-
-
+    
 <div class="ui">
     <a class="start" href="#">Start Racing</a>
     <div class="ui-item lifes">
@@ -251,10 +240,7 @@
     <canvas id="track_canvas"></canvas>
 </div>
 
-<footer>
-    <a href="https://twitter.com/intent/tweet?text=A%20racing%20game%20built%20with%20Paper.js%20by%20@ilpes%20https://ilpes.it/a-racing-game-built-with-paper-js" class="cta"  target="_blank">Tweet this</a>
-    <a href="https://ilpes.it/a-racing-game-built-with-paper-js" class="cta"  target="_blank">Read on ilpes.it</a>
-</footer>
+
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/paper.js/0.10.3/paper-full.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
@@ -266,4 +252,4 @@
 </script>
 
 </body>
-</html>¬
+</html>
