@@ -63,7 +63,7 @@
 }
 .home-car{
   rotate: 270deg;
-  margin-top: 16px;
+  margin-right: 16px;
 }
 .main-logo-content {
   width: 100%;
@@ -122,7 +122,7 @@
 }
 
 .game-lives {
-  @include flex(row, start, start);
+  @include flex(row, start, center);
   gap: 4px;
   img {
     width: 16px;

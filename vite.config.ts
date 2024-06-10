@@ -10,12 +10,12 @@ const htmlImport = {
    * @param {string} id The absolute path.
    * @returns {{code: string}}
    */
-  transform(code, id) {
-    if (/^.*\.html$/g.test(id)) {
-      code = `export default \`${code}\``;
-    }
-    return { code };
-  },
+  // transform(code, id) {
+  //   if (/^.*\.html$/g.test(id)) {
+  //     code = `export default \`${code}\``;
+  //   }
+  //   return { code };
+  // },
 };
 // https://vitejs.dev/config/
 export default defineConfig({
