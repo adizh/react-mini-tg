@@ -10,7 +10,11 @@
         * {
             box-sizing: border-box;
          
-        
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         body {
@@ -116,6 +120,8 @@ font-weight: 700;
     </svg> -->
 
 <div class="game-section">
+<a href="/react-mini-tg/home" onclick="goBack">Back</a>
+
     <svg id="track">
         <path id="circuit"   d="M65.6837 40.831L215.617 24.0538C219.196 23.6534 222.704 22.7715 226.046 21.4322L260.803 7.50567C279.923 -0.155203 301.734 7.95549 311.203 26.2472L311.764 27.3306C321.459 46.0573 314.95 69.0934 296.89 79.9784L120.462 186.31C108.664 193.421 101.355 206.102 101.116 219.876L98.8109 352.767C98.4627 372.837 82.0935 388.925 62.0205 388.925V388.925C41.6986 388.925 25.2245 372.451 25.2245 352.129V169.182C25.2245 147.091 43.1331 129.182 65.2245 129.182H231.405C253.496 129.182 271.405 147.091 271.405 169.182V431C271.405 453.091 253.496 471 231.405 471H44C21.9086 471 4 453.091 4 431V85.4296C4 78.9675 5.5656 72.6017 8.56282 66.8768L9.3119 65.446C15.3334 53.9446 26.5621 46.0808 39.429 44.3542L65.6837 40.831Z" stroke="#ffffff"  fill="none"/>
     </svg>
@@ -154,39 +160,21 @@ font-weight: 700;
 <script src="//cdnjs.cloudflare.com/ajax/libs/paper.js/0.10.3/paper-full.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src='racer.js'></script>
+<script src='/racer.js'></script>
 <script>
       const tg = window.Telegram.WebApp;
       const btn = tg.BackButton;
       btn.show();
       Racer.Game.init();
 
+      btn.onClick(() => {
+        window.history.pushState({},'','/react-mini-tg/home')
+  });
 
-// function handleNavigation(event) {
-//   if (!navigating) {
-//     const userConfirmed = window.confirm('Are you sure you want to leave? Your progress will be lost.');
-//     if (!userConfirmed) {
-//       event.preventDefault();
-//       history.pushState(null, '', location.href);
-//     } else {
-//       navigating = true; 
-//       window.removeEventListener('popstate', handleNavigation);
-//       window.history.back(); 
-//       Racer.Game.restart()
-
-
-//     }
-//   }
-// }
-
-// window.addEventListener('popstate', handleNavigation);
-
-
-
-
-// history.pushState(null, '', location.href);
-
-
+  const goBack =(e)=>{
+e.preventDefault();
+window.history.pushState('/react-mini-tg/home')
+  }
     </script>
 
 

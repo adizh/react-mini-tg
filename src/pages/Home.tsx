@@ -57,7 +57,8 @@ const [lives,setLives]=useState(0)
     }
   }, []);
   const handlePlayClick = () => {
-      window.location.href = 'game.html'; 
+    window.location.href='game.html'
+    // navigate('/react-mini-tg/game') 
   };
 
 

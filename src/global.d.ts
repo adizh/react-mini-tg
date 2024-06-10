@@ -24,3 +24,5 @@ declare module 'racer' {
 
 declare module 'gsap'
 declare module 'paper'
+
+declare module '*.html'

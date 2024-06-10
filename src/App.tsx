@@ -100,7 +100,10 @@ export const App: FC = () => {
           <Route path="/react-mini-tg/boost" element={<Boost />} />
           <Route path="/react-mini-tg/tasks" element={<Tasks />} />
           <Route path="/react-mini-tg/game" element={<Game />} />
-          <Route path="/react-mini-tg/game.html"  />
+          {/* <Route path="/react-mini-tg/game"  element={<Navigate to={'game.html'}/>}> */}
+
+
+       
         </Routes>
       </AppContext.Provider>
     </AppRoot>
