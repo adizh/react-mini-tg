@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 
-type TimerHookReturnType = [number, number | null];
+type TimerHookReturnType = [number, number | null,boolean];
 
 function useTimer(initialRating: number): TimerHookReturnType {
     const [rating, setRating] = useState<number>(initialRating);
     const [timeLeft, setTimeLeft] = useState<number | null>(null);
+    const [isStarted, setIsStarted] = useState(false);
 
     useEffect(() => {
         const storedStartTime = localStorage.getItem("startTime");
@@ -23,6 +24,7 @@ function useTimer(initialRating: number): TimerHookReturnType {
         }
 
         const intervalId = setInterval(() => {
+            setIsStarted(true)
             if (rating < 5 && timeLeft !== null) {
                 setTimeLeft(prevTimeLeft => (prevTimeLeft ? prevTimeLeft - 1 : 7199));
             }
@@ -42,10 +44,11 @@ function useTimer(initialRating: number): TimerHookReturnType {
             setTimeLeft(0)
             localStorage.setItem('lives',5?.toString())
             localStorage.removeItem('startTime')
+            setIsStarted(false)
         }
     }, [rating, timeLeft]);
 
-    return [rating, timeLeft];
+    return [rating, timeLeft,isStarted];
 }
 
 export default useTimer;

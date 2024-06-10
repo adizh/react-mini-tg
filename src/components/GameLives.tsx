@@ -14,7 +14,7 @@ function GameLives() {
       console.log("livesFromLocal in GAME COMPONENT",livesFromLocal)
 
   const [lives, setLives] = useState(livesFromLocal);
-const [rating, timeLeft] = useTimer(+livesFromLocal);
+const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
   const ratingArray = Array.from({ length: rating }, (_, index) => index + 1);
   const voidItems = Array.from({ length: 5 - rating }, (_, index) => index + 1);
 
@@ -65,8 +65,8 @@ const [rating, timeLeft] = useTimer(+livesFromLocal);
       ))}
       {voidItems?.length > 0 &&
         voidItems?.map((item: number) => <img src={heartVoid} key={item} />)}
-     <p className="grey-text">{formatTimeLeft(timeLeft as number)} left</p> 
-
+        {isStarted && <p className="grey-text">{formatTimeLeft(timeLeft as number)} left</p> 
+}
     </div>
   );
 }
