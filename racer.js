@@ -1,6 +1,6 @@
 
 let Racer = window.Racer || {};
-
+console.log('file is running')
 let livesFromLocal = localStorage.getItem('lives');
 let _life;
 if(livesFromLocal && livesFromLocal!=undefined){
