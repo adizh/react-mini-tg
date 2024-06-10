@@ -1,6 +1,6 @@
 
 let Racer = window.Racer || {};
-console.log('file is running')
+
 let livesFromLocal = localStorage.getItem('lives');
 let _life;
 if(livesFromLocal && livesFromLocal!=undefined){
@@ -81,7 +81,7 @@ Racer.Game = (function () {
 
         _hearts = document.querySelectorAll("div.lifes li");
         
-        console.log('lives in init', _life)
+
 
         for(let i = _hearts.length - 1; i >= _hearts.length - (5 - _life); i--) {
             _hearts[i].style.opacity = 0.2;
@@ -99,7 +99,7 @@ Racer.Game = (function () {
         TweenMax.to("div.score", .6, {ease: Cubic.easeInOut, left: -20, delay: .4});
 
         _maxPoints = localStorage.getItem("bestScore") == null ? 0 : localStorage.getItem("bestScore");
-        console.log("Max points: ", _maxPoints);
+
 
         if (_maxPoints > 0) {
           // _bestScoreUI.innerHTML = _maxPoints.toString();
@@ -336,7 +336,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
 
     function updateCarPosition() {
         _rotation= (+_rotation + 180).toString();
-        console.log('updateCarPosition is working _rotation',_rotation)
+
         _car.style[Racer.Utils.getTransform()] = 'translate3d(' + _position?.x + 'px, ' + _position.y + 'px, 0px)rotate(' + _rotation     + 'deg)';
     }
 
@@ -407,7 +407,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
         _rotation = _rotation.toFixed(10);
         _position = point;
 
-        console.log('rotation before +90',_rotation)
+
         _rotation =( +_rotation+270).toString()
 
         if (_position &&_position.x && _position.y ) {
@@ -415,7 +415,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
             _position.y = _position?.y ? parseFloat(_position.y?.toFixed(20)) : 0;
           } 
 
-          console.log("render car init postiio _rot",_rotation)
+ 
         updateCarPosition();
     }
 
