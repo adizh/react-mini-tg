@@ -183,7 +183,7 @@ h2 {
   background: $footer-bg;
   padding: 16px;
   margin-top: 46px;
-  @include flex(row, space-between, start);
+  @include flex(row, space-between, center);
 }
 
 .link-page {
