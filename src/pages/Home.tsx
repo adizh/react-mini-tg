@@ -22,6 +22,10 @@ function Home() {
 
   //const vp = useViewport();
   const tg = window.Telegram.WebApp;
+  const livesFromLocal =
+  localStorage.getItem("lives") && localStorage.getItem("lives") !== null
+    ? Number(localStorage.getItem("lives"))
+    : 5;
   //   const cloasing = useClosingBehavior()
   // const close=initClosingBehavior()
   // cloasing.enableConfirmation
@@ -42,6 +46,7 @@ function Home() {
   const [userName, setUserName] = useState("");
   tg.expand();
 
+  console.log("TG",tg)
   useEffect(() => {
     setUserName(tg.initDataUnsafe.user?.first_name as string);
   }, []);
@@ -102,12 +107,12 @@ function Home() {
               <p className="grey-text">Play to earn more MDC!</p>
               <GameLives />
 
-              <button className="blue-btn" onClick={() => handlePlayClick()}>
+              <button className="white-btn" onClick={() => handlePlayClick()} disabled={livesFromLocal<1 ? true :false}>
                 Play
               </button>
             </div>
             <div>
-              <img width={55} src={MiniBlue} alt="car" />
+              <img width={55} src={MiniBlue} alt="car" className='home-car' />
             </div>
           </div>
         </div>

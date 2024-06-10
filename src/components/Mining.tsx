@@ -30,14 +30,28 @@ function Mining() {
   );
   const [claim, setClaim] = useState(localSavedClaim);
 
-  const convertUnixTime = (time: number) => {
-    const dateFromUnixTimestamp = new Date(time * 1000);
-    const hours = dateFromUnixTimestamp.getHours();
-    const minutes = dateFromUnixTimestamp.getMinutes();
-    const seconds = dateFromUnixTimestamp.getSeconds();
-    const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-    return formattedTime;
-  };
+  function formatUnixTime(unixTime: number): string {
+    const milliseconds = unixTime * 1000; // Convert Unix time to milliseconds
+    const date = new Date(milliseconds);
+
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    const seconds = date.getUTCSeconds();
+
+    let formattedTime = "";
+
+    if (hours > 0) {
+        formattedTime += hours + " hour" + (hours === 1 ? "" : "s") + " ";
+    }
+    if (minutes > 0) {
+        formattedTime += minutes + " minute" + (minutes === 1 ? "" : "s") + " ";
+    }
+    if (seconds > 0) {
+        formattedTime += seconds + " second" + (seconds === 1 ? "" : "s");
+    }
+
+    return formattedTime.trim();
+}
 
   const startMining = () => {
     setStartMining(true);
@@ -80,10 +94,11 @@ function Mining() {
         localStorage.removeItem("twoMinutesLaterUnixTime");
         localStorage.removeItem("isMiningStarted");
       } else {
-        const hours = Math.floor(newTimeLeft / 3600);
-        const minutes = Math.floor((newTimeLeft % 3600) / 60);
-        const seconds = newTimeLeft % 60;
-        const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+        // const hours = Math.floor(newTimeLeft / 3600);
+        // const minutes = Math.floor((newTimeLeft % 3600) / 60);
+        // const seconds = newTimeLeft % 60;
+        // const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+       const formattedTime = formatUnixTime(newTimeLeft)
         setTimeLeft(formattedTime);
         const elapsed = totalDuration - newTimeLeft;
         const percentageComplete = +((elapsed / totalDuration) * 100).toFixed(

@@ -8,19 +8,18 @@ function useTimer(initialRating: number): TimerHookReturnType {
 
     useEffect(() => {
         const storedStartTime = localStorage.getItem("startTime");
-        const storedRating = localStorage.getItem("rating");
+   
         
-        if (storedStartTime && storedRating) {
+        if (storedStartTime) {
             const startTime = parseInt(storedStartTime, 10);
             const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-            const storedTimeLeft = parseInt(storedRating, 10) < 5 ? 7200 - (elapsedTime % 7200) : null;
+            const storedTimeLeft = parseInt(rating.toString(), 10) < 5 ? 7199 - (elapsedTime % 7200) : null;
             
             setTimeLeft(storedTimeLeft);
-            setRating(parseInt(storedRating, 10));
+            setRating(parseInt(rating.toString(), 10));
         } else {
             localStorage.setItem("startTime", Date.now().toString());
-            localStorage.setItem("rating", initialRating.toString());
-            setTimeLeft(7200);
+            setTimeLeft(7199);
         }
 
         const intervalId = setInterval(() => {
@@ -37,12 +36,12 @@ function useTimer(initialRating: number): TimerHookReturnType {
             setRating(prevRating => prevRating + 1);
             setTimeLeft(7199); 
             localStorage.setItem("startTime", Date.now().toString());
-            localStorage.setItem("rating", (rating + 1).toString());
             localStorage.setItem('lives',rating?.toString())
         }
         if(rating===5){
             setTimeLeft(0)
             localStorage.setItem('lives',5?.toString())
+            localStorage.removeItem('startTime')
         }
     }, [rating, timeLeft]);
 

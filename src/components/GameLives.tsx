@@ -11,9 +11,10 @@ function GameLives() {
     localStorage.getItem("lives") && localStorage.getItem("lives") !== null
       ? Number(localStorage.getItem("lives"))
       : 5;
+      console.log("livesFromLocal in GAME COMPONENT",livesFromLocal)
 
   const [lives, setLives] = useState(livesFromLocal);
-const [rating, timeLeft] = useTimer(livesFromLocal);
+const [rating, timeLeft] = useTimer(+livesFromLocal);
   const ratingArray = Array.from({ length: rating }, (_, index) => index + 1);
   const voidItems = Array.from({ length: 5 - rating }, (_, index) => index + 1);
 
