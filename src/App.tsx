@@ -1,44 +1,29 @@
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { type FC, useEffect, useMemo, useRef, useState } from "react";
 import { Navigate, Route, Router, Routes } from "react-router-dom";
-import { on, off, type MiniAppsEventListener } from '@tma.js/sdk';
+import { on, off, type MiniAppsEventListener } from "@tma.js/sdk";
 import Main from "./pages/Main";
 import About from "./pages/About";
-import { SDKProvider } from '@tma.js/sdk-react';
+import { SDKProvider } from "@tma.js/sdk-react";
 import Login from "./pages/Login";
 
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Boost from "./pages/Boost";
-import { requestViewport } from '@tma.js/sdk';
-import { setDebug } from '@tma.js/sdk';
+import { requestViewport } from "@tma.js/sdk";
+import { setDebug } from "@tma.js/sdk";
 import Friends from "./pages/Friends";
 import Tasks from "./pages/Tasks";
 import AppContext from "./components/AppContext";
 import http from "./http";
 import Game from "./pages/Game";
-import { request } from '@tma.js/sdk';
-import { postEvent } from '@tma.js/sdk';
-import { parseLaunchParams, LaunchParams } from '@tma.js/sdk';
-import {
-  subscribe,
-  unsubscribe,
-
-} from '@tma.js/sdk';
+import { request } from "@tma.js/sdk";
+import { postEvent } from "@tma.js/sdk";
+import { parseLaunchParams, LaunchParams } from "@tma.js/sdk";
+import { subscribe, unsubscribe } from "@tma.js/sdk";
 export const App: FC = () => {
-
-
-
-
-
-
-
   const scrollableRef = useRef<HTMLDivElement | null>(null);
   const telegram = window.Telegram.WebApp;
-
-
-
-
 
   function ensureDocumentIsScrollable() {
     const isScrollable =
@@ -60,19 +45,9 @@ export const App: FC = () => {
     window.scrollTo(0, 100);
   }
 
-
-
-
   useEffect(() => {
     ensureDocumentIsScrollable();
-
- 
-    
   }, []);
-
-
-  
-
 
   // useEffect(() => {
   //   scrollableRef.current?.addEventListener("touchstart", preventCollapse);
@@ -100,14 +75,11 @@ export const App: FC = () => {
           <Route path="/react-mini-tg/boost" element={<Boost />} />
           <Route path="/react-mini-tg/tasks" element={<Tasks />} />
           <Route path="/react-mini-tg/game" element={<Game />} />
-          <Route path="/react-mini-tg/game.html"  />
+          <Route path="/react-mini-tg/game.html" />
           {/* <Route path="/react-mini-tg/game"  element={<Navigate to={'game.html'}/>}> */}
-
-
-       
         </Routes>
       </AppContext.Provider>
     </AppRoot>
-   //  </SDKProvider> 
+    //  </SDKProvider>
   );
 };

@@ -20,7 +20,7 @@ function Tasks() {
   });
 
   return (
-    <div className='section'>
+    <div className="section">
       <div className="tasks-section">
         <div className="tasks-header">
           <h1>Tasks</h1>

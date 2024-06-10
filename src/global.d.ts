@@ -16,13 +16,11 @@ declare global {
   }
 }
 
-
-declare module 'racer' {
-  export interface Racer {
-  }
+declare module "racer" {
+  export interface Racer {}
 }
 
-declare module 'gsap'
-declare module 'paper'
+declare module "gsap";
+declare module "paper";
 
-declare module '*.html'
+declare module "*.html";

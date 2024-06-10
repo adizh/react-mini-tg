@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import paper, { Point, Path, Layer } from 'paper';
-import { TweenMax, Cubic } from 'gsap';
+import React, { useEffect, useRef, useState } from "react";
+import paper, { Point, Path, Layer } from "paper";
+import { TweenMax, Cubic } from "gsap";
 
 interface CarProps {
   path: paper.Path;
@@ -10,7 +10,13 @@ interface CarProps {
   slidingFriction?: number;
 }
 
-const Car: React.FC<CarProps> = ({ path, acceleration = 0.8, friction = 0.9, speed = 20, slidingFriction = 4.1 }) => {
+const Car: React.FC<CarProps> = ({
+  path,
+  acceleration = 0.8,
+  friction = 0.9,
+  speed = 20,
+  slidingFriction = 4.1,
+}) => {
   const ACCELERATION = acceleration;
   const FRICTION = friction;
   const SPEED = speed;
@@ -39,7 +45,7 @@ const Car: React.FC<CarProps> = ({ path, acceleration = 0.8, friction = 0.9, spe
       velocity.angle = trackAngle;
 
       if (inTrack) {
-        setElapsed(prev => prev + velocity.length);
+        setElapsed((prev) => prev + velocity.length);
         if (velocity.length > 0.1) {
           renderCar(trackPoint);
         }
@@ -78,19 +84,23 @@ const Car: React.FC<CarProps> = ({ path, acceleration = 0.8, friction = 0.9, spe
       direction = 1;
     }
 
-    const normalAtPosition = path.getNormalAt(offset).multiply(1000 * direction);
-    const normalAtPoint = path.getNormalAt(offsetPrev).multiply(1000 * direction);
+    const normalAtPosition = path
+      .getNormalAt(offset)
+      .multiply(1000 * direction);
+    const normalAtPoint = path
+      .getNormalAt(offsetPrev)
+      .multiply(1000 * direction);
 
     const l1 = new Path.Line({
       from: point,
       to: point.add(normalAtPosition),
-      strokeColor: 'black',
+      strokeColor: "black",
       strokeWidth: 1,
     });
     const l2 = new Path.Line({
       from: path.getPointAt(offsetPrev),
       to: path.getPointAt(offsetPrev).add(normalAtPoint),
-      strokeColor: 'blue',
+      strokeColor: "blue",
       strokeWidth: 1,
     });
 
@@ -111,7 +121,9 @@ const Car: React.FC<CarProps> = ({ path, acceleration = 0.8, friction = 0.9, spe
     l1.remove();
     l2.remove();
 
-    const carRunningEvent = new CustomEvent('CarRunning', { detail: Math.round(5 * velocity.length) - 1 });
+    const carRunningEvent = new CustomEvent("CarRunning", {
+      detail: Math.round(5 * velocity.length) - 1,
+    });
     window.dispatchEvent(carRunningEvent);
 
     setRotation(velocity.angle);
@@ -135,16 +147,16 @@ const Car: React.FC<CarProps> = ({ path, acceleration = 0.8, friction = 0.9, spe
       e.preventDefault();
     };
 
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    document.body.addEventListener('touchstart', handleMouseDown);
-    document.body.addEventListener('touchend', handleMouseUp);
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+    document.body.addEventListener("touchstart", handleMouseDown);
+    document.body.addEventListener("touchend", handleMouseUp);
 
     return () => {
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-      document.body.removeEventListener('touchstart', handleMouseDown);
-      document.body.removeEventListener('touchend', handleMouseUp);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      document.body.removeEventListener("touchstart", handleMouseDown);
+      document.body.removeEventListener("touchend", handleMouseUp);
     };
   }, []);
 

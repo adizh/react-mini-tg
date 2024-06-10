@@ -28,7 +28,7 @@
 }
 
 .home-header {
-  padding:$main-padding;
+  padding: $main-padding;
   @include flex(row, space-between, start);
 }
 
@@ -38,7 +38,7 @@
 }
 
 .home-game {
-margin:0 $main-padding;
+  margin: 0 $main-padding;
 
   h1 {
     margin-bottom: 4px;
@@ -55,12 +55,12 @@ margin:0 $main-padding;
     margin-top: 8px;
   }
 }
-.mining{
-  padding:$main-padding;
-  .grey-text{
+.mining {
+  padding: $main-padding;
+  .grey-text {
     text-align: center;
   }
-} 
+}
 .main-logo-content {
   width: 100%;
   height: 210px;
@@ -117,12 +117,11 @@ margin:0 $main-padding;
   }
 }
 
-
-.game-lives{
-  @include flex(row,start,start);
-  gap:4px;
-  img{
+.game-lives {
+  @include flex(row, start, start);
+  gap: 4px;
+  img {
     width: 16px;
-    height:16px
+    height: 16px;
   }
 }

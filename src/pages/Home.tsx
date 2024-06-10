@@ -11,59 +11,45 @@ import {
   useViewportRaw,
   useBiometryManagerRaw,
   useClosingBehavior,
-} from '@tma.js/sdk-react';
+} from "@tma.js/sdk-react";
 
-import { initClosingBehavior } from '@tma.js/sdk';
-import { initMiniApp } from '@tma.js/sdk';
+import { initClosingBehavior } from "@tma.js/sdk";
+import { initMiniApp } from "@tma.js/sdk";
 import Mining from "../components/Mining";
 import GameLives from "../components/GameLives";
 function Home() {
   const navigate = useNavigate();
-const [lives,setLives]=useState(0)
+
   //const vp = useViewport();
   const tg = window.Telegram.WebApp;
-//   const cloasing = useClosingBehavior()
-// const close=initClosingBehavior()
-// cloasing.enableConfirmation
-// const miniApp = initMiniApp();
-
+  //   const cloasing = useClosingBehavior()
+  // const close=initClosingBehavior()
+  // cloasing.enableConfirmation
+  // const miniApp = initMiniApp();
 
   // useEffect(() => {
-
 
   // vp?.on('change',()=>{
   //   tg.expand();
   //   vp.expand()
   //   miniApp[0].ready()
 
-
   //   tg.isExpanded=true
 
   // })
   // }, [cloasing,vp]);
 
-
   const [userName, setUserName] = useState("");
   tg.expand();
-  console.log("tg initDataUnsafe", tg.initDataUnsafe);
-  console.log("tg", tg);
 
   useEffect(() => {
     setUserName(tg.initDataUnsafe.user?.first_name as string);
-
-    let livesFromLoc = localStorage.getItem('lives')
-    if(livesFromLoc && livesFromLoc!==undefined){
-      setLives(+livesFromLoc)
-    }
   }, []);
+
   const handlePlayClick = () => {
-    window.location.href='game.html'
-    // navigate('/react-mini-tg/game') 
+    window.location.href = "game.html";
   };
 
-
-
- 
   return (
     <div className="scroll-section">
       <div className="home-section">
@@ -108,18 +94,17 @@ const [lives,setLives]=useState(0)
             <p>0 MDC</p>
           </div>
 
-     <Mining/>
+          <Mining />
 
           <div className="home-game">
             <div>
               <h1>Racing Game</h1>
               <p className="grey-text">Play to earn more MDC!</p>
-            <GameLives/>
+              <GameLives />
 
-              <button className="blue-btn" 
-              onClick={()=>handlePlayClick()}
-              >Play</button>
-             
+              <button className="blue-btn" onClick={() => handlePlayClick()}>
+                Play
+              </button>
             </div>
             <div>
               <img width={55} src={MiniBlue} alt="car" />

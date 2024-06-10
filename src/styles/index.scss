@@ -2,7 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Onest:ital,wght@0,100..900;1,100..900&display=swap");
 $margin-bottom: 130px;
 
-
 * {
   margin: 0;
   padding: 0;
@@ -22,8 +21,8 @@ body {
   overscroll-behavior: contain;
 }
 .blue-btn:disabled {
-  opacity: 0.5; 
-  cursor: not-allowed; 
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 .scroll-section {
   overflow: auto;
@@ -128,8 +127,8 @@ h2 {
     margin-bottom: 8px;
   }
 }
-.centered{
-  @include flex(row,center,start)
+.centered {
+  @include flex(row, center, start);
 }
 .grey-text {
   font-size: 14px;
@@ -145,12 +144,12 @@ h2 {
   font-weight: 400;
 }
 
-.section{
+.section {
   padding: $main-padding;
 }
 
-.section .home-section{
-  padding:0;
+.section .home-section {
+  padding: 0;
 }
 .md-text-basic {
   color: white;
@@ -188,9 +187,8 @@ h2 {
   @include flex(row, space-between, start);
 }
 
-
-.link-page{
-margin-top: 8px;
+.link-page {
+  margin-top: 8px;
   text-decoration: none;
   display: block;
 }

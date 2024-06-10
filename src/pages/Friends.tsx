@@ -6,7 +6,7 @@ function Friends() {
   const tg = window.Telegram.WebApp;
   tg.expand();
   return (
-    <div className='section'>
+    <div className="section">
       <div className="friends-section">
         <h1>Friends</h1>
         <div className="friends-mid-block">
