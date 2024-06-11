@@ -11,21 +11,21 @@ function useTimer(initialRating: number): TimerHookReturnType {
       if(rating<5){
         let storedStartTime: number | null = parseInt(localStorage.getItem('gameLiveStart') || '');
         if (!storedStartTime || isNaN(storedStartTime)) {
-            storedStartTime = Math.floor(Date.now() / 1000); // Set startTime if not available in localStorage
+            storedStartTime = Math.floor(Date.now() / 1000); 
             localStorage.setItem('gameLiveStart', storedStartTime.toString());
         }
 
         const intervalId = setInterval(() => {
             setIsStarted(true);
             const currentTime = Math.floor(Date.now() / 1000);
-            let elapsedTime = currentTime - storedStartTime!; // Calculate elapsed time since start
+            let elapsedTime = currentTime - storedStartTime!; 
 
-            if (elapsedTime >= 7200) { // Update rating every 3 seconds until the rating reaches 5 or 16 seconds have passed
-                const updatedRating = rating + Math.floor(elapsedTime / 7200); // Increment rating based on elapsed time
-                const newRating = Math.min(updatedRating, 5); // Ensure rating does not exceed 5
+            if (elapsedTime >= 7200) { 
+                const updatedRating = rating + Math.floor(elapsedTime / 7200);
+                const newRating = Math.min(updatedRating, 5); 
                 setRating(newRating);
                 localStorage.setItem('lives', newRating.toString());
-            } else {
+            } else { 
                 
                 setTimeLeft(0);
             }
