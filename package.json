@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "/",
+  "homepage": "https://adizh.github.io/react-mini-tg/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
