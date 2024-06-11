@@ -20,15 +20,16 @@ function useTimer(initialRating: number): TimerHookReturnType {
             const currentTime = Math.floor(Date.now() / 1000);
             let elapsedTime = currentTime - storedStartTime!; // Calculate elapsed time since start
 
-            if (elapsedTime >= 3 && elapsedTime < 16) { // Update rating every 3 seconds until the rating reaches 5 or 16 seconds have passed
-                const updatedRating = rating + Math.floor(elapsedTime / 3); // Increment rating based on elapsed time
+            if (elapsedTime >= 7200) { // Update rating every 3 seconds until the rating reaches 5 or 16 seconds have passed
+                const updatedRating = rating + Math.floor(elapsedTime / 7200); // Increment rating based on elapsed time
                 const newRating = Math.min(updatedRating, 5); // Ensure rating does not exceed 5
                 setRating(newRating);
                 localStorage.setItem('lives', newRating.toString());
             } else {
+                
                 setTimeLeft(0);
             }
-            const remainingTime = 3 - (elapsedTime % 3);
+            const remainingTime = 7200 - (elapsedTime % 7200);
             setTimeLeft(remainingTime);
         }, 1000);
 
@@ -37,9 +38,10 @@ function useTimer(initialRating: number): TimerHookReturnType {
             setIsStarted(false);
         };
       } else if (rating === 5) {
+
+        localStorage.removeItem('gameLiveStart');
         setIsStarted(false);
         setTimeLeft(0);
-        localStorage.removeItem('gameLiveStart');
       }
     }, []); 
 

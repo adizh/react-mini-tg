@@ -27,6 +27,12 @@ function Home() {
   localStorage.getItem("lives") && localStorage.getItem("lives") !== null
     ? Number(localStorage.getItem("lives"))
     : 5;
+
+    const [lives,setLives]=useState(livesFromLocal)
+
+    useEffect(()=>{
+      setLives(livesFromLocal)
+    },[livesFromLocal])
     // const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
   //   const cloasing = useClosingBehavior()
   // const close=initClosingBehavior()
@@ -110,7 +116,7 @@ function Home() {
               <p className="grey-text">Play to earn more MDC!</p>
               <GameLives />
 
-              <button className="white-btn" onClick={() => handlePlayClick()} disabled={livesFromLocal<1 ? true :false}>
+              <button className="white-btn" onClick={() => handlePlayClick()} disabled={lives<1 ? true :false}>
                 Play
               </button>
             </div>

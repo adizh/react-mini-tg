@@ -26,17 +26,20 @@ const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
     if (livesFromLoc && livesFromLoc !== undefined) {
       setLives(+livesFromLoc);
     }
+    if(rating===5){
+      localStorage.removeItem('gameLiveStart')
+    }
 
    
   }, []);
 
 
-  useEffect(()=>{
-setLives(rating)
-if(rating===5){
-  localStorage.removeItem('gameLiveStart')
-}
-  },[rating]);
+//   useEffect(()=>{
+// setLives(rating)
+// if(rating===5){
+//   localStorage.removeItem('gameLiveStart')
+// }
+//   },[rating]);
 
 
   function formatTimeLeft(timeLeft: number | null): string {
