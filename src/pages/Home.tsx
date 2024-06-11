@@ -44,11 +44,12 @@ function Home() {
   // }, [cloasing,vp]);
 
   const [userName, setUserName] = useState("");
-  tg.expand();
+  
 
   console.log("TG",tg)
   useEffect(() => {
     setUserName(tg.initDataUnsafe.user?.first_name as string);
+    tg.expand();
   }, []);
 
   const handlePlayClick = () => {

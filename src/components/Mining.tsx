@@ -94,11 +94,7 @@ function Mining() {
         localStorage.removeItem("twoMinutesLaterUnixTime");
         localStorage.removeItem("isMiningStarted");
       } else {
-        // const hours = Math.floor(newTimeLeft / 3600);
-        // const minutes = Math.floor((newTimeLeft % 3600) / 60);
-        // const seconds = newTimeLeft % 60;
-        // const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-       const formattedTime = formatUnixTime(newTimeLeft)
+          const formattedTime = formatUnixTime(newTimeLeft)
         setTimeLeft(formattedTime);
         const elapsed = totalDuration - newTimeLeft;
         const percentageComplete = +((elapsed / totalDuration) * 100).toFixed(

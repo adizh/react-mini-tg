@@ -74,7 +74,8 @@ const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
         voidItems?.map((item: number) => <img src={heartVoid} key={item} />)}
 
    </div>
-       {rating!==5 && <p className="grey-text">{formatTimeLeft(timeLeft as number)} left</p> }
+       {/* {rating!==5 && <p className="grey-text">{formatTimeLeft(timeLeft as number)} left</p> } */}
+       <p className="grey-text">{formatTimeLeft(timeLeft as number)} left</p> 
   
 </div>
   );
