@@ -5,9 +5,10 @@ type TimerHookReturnType = [number, number | null, boolean];
 function useTimer(initialRating: number): TimerHookReturnType {
     const [rating, setRating] = useState<number>(initialRating);
     const [timeLeft, setTimeLeft] = useState<number | null>(3);
-    const [isStarted, setIsStarted] = useState<boolean>(true);
+    const [isStarted, setIsStarted] = useState<boolean>(false);
 
     useEffect(() => {
+      if(rating<5){
         let storedStartTime: number | null = parseInt(localStorage.getItem('gameLiveStart') || '');
         if (!storedStartTime || isNaN(storedStartTime)) {
             storedStartTime = Math.floor(Date.now() / 1000); // Set startTime if not available in localStorage
@@ -15,21 +16,32 @@ function useTimer(initialRating: number): TimerHookReturnType {
         }
 
         const intervalId = setInterval(() => {
+            setIsStarted(true);
             const currentTime = Math.floor(Date.now() / 1000);
-            const elapsedTime = currentTime - storedStartTime!; // Calculate elapsed time since start
-            const remainingTime = 3 - (elapsedTime % 3); // Calculate remaining time in current cycle
+            let elapsedTime = currentTime - storedStartTime!; // Calculate elapsed time since start
 
-            setTimeLeft(remainingTime);
-
-            if (elapsedTime >= 3 && elapsedTime % 3 === 0 && rating < 5)  { // Update rating every 3 seconds
-                const updatedRating = rating + 1; // Increment rating by 1 (up to a maximum of 5)
-                setRating(updatedRating);
-                localStorage.setItem('lives', updatedRating.toString());
+            if (elapsedTime >= 3 && elapsedTime < 16) { // Update rating every 3 seconds until the rating reaches 5 or 16 seconds have passed
+                const updatedRating = rating + Math.floor(elapsedTime / 3); // Increment rating based on elapsed time
+                const newRating = Math.min(updatedRating, 5); // Ensure rating does not exceed 5
+                setRating(newRating);
+                localStorage.setItem('lives', newRating.toString());
+            } else {
+                setTimeLeft(0);
             }
+            const remainingTime = 3 - (elapsedTime % 3);
+            setTimeLeft(remainingTime);
         }, 1000);
 
-        return () => clearInterval(intervalId);
-    }, []); // We only want this effect to run once
+        return () => {
+            clearInterval(intervalId);
+            setIsStarted(false);
+        };
+      } else if (rating === 5) {
+        setIsStarted(false);
+        setTimeLeft(0);
+        localStorage.removeItem('gameLiveStart');
+      }
+    }, []); 
 
     return [rating, timeLeft, isStarted];
 }

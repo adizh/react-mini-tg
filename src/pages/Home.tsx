@@ -17,6 +17,7 @@ import { initClosingBehavior } from "@tma.js/sdk";
 import { initMiniApp } from "@tma.js/sdk";
 import Mining from "../components/Mining";
 import GameLives from "../components/GameLives";
+import useTimer from '../hooks/gameLivesTimer'
 function Home() {
   const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ function Home() {
   localStorage.getItem("lives") && localStorage.getItem("lives") !== null
     ? Number(localStorage.getItem("lives"))
     : 5;
+    // const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
   //   const cloasing = useClosingBehavior()
   // const close=initClosingBehavior()
   // cloasing.enableConfirmation
