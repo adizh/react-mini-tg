@@ -32,7 +32,6 @@ const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
 
 
   useEffect(()=>{
-console.log('rating is being updates in the componen!!!',rating)
 setLives(rating)
 if(rating===5){
   localStorage.removeItem('gameLiveStart')

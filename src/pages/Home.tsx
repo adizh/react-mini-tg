@@ -17,7 +17,7 @@ import { initClosingBehavior } from "@tma.js/sdk";
 import { initMiniApp } from "@tma.js/sdk";
 import Mining from "../components/Mining";
 import GameLives from "../components/GameLives";
-import useTimer from '../hooks/gameLivesTimer'
+
 function Home() {
   const navigate = useNavigate();
 
