@@ -122,10 +122,13 @@
 }
 
 .game-lives {
-  @include flex(row, start, center);
+  @include flex(column, center, start);
   gap: 4px;
   img {
     width: 16px;
     height: 16px;
+  }
+  .grey-text{
+    margin:0 !important;
   }
 }

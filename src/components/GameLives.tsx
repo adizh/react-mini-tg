@@ -24,6 +24,8 @@ const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
     if (livesFromLoc && livesFromLoc !== undefined) {
       setLives(+livesFromLoc);
     }
+
+   
   }, []);
 
   console.log('isStarted in the comonnet',isStarted)
@@ -61,14 +63,20 @@ const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
   return (
 
     <div className="game-lives">
-      {ratingArray?.map((item: number) => (
+   <div>
+
+    {ratingArray?.map((item: number) => (
         <img src={heartFilled} key={item + 10} />
       ))}
+
+
       {voidItems?.length > 0 &&
         voidItems?.map((item: number) => <img src={heartVoid} key={item} />)}
-        {rating!==5 && <p className="grey-text">{formatTimeLeft(timeLeft as number)} left</p> 
-}
-    </div>
+
+   </div>
+       {rating!==5 && <p className="grey-text">{formatTimeLeft(timeLeft as number)} left</p> }
+  
+</div>
   );
 }
 

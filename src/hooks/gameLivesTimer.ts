@@ -49,6 +49,8 @@ function useTimer(initialRating: number): TimerHookReturnType {
             setIsStarted(false)
 
             console.log("setIsStarted",isStarted)
+
+         
         }
     }, [rating, timeLeft]);
 
