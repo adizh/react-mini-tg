@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { retrieveLaunchParams } from "@tma.js/sdk";
 
 function Register() {
+  
   const { initDataRaw, initData } = retrieveLaunchParams();
   const navigate = useNavigate();
   const tg = window.Telegram.WebApp;

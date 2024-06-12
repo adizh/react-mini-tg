@@ -17,7 +17,7 @@ import { initClosingBehavior } from "@tma.js/sdk";
 import { initMiniApp } from "@tma.js/sdk";
 import Mining from "../components/Mining";
 import GameLives from "../components/GameLives";
-
+import useTimer from "../hooks/gameLivesTimer";
 function Home() {
   const navigate = useNavigate();
 
@@ -30,11 +30,14 @@ function Home() {
 
     const [lives,setLives]=useState(livesFromLocal)
 
-    useEffect(()=>{
-      setLives(livesFromLocal)
-    },[livesFromLocal])
-    // const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
-  //   const cloasing = useClosingBehavior()
+ 
+
+   const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
+
+   useEffect(()=>{
+    setLives(rating)
+  },[rating])
+  // const cloasing = useClosingBehavior()
   // const close=initClosingBehavior()
   // cloasing.enableConfirmation
   // const miniApp = initMiniApp();

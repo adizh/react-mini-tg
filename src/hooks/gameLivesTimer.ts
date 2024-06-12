@@ -6,7 +6,7 @@ function useTimer(initialRating: number): TimerHookReturnType {
     const [rating, setRating] = useState<number>(initialRating);
     const [timeLeft, setTimeLeft] = useState<number | null>(3);
     const [isStarted, setIsStarted] = useState<boolean>(false);
-
+     const seconds=40
     useEffect(() => {
       if(rating<5){
         let storedStartTime: number | null = parseInt(localStorage.getItem('gameLiveStart') || '');
@@ -20,8 +20,8 @@ function useTimer(initialRating: number): TimerHookReturnType {
             const currentTime = Math.floor(Date.now() / 1000);
             let elapsedTime = currentTime - storedStartTime!; 
 
-            if (elapsedTime >= 7200) { 
-                const updatedRating = rating + Math.floor(elapsedTime / 7200);
+            if (elapsedTime >= seconds) { 
+                const updatedRating = rating + Math.floor(elapsedTime / seconds);
                 const newRating = Math.min(updatedRating, 5); 
                 setRating(newRating);
                 localStorage.setItem('lives', newRating.toString());
@@ -29,7 +29,7 @@ function useTimer(initialRating: number): TimerHookReturnType {
                 
                 setTimeLeft(0);
             }
-            const remainingTime = 7200 - (elapsedTime % 7200);
+            const remainingTime = seconds - (elapsedTime % seconds);
             setTimeLeft(remainingTime);
         }, 1000);
 
