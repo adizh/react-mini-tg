@@ -172,7 +172,7 @@ Racer.Game = (function () {
     document.body.removeEventListener("touchstart", accelerate);
     document.body.removeEventListener("touchend", brake);
   }
-
+  
   function onCarRunning(e) {
     _points += e.detail;
     _scoreUI.innerHTML = _points;
