@@ -1,16 +1,16 @@
 // http.js
 import axios, { AxiosInstance, AxiosError } from "axios";
 
-import { retrieveLaunchParams } from "@tma.js/sdk";
+//import { retrieveLaunchParams } from "@tma.js/sdk";
 
-const { initDataRaw, initData } = retrieveLaunchParams();
+//const { initDataRaw, initData } = retrieveLaunchParams();
 const url = "https://racing.mydatacoin.io";
 
 const http: AxiosInstance = axios.create({
   baseURL: url,
-  headers: {
-    Authorization: `tma ${initDataRaw}`,
-  },
+  // headers: {
+  //   Authorization: `tma ${initDataRaw}`,
+  // },
 });
 
 http.interceptors.request.use((config) => {
