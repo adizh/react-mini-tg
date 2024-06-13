@@ -1,14 +1,16 @@
 let Racer = window.Racer || {};
-let  _hearts;
+
 let livesFromLocal = localStorage.getItem("lives");
 let _life;
+let rating
 if (livesFromLocal && livesFromLocal != undefined) {
   _life = +livesFromLocal;
+  rating = +livesFromLocal;
 }
 
 
 
-if(_life===5){
+if(_life>=5){
      localStorage.removeItem('gameLiveStart')
 }
 
@@ -61,13 +63,7 @@ Racer.Utils = (function () {
  * @type {{init: Window.Racer.Game.init, restart: Window.Racer.Game.restart}}
  */
 
-function updateHearts() {
-  for (let i = 0; i < _hearts.length; i++) {
-    if (i < _life) _hearts[i].style.opacity = 1;
-    else _hearts[i].style.opacity = 0.2;
-  }
-  localStorage.setItem("lives", _life.toString());
-}
+
 
 // window.addEventListener('message', (event) => {
 //   console.log('even',event)
@@ -141,6 +137,13 @@ Racer.Game = (function () {
       });
     }
   }
+  function updateHearts() {
+    for (let i = 0; i < _hearts.length; i++) {
+      if (i < _life) _hearts[i].style.opacity = 1;
+      else _hearts[i].style.opacity = 0.2;
+    }
+    localStorage.setItem("lives", _life.toString());
+  }
 
   function onCarCrashEnded() {
     if (_life > 0) {
@@ -151,44 +154,34 @@ Racer.Game = (function () {
           storedStartTime = Math.floor(Date.now() / 1000); 
           localStorage.setItem('gameLiveStart', storedStartTime.toString());
       }
-
-
+      const seconds=10;
    
-      // window.addEventListener('storage', (event) => {
-      //   console.log("IS storage event woring??",event)
-      //   if (event.key === 'lives') {
-      //    console.log('LIVES ARE BEING UPDATED event ',event)
-      //    if(event.key==='lives'){
-      //     _life=event?.newValue;
-      
-      //     alert('lifes',event?.newValue)
-      //     localStorage.setItem(event?.newValue);
-      //     Racer.Game.updateHearts();
-      
-      //    setTimeout(()=>{
-      //     window.location.reload()
-      //    },100)
-      //    }
-      //   }
-      // },false);
-     
+      if(_life<5){
+        const intervalId = setInterval(() => {
+          const currentTime = Math.floor(Date.now() / 1000);
+          let elapsedTime = currentTime - storedStartTime; 
 
-      let checkLifeInterval = setInterval(() => {
-        if (_life < 5) {
-          // livesFromLocal = localStorage.getItem("lives");
-          // console.log('life is less 5 livesFromLocal',livesFromLocal)
-          // if (livesFromLocal && livesFromLocal != undefined) {
-          //   _life = +livesFromLocal;
-          //   console.log(`Life is less than 5: ${_life}, checking the life::`);
-          // }
-          _life+=1;
+          if (elapsedTime >= seconds) { 
+            console.log('raging>>>>',rating)
+              const updatedRating = rating + Math.floor(elapsedTime / seconds);
+
+              const newRating = Math.min(updatedRating, 5); 
+               _life=newRating;
+
+               if(_life===1){
+                restartGame()
+               }
+          } else { 
+              
+   
+          }
           updateHearts()
-      
-        } else if (_life === 5) {
-          console.log("Life is 5, clearing interval");
-          clearInterval(checkLifeInterval);
-        }
-      }, 40000);
+          const remainingTime = seconds - (elapsedTime % seconds);
+
+      }, 1000);
+      }else if(_life===5){
+        localStorage.removeItem('gameLiveStart')
+      }
 
     } else {
       TweenMax.to("a.start", 0.3, { ease: Cubic.easeInOut, autoAlpha: 1 });
@@ -254,6 +247,7 @@ Racer.Game = (function () {
   function onCarCrashed(e) {
     if (_life > 0) {
       _life--;
+      rating--
       updateHearts();
       removeListener();
     }
@@ -395,14 +389,12 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     _position = _lastPoint;
     _position.x = parseFloat(_position?.x.toFixed(20));
     _position.y = parseFloat(_position?.y.toFixed(20));
-    console.log('_rotation??? restartAfterCrash BEFORE +100>',_rotation)
     _rotation=(100 + +_rotation)?.toString()
-   console.log('_rotation??? restartAfterCrash',_rotation)
+
     updateCarPosition();
   }
 
   function updateCarPosition() {
-   console.log('updateCarPosition _rotation',_rotation)
     _car.style[Racer.Utils.getTransform()] =
       "translate3d(" +
       _position?.x +
@@ -421,7 +413,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     _position.x = parseFloat(_position?.x.toFixed(20));
     _position.y = parseFloat(_position?.y.toFixed(20));
    // _rotation='360'
-    console.log('renderCrash??? rorataion',_rotation)
+
 
     updateCarPosition();
   }
@@ -503,7 +495,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
       _position.y = _position?.y ? parseFloat(_position.y?.toFixed(20)) : 0;
     }
 
-    console.log("CAR CRAHSED EVN DISPATCh _rotation",_rotation)
+
 
     updateCarPosition();
   }

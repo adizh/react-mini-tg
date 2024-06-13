@@ -35,17 +35,12 @@ const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
       localStorage.removeItem('gameLiveStart')
     }
 
+    if(livesFromLocal>5){
+      localStorage.removeItem('lives')
+    }
+
    
   }, []);
-
-
-//   useEffect(()=>{
-// setLives(rating)
-// if(rating===5){
-//   localStorage.removeItem('gameLiveStart')
-// }
-//   },[rating]);
-
 
   function formatTimeLeft(timeLeft: number | null): string {
     if (timeLeft === null) return "";
