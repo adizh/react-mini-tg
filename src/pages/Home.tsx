@@ -69,7 +69,8 @@ function Home() {
 
   const handlePlayClick = () => {
     //window.open("game.html", "_blank");
-    window.open('game.html')
+   // window.open('game.html')
+    location.href='game.html'
   };
 
   return (
