@@ -1,5 +1,5 @@
 let Racer = window.Racer || {};
-
+let  _hearts;
 let livesFromLocal = localStorage.getItem("lives");
 let _life;
 if (livesFromLocal && livesFromLocal != undefined) {
@@ -11,39 +11,6 @@ if (livesFromLocal && livesFromLocal != undefined) {
 if(_life===5){
      localStorage.removeItem('gameLiveStart')
 }
-
-window.addEventListener('message', (event) => {
-  // Ensure the message is from a trusted origin
-  // if (event.origin !== 'http://trusted-origin.com') {
-  //   return;
-  // }
-
-  // Update localStorage with the received data
-  if (event.data) {
-    console.log("post message received in js",event)
-  }
-}, false);
-// if(_life<5){
-//   let checkLifeInterval = setInterval(() => {
-//     //  livesFromLocal = localStorage.getItem("lives");
-//     // if (livesFromLocal && livesFromLocal != undefined) {
-//     //   _life = +livesFromLocal;
-//     // }
-  
-//     if (_life < 5) {
-    
-//       livesFromLocal = localStorage.getItem("lives");
-//       if (livesFromLocal && livesFromLocal != undefined) {
-//         _life = +livesFromLocal;
-//         console.log(`Life is less than 5: ${_life}, checking the life::`);
-//       }
-    
-//     } else if (_life === 5) {
-//       console.log("Life is 5, clearing interval");
-//       clearInterval(checkLifeInterval);
-//     }
-//   }, 1000);
-// }
 
 
 
@@ -95,17 +62,34 @@ Racer.Utils = (function () {
  * @type {{init: Window.Racer.Game.init, restart: Window.Racer.Game.restart}}
  */
 
-window.addEventListener('storage', (event) => {
-  console.log("IS storage event woring??",event)
-  if (event.key === 'lives') {
-   console.log('LIVES ARE BEING UPDATED event ',event)
+function updateHearts() {
+  for (let i = 0; i < _hearts.length; i++) {
+    if (i < _life) _hearts[i].style.opacity = 1;
+    else _hearts[i].style.opacity = 0.2;
   }
-},false);
+  localStorage.setItem("lives", _life.toString());
+}
+
+
+// window.addEventListener('message', (event) => {
+//   console.log('even',event)
+//   if(typeof event?.data==='number'){
+//     _life=event.data;    
+//     window.location.reload()
+//     updateHearts();
+
+//   }
+
+// });
+
+
+
 Racer.Game = (function () {
+
   let _track, _car;
   let _points = 0;
   let _maxPoints = 0;
-  let _scoreUI, _hearts, _restartUI;
+  let _scoreUI, _restartUI;
 
   function initialize() {
     paper.install(window);
@@ -171,39 +155,43 @@ Racer.Game = (function () {
           localStorage.setItem('gameLiveStart', storedStartTime.toString());
       }
 
-      function checkAndUpdateLife() {
-         livesFromLocal = localStorage.getItem("lives");
-        if (livesFromLocal && livesFromLocal !== undefined) {
-          _life = +livesFromLocal;
-        }
+
+   
+      // window.addEventListener('storage', (event) => {
+      //   console.log("IS storage event woring??",event)
+      //   if (event.key === 'lives') {
+      //    console.log('LIVES ARE BEING UPDATED event ',event)
+      //    if(event.key==='lives'){
+      //     _life=event?.newValue;
       
+      //     alert('lifes',event?.newValue)
+      //     localStorage.setItem(event?.newValue);
+      //     Racer.Game.updateHearts();
+      
+      //    setTimeout(()=>{
+      //     window.location.reload()
+      //    },100)
+      //    }
+      //   }
+      // },false);
+     
+
+      let checkLifeInterval = setInterval(() => {
         if (_life < 5) {
-          console.log(`Life is less than 5: ${_life}`);
+          // livesFromLocal = localStorage.getItem("lives");
+          // console.log('life is less 5 livesFromLocal',livesFromLocal)
+          // if (livesFromLocal && livesFromLocal != undefined) {
+          //   _life = +livesFromLocal;
+          //   console.log(`Life is less than 5: ${_life}, checking the life::`);
+          // }
+          _life+=1;
+          updateHearts()
+      
         } else if (_life === 5) {
           console.log("Life is 5, clearing interval");
           clearInterval(checkLifeInterval);
         }
-      }
-      let checkLifeInterval = setInterval(checkAndUpdateLife, 1000);
-
-
-checkAndUpdateLife();
-     
-
-      // let checkLifeInterval = setInterval(() => {
-      //   if (_life < 5) {
-      //     livesFromLocal = localStorage.getItem("lives");
-      //     console.log('life is less 5 livesFromLocal',livesFromLocal)
-      //     if (livesFromLocal && livesFromLocal != undefined) {
-      //       _life = +livesFromLocal;
-      //       console.log(`Life is less than 5: ${_life}, checking the life::`);
-      //     }
-        
-      //   } else if (_life === 5) {
-      //     console.log("Life is 5, clearing interval");
-      //     clearInterval(checkLifeInterval);
-      //   }
-      // }, 1000);
+      }, 10000);
 
     } else {
       TweenMax.to("a.start", 0.3, { ease: Cubic.easeInOut, autoAlpha: 1 });
@@ -276,13 +264,7 @@ checkAndUpdateLife();
     localStorage.setItem("lives", _life.toString());
   }
 
-  function updateHearts() {
-    for (let i = 0; i < _hearts.length; i++) {
-      if (i < _life) _hearts[i].style.opacity = 1;
-      else _hearts[i].style.opacity = 0.2;
-    }
-    localStorage.setItem("lives", _life.toString());
-  }
+
 
   return {
     init: function () {
