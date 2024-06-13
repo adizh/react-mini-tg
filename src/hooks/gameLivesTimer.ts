@@ -25,6 +25,16 @@ function useTimer(initialRating: number): TimerHookReturnType {
                 const newRating = Math.min(updatedRating, 5); 
                 setRating(newRating);
                 localStorage.setItem('lives', newRating.toString());
+                if (window && window !== null) {
+                 // const newWindow = window.open('/game.html');
+                  console.log('post event sent from hme')
+                  if (window) {
+                    window.postMessage(newRating, '/game.html');
+                  } else {
+                    console.error('Failed to open new window');
+                  }
+                }
+                
             } else { 
                 
                 setTimeLeft(0);
@@ -38,7 +48,6 @@ function useTimer(initialRating: number): TimerHookReturnType {
             setIsStarted(false);
         };
       } else if (rating === 5) {
-
         localStorage.removeItem('gameLiveStart');
         setIsStarted(false);
         setTimeLeft(0);

@@ -57,12 +57,12 @@ function Home() {
   const [userName, setUserName] = useState("");
   
 
-  console.log("TG",tg)
+  //console.log("TG",tg)
   useEffect(() => {
     setUserName(tg.initDataUnsafe.user?.first_name as string);
     tg.expand();
     if(rating===5){
-      console.log('HOME COMPONENT rating',rating)
+    //  console.log('HOME COMPONENT rating',rating)
       localStorage.removeItem('gameLiveStart')
     }
   }, []);

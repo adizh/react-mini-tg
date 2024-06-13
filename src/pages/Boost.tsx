@@ -34,7 +34,7 @@ function Boost() {
     setLoading(true);
     try {
       const response = await http("/api/v1/Boost/get-all-boosters");
-      console.log("fetchAllBoosts response", response);
+      //console.log("fetchAllBoosts response", response);
       if (response.status === 200) {
         const imgAddedBoosts = response.data.map(
           (item: BoostType, index: number) => {
@@ -43,7 +43,7 @@ function Boost() {
         );
         setAllBoosts(imgAddedBoosts);
 
-        console.log("imgAddedBoosts", imgAddedBoosts);
+      //  console.log("imgAddedBoosts", imgAddedBoosts);
       }
     } catch (err) {
       console.log(err);

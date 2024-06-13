@@ -12,7 +12,7 @@ function Main() {
   }, []);
 
   const myContext = useContext(AppContext);
-  console.log("myContext", myContext);
+  //console.log("myContext", myContext);
 
   return (
     <div className="section">
