@@ -6,7 +6,7 @@ function useTimer(initialRating: number): TimerHookReturnType {
     const [rating, setRating] = useState<number>(initialRating);
     const [timeLeft, setTimeLeft] = useState<number | null>(3);
     const [isStarted, setIsStarted] = useState<boolean>(false);
-     const seconds=40
+     const seconds=10
     useEffect(() => {
       if(rating<5){
         let storedStartTime: number | null = parseInt(localStorage.getItem('gameLiveStart') || '');
@@ -25,15 +25,8 @@ function useTimer(initialRating: number): TimerHookReturnType {
                 const newRating = Math.min(updatedRating, 5); 
                 setRating(newRating);
                 localStorage.setItem('lives', newRating.toString());
-                if (window && window !== null) {
-                 // const newWindow = window.open('/game.html');
-                  console.log('post event sent from hme')
-                  if (window) {
-                    window.postMessage(newRating, '/game.html');
-                  } else {
-                    console.error('Failed to open new window');
-                  }
-                }
+                window.parent.postMessage(newRating,'*')
+                console.log('window parent post message setn')
                 
             } else { 
                 
