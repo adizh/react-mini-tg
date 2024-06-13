@@ -61,6 +61,10 @@ function Home() {
   useEffect(() => {
     setUserName(tg.initDataUnsafe.user?.first_name as string);
     tg.expand();
+    if(rating===5){
+      console.log('HOME COMPONENT rating',rating)
+      localStorage.removeItem('gameLiveStart')
+    }
   }, []);
 
   const handlePlayClick = () => {

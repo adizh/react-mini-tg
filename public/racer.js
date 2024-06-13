@@ -6,6 +6,9 @@ if (livesFromLocal && livesFromLocal != undefined) {
   _life = +livesFromLocal;
 }
 
+if(_life===5){
+     localStorage.removeItem('gameLiveStart')
+}
 Racer.Utils = (function () {
   let _that = this;
   let _transform;

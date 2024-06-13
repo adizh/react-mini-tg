@@ -13,6 +13,10 @@ function GameLives() {
       : 5;
       console.log("livesFromLocal in GAME COMPONENT",livesFromLocal)
 
+      if(livesFromLocal===5){
+        localStorage.removeItem('gameLiveStart')
+      }
+
   const [lives, setLives] = useState(livesFromLocal);
 const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
 
@@ -27,6 +31,7 @@ const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
       setLives(+livesFromLoc);
     }
     if(rating===5){
+      console.log('GAMELIVES COMPOSNNER rating',rating)
       localStorage.removeItem('gameLiveStart')
     }
 
