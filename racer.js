@@ -13,7 +13,6 @@ if(_life===5){
 }
 
 
-
 Racer.Utils = (function () {
   let _that = this;
   let _transform;
@@ -70,7 +69,6 @@ function updateHearts() {
   localStorage.setItem("lives", _life.toString());
 }
 
-
 // window.addEventListener('message', (event) => {
 //   console.log('even',event)
 //   if(typeof event?.data==='number'){
@@ -99,10 +97,9 @@ Racer.Game = (function () {
 
     _track = new Racer.Track();
     _car = new Racer.Car(_track.getPath());
-
     _scoreUI = document.getElementsByClassName("points")[0];
     _scoreUI.innerHTML = _points;
-
+    
     // _bestScoreUI = document.getElementsByClassName('best-points')[0];
 
     _hearts = document.querySelectorAll("div.lifes li");
@@ -191,7 +188,7 @@ Racer.Game = (function () {
           console.log("Life is 5, clearing interval");
           clearInterval(checkLifeInterval);
         }
-      }, 10000);
+      }, 40000);
 
     } else {
       TweenMax.to("a.start", 0.3, { ease: Cubic.easeInOut, autoAlpha: 1 });
@@ -321,13 +318,11 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
   function initPosition() {
     _rotationExit = 0;
     _elapsedExit = 0;
-
-    _rotation = 180;
+    _rotation =0;
     _elapsed = 0;
     _velocity = new Point(0, 0);
     _velocity.length = 0;
     _throttle = 0;
-
     _position = _path?.getPointAt(_elapsed);
     renderCar(_position);
   }
@@ -337,7 +332,6 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     _car = document.getElementsByClassName("image")[0];
     _layer = new Layer();
     _layer.activate();
-
     initPosition();
     requestAnimationFrame(render);
   }
@@ -401,13 +395,14 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     _position = _lastPoint;
     _position.x = parseFloat(_position?.x.toFixed(20));
     _position.y = parseFloat(_position?.y.toFixed(20));
-
+    console.log('_rotation??? restartAfterCrash BEFORE +100>',_rotation)
+    _rotation=(100 + +_rotation)?.toString()
+   console.log('_rotation??? restartAfterCrash',_rotation)
     updateCarPosition();
   }
 
   function updateCarPosition() {
-    _rotation = (+_rotation + 180).toString();
-
+   console.log('updateCarPosition _rotation',_rotation)
     _car.style[Racer.Utils.getTransform()] =
       "translate3d(" +
       _position?.x +
@@ -425,25 +420,23 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     _position = point;
     _position.x = parseFloat(_position?.x.toFixed(20));
     _position.y = parseFloat(_position?.y.toFixed(20));
+   // _rotation='360'
+    console.log('renderCrash??? rorataion',_rotation)
 
     updateCarPosition();
   }
 
   function renderCar(point) {
     _layer.removeChildren();
-
     let offset = _path?.getOffsetOf(point);
     let offset_prev = _path?.getOffsetOf(_position);
     let offset_mid = (offset + offset_prev) / 2;
-
     let point_angle = _path?.getTangentAt(offset).angle;
     let prev_point_angle = _path?.getTangentAt(offset_mid).angle;
     let direction = -1;
-
     if (parseFloat(prev_point_angle) > parseFloat(point_angle)) {
       direction = 1;
     }
-
     let normalAtPosition = _path
       ?.getNormalAt(offset)
       .multiply(1000 * direction);
@@ -503,12 +496,14 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     _rotation = _rotation.toFixed(10);
     _position = point;
 
-    _rotation = (+_rotation + 270).toString();
+    _rotation = (+_rotation + 270+180).toString();
 
     if (_position && _position.x && _position.y) {
       _position.x = _position?.x ? parseFloat(_position.x?.toFixed(20)) : 0;
       _position.y = _position?.y ? parseFloat(_position.y?.toFixed(20)) : 0;
     }
+
+    console.log("CAR CRAHSED EVN DISPATCh _rotation",_rotation)
 
     updateCarPosition();
   }
