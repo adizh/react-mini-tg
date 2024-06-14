@@ -182,14 +182,12 @@
       btn.show();
      Racer.Game.init();
      const goBack=()=>{
-      console.log('btn is being clicked')
        window.history.replaceState(null, null, "/react-mini-tg/home");
         setTimeout(() => {
           window.location.reload();
         }, 100);
      }
       btn.onClick((e) => {
-        console.log('btn is being clicked')
         window.history.pushState(null, null, "/react-mini-tg/home");
         setTimeout(() => {
           window.location.reload();
