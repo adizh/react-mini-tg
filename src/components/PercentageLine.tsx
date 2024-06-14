@@ -22,7 +22,7 @@ const PercentageLine: React.FC<PercentageLineProps> = ({
           backgroundColor: fillColor,
         }}
       ></div>
-      <div className="percentage-line-text">Mining {percentage}%</div>
+      <div className="percentage-line-text">Mining {percentage} MDC</div>
     </div>
   );
 };
