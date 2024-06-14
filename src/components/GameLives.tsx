@@ -12,7 +12,7 @@ function GameLives() {
       ? Number(localStorage.getItem("lives"))
       : 5;
 
-
+      
       if(livesFromLocal===5){
         localStorage.removeItem('gameLiveStart')
       }

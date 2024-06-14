@@ -25,9 +25,9 @@ import { subscribe, unsubscribe } from "@tma.js/sdk";
 export const App: FC = () => {
   const scrollableRef = useRef<HTMLDivElement | null>(null);
   const telegram = window.Telegram.WebApp;
- // const [closingBehavior] = initClosingBehavior();
+ const [closingBehavior] = initClosingBehavior();
 
- // closingBehavior.enableConfirmation();
+  closingBehavior.enableConfirmation();
   function ensureDocumentIsScrollable() {
     const isScrollable =
       document.documentElement.scrollHeight > window.innerHeight;
