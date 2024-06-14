@@ -182,17 +182,23 @@
       btn.show();
      Racer.Game.init();
      const goBack=()=>{
-       window.history.replaceState(null, null, "/react-mini-tg/home");
-        setTimeout(() => {
-          window.location.reload();
-        }, 100);
+      //  window.history.replaceState(null, null, "/react-mini-tg/home");
+      //   setTimeout(() => {
+      //     window.location.reload();
+      //   }, 100);
      }
       btn.onClick((e) => {
         window.history.pushState(null, null, "/react-mini-tg/home");
         setTimeout(() => {
           window.location.reload();
-        }, 100);
+        }, 0);
       });
+
+      window.addEventListener('beforeunload', function (event) {
+setTimeout(()=>{
+  btn.hide()
+},300)
+});
     </script>
   </body>
 </html>

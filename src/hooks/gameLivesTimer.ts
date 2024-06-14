@@ -6,13 +6,14 @@ function useTimer(initialRating: number): TimerHookReturnType {
     const [rating, setRating] = useState<number>(initialRating);
     const [timeLeft, setTimeLeft] = useState<number | null>(3);
     const [isStarted, setIsStarted] = useState<boolean>(false);
+    const [devRating,setDevRating]=useState(rating)
      const seconds=15;
     useEffect(() => {
       if(rating<5){
         let storedStartTime: number | null = parseInt(localStorage.getItem('gameLiveStart') || '');
         if (!storedStartTime || isNaN(storedStartTime)) {
             storedStartTime = Math.floor(Date.now() / 1000); 
-            localStorage.setItem('gameLiveStart', storedStartTime.toString());
+           // localStorage.setItem('gameLiveStart', storedStartTime.toString());
         }
 
         const intervalId = setInterval(() => {
@@ -21,13 +22,16 @@ function useTimer(initialRating: number): TimerHookReturnType {
             let elapsedTime = currentTime - storedStartTime!; 
 
             if (elapsedTime >= seconds) { 
-                const updatedRating = rating + Math.floor(elapsedTime / seconds);
+                const updatedRating = devRating + Math.floor(elapsedTime / seconds);
+
+
+                console.log("WHAT IS UPDATED RATING IN A HOOK",updatedRating)
                 const newRating = Math.min(updatedRating, 5); 
                 setRating(newRating);
               //  localStorage.setItem('gameLiveStart', currentTime?.toString());
 
     if(newRating<=5){
-      localStorage.setItem('lives', newRating.toString());
+   //   localStorage.setItem('lives', newRating.toString());
     }                
             } else { 
                 setTimeLeft(0);
