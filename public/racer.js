@@ -47,11 +47,13 @@ if(_life>=5){
            updatedRating = _life + Math.floor(elapsedTime / seconds);
            console.log("elapsedTime",elapsedTime)
            console.log('updatedRating in refillLives',updatedRating)
-           updateHearts(updatedRating)
+           updateHearts(updatedRating);
+          // localStorage.setItem('gameLiveStart', currentTime?.toString());
     if(updatedRating>=5){
     clearInterval(intervalId)
     localStorage.removeItem('gameLiveStart')
-    timeLeftElement.style.display='none'
+    timeLeftElement.style.display='none';
+    window.location.reload()
   }
 
 

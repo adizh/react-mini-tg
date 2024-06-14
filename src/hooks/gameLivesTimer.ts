@@ -24,12 +24,12 @@ function useTimer(initialRating: number): TimerHookReturnType {
                 const updatedRating = rating + Math.floor(elapsedTime / seconds);
                 const newRating = Math.min(updatedRating, 5); 
                 setRating(newRating);
+              //  localStorage.setItem('gameLiveStart', currentTime?.toString());
 
     if(newRating<=5){
       localStorage.setItem('lives', newRating.toString());
     }                
             } else { 
-                
                 setTimeLeft(0);
             }
             const remainingTime = seconds - (elapsedTime % seconds);

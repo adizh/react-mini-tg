@@ -4,7 +4,8 @@ import { Navigate, Route, Router, Routes } from "react-router-dom";
 import { on, off, type MiniAppsEventListener } from "@tma.js/sdk";
 import Main from "./pages/Main";
 import About from "./pages/About";
-import { SDKProvider } from "@tma.js/sdk-react";
+
+import { initClosingBehavior } from '@tma.js/sdk';
 import Login from "./pages/Login";
 
 import Register from "./pages/Register";
@@ -24,7 +25,9 @@ import { subscribe, unsubscribe } from "@tma.js/sdk";
 export const App: FC = () => {
   const scrollableRef = useRef<HTMLDivElement | null>(null);
   const telegram = window.Telegram.WebApp;
+  const [closingBehavior] = initClosingBehavior();
 
+  closingBehavior.enableConfirmation();
   function ensureDocumentIsScrollable() {
     const isScrollable =
       document.documentElement.scrollHeight > window.innerHeight;
@@ -47,19 +50,20 @@ export const App: FC = () => {
 
   useEffect(() => {
     ensureDocumentIsScrollable();
+ //   preventCollapse()
   }, []);
 
-  // useEffect(() => {
-  //   scrollableRef.current?.addEventListener("touchstart", preventCollapse);
-  //   return () => {
-  //     scrollableRef.current?.removeEventListener("touchstart", preventCollapse);
-  //     document.body.style.paddingBottom = "";
-  //     document.body.style.overflowY = "";
-  //     document.body.style.marginTop = "";
-  //     document.body.style.height = "";
-  //     window.scrollTo(0, 0);
-  //   };
-  // }, [scrollableRef]);
+  useEffect(() => {
+    scrollableRef.current?.addEventListener("touchstart", preventCollapse);
+    return () => {
+      scrollableRef.current?.removeEventListener("touchstart", preventCollapse);
+      document.body.style.paddingBottom = "";
+      document.body.style.overflowY = "";
+      document.body.style.marginTop = "";
+      document.body.style.height = "";
+      window.scrollTo(0, 0);
+    };
+  }, [scrollableRef]);
 
   return (
     // <SDKProvider acceptCustomStyles debug>
