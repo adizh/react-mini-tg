@@ -16,13 +16,14 @@ function updateHearts(life=_life) {
   }
   if(_life<=5){
     localStorage.setItem("lives", life.toString());
-
   }
 }
 
 if(_life>=5){
      localStorage.removeItem('gameLiveStart')
 }
+
+
 
 
   function refillLives(){
@@ -44,24 +45,23 @@ if(_life>=5){
       let elapsedTime = currentTime - storedStartTime; 
       if (elapsedTime >= seconds) { 
            updatedRating = _life + Math.floor(elapsedTime / seconds);
-     
            console.log("elapsedTime",elapsedTime)
            console.log('updatedRating in refillLives',updatedRating)
            updateHearts(updatedRating)
     if(updatedRating>=5){
     clearInterval(intervalId)
     localStorage.removeItem('gameLiveStart')
-  //  timeLeftElement.innerHTML=0;
-    window.location.reload()
+    timeLeftElement.style.display='none'
   }
 
 
   
   } else { 
-      //  timeLeftElement.innerHTML=0;
+
       }
+
       const remainingTime = seconds - (elapsedTime % seconds);
-      timeLeftElement.innerHTML=remainingTime   
+      timeLeftElement.innerHTML=remainingTime  
   }, 1000);
   }
 
@@ -194,11 +194,6 @@ Racer.Game = (function () {
       addListener();
       _car.afterCrash(true);
       refillLives()
-
-      console.log('onCarCrashEnded!!',updatedRating)
-
-   
-      
     } else {
       TweenMax.to("a.start", 0.3, { ease: Cubic.easeInOut, autoAlpha: 1 });
       TweenMax.to("div.lifes", 0.4, { ease: Cubic.easeInOut, left: -200 });
@@ -261,19 +256,18 @@ Racer.Game = (function () {
   }
 
   function onCarCrashed(e) {
-    if (_life > 0) {
+    if (_life >= 0) {
       _life--;
       rating--
       updateHearts();
       removeListener();
+      if(_life===0){
+        window.history.pushState(null,null,'/react-mini-tg/home');
+        setTimeout(()=>{
+window.location.reload()
+        },1000)
+      }
     }
-    // if(_life===0){
-    //  setTimeout(()=>{
-    //   window.location.reload()
-    //  },1000)
-    // }
-
-
     if(_life<=5){
       localStorage.setItem("lives", _life.toString());
     }
