@@ -1,19 +1,75 @@
 let Racer = window.Racer || {};
 
 let livesFromLocal = localStorage.getItem("lives");
+const timeLeftElement = document.getElementById('timeLeft')
 let _life;
+let _hearts;
 let rating
 if (livesFromLocal && livesFromLocal != undefined) {
   _life = +livesFromLocal;
   rating = +livesFromLocal;
 }
+function updateHearts(life=_life) {
+  for (let i = 0; i < _hearts.length; i++) {
+    if (i < life) _hearts[i].style.opacity = 1;
+    else _hearts[i].style.opacity = 0.2;
+  }
+  if(_life<=5){
+    localStorage.setItem("lives", life.toString());
 
-
+  }
+}
 
 if(_life>=5){
      localStorage.removeItem('gameLiveStart')
 }
 
+
+  function refillLives(){
+    let updatedRating=_life;
+    let storedStartTime = parseInt(localStorage.getItem('gameLiveStart') || '');
+    if (!storedStartTime || isNaN(storedStartTime)) {
+        storedStartTime = Math.floor(Date.now() / 1000);
+        localStorage.setItem('gameLiveStart', storedStartTime.toString());
+    }
+    
+    const seconds = 15;
+  
+    let intervalId;
+
+    
+  if(updatedRating<5){
+     intervalId = setInterval(() => {
+      const currentTime = Math.floor(Date.now() / 1000);
+      let elapsedTime = currentTime - storedStartTime; 
+      if (elapsedTime >= seconds) { 
+           updatedRating = _life + Math.floor(elapsedTime / seconds);
+     
+           console.log("elapsedTime",elapsedTime)
+           console.log('updatedRating in refillLives',updatedRating)
+           updateHearts(updatedRating)
+    if(updatedRating>=5){
+    clearInterval(intervalId)
+    localStorage.removeItem('gameLiveStart')
+  //  timeLeftElement.innerHTML=0;
+    window.location.reload()
+  }
+
+
+  
+  } else { 
+      //  timeLeftElement.innerHTML=0;
+      }
+      const remainingTime = seconds - (elapsedTime % seconds);
+      timeLeftElement.innerHTML=remainingTime   
+  }, 1000);
+  }
+
+  }
+
+if(_life<5){
+  refillLives()
+}
 
 Racer.Utils = (function () {
   let _that = this;
@@ -64,22 +120,16 @@ Racer.Utils = (function () {
  */
 
 
-
 // window.addEventListener('message', (event) => {
 //   console.log('even',event)
 //   if(typeof event?.data==='number'){
 //     _life=event.data;    
 //     window.location.reload()
 //     updateHearts();
-
 //   }
-
 // });
 
-
-
 Racer.Game = (function () {
-
   let _track, _car;
   let _points = 0;
   let _maxPoints = 0;
@@ -88,7 +138,7 @@ Racer.Game = (function () {
   function initialize() {
     paper.install(window);
     paper.setup("track_canvas");
-
+    
     Racer.Utils.init();
 
     _track = new Racer.Track();
@@ -137,52 +187,18 @@ Racer.Game = (function () {
       });
     }
   }
-  function updateHearts() {
-    for (let i = 0; i < _hearts.length; i++) {
-      if (i < _life) _hearts[i].style.opacity = 1;
-      else _hearts[i].style.opacity = 0.2;
-    }
-    localStorage.setItem("lives", _life.toString());
-  }
+ 
 
   function onCarCrashEnded() {
     if (_life > 0) {
       addListener();
       _car.afterCrash(true);
-      let storedStartTime= parseInt(localStorage.getItem('gameLiveStart') || '');
-      if (!storedStartTime || isNaN(storedStartTime)) {
-          storedStartTime = Math.floor(Date.now() / 1000); 
-          localStorage.setItem('gameLiveStart', storedStartTime.toString());
-      }
-      const seconds=10;
+      refillLives()
+
+      console.log('onCarCrashEnded!!',updatedRating)
+
    
-      if(_life<5){
-        const intervalId = setInterval(() => {
-          const currentTime = Math.floor(Date.now() / 1000);
-          let elapsedTime = currentTime - storedStartTime; 
-
-          if (elapsedTime >= seconds) { 
-            console.log('raging>>>>',rating)
-              const updatedRating = rating + Math.floor(elapsedTime / seconds);
-
-              const newRating = Math.min(updatedRating, 5); 
-               _life=newRating;
-
-               if(_life===1){
-                restartGame()
-               }
-          } else { 
-              
-   
-          }
-          updateHearts()
-          const remainingTime = seconds - (elapsedTime % seconds);
-
-      }, 1000);
-      }else if(_life===5){
-        localStorage.removeItem('gameLiveStart')
-      }
-
+      
     } else {
       TweenMax.to("a.start", 0.3, { ease: Cubic.easeInOut, autoAlpha: 1 });
       TweenMax.to("div.lifes", 0.4, { ease: Cubic.easeInOut, left: -200 });
@@ -207,7 +223,7 @@ Racer.Game = (function () {
     //  _life = 5;
     _points = 0;
     _scoreUI.innerHTML = _points;
-    updateHearts();
+   // updateHearts();
     addListener();
     TweenMax.to("a.start", 0.1, { ease: Cubic.easeInOut, autoAlpha: 0 });
     TweenMax.to("div.lifes", 0.6, { ease: Cubic.easeInOut, left: -20 });
@@ -251,11 +267,17 @@ Racer.Game = (function () {
       updateHearts();
       removeListener();
     }
+    // if(_life===0){
+    //  setTimeout(()=>{
+    //   window.location.reload()
+    //  },1000)
+    // }
 
-    localStorage.setItem("lives", _life.toString());
+
+    if(_life<=5){
+      localStorage.setItem("lives", _life.toString());
+    }
   }
-
-
 
   return {
     init: function () {
@@ -389,7 +411,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     _position = _lastPoint;
     _position.x = parseFloat(_position?.x.toFixed(20));
     _position.y = parseFloat(_position?.y.toFixed(20));
-    _rotation=(100 + +_rotation)?.toString()
+    _rotation=(103 + +_rotation)?.toString()
 
     updateCarPosition();
   }
@@ -412,8 +434,6 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     _position = point;
     _position.x = parseFloat(_position?.x.toFixed(20));
     _position.y = parseFloat(_position?.y.toFixed(20));
-   // _rotation='360'
-
 
     updateCarPosition();
   }
