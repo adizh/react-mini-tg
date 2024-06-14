@@ -16,11 +16,11 @@
 <style>
       * {
         box-sizing: border-box;
-        /* -webkit-touch-callout: none;
+        -webkit-touch-callout: none;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
-            user-select: none; */
+            user-select: none;
       }
 
       body {
@@ -106,7 +106,16 @@
       .bottom-ui {
         display: flex;
         gap: 15px;
+      
         align-items: center;
+      }
+
+      #timeLeft{
+        color:white;
+      }
+      .lives-block{
+        display: flex;
+        flex-direction: column;
       }
     </style> 
   </head>
@@ -136,6 +145,7 @@
         <div id="mdc-coins">12 MDC</div>
 
         <div class="bottom-ui">
+        <div class="lives-block">
           <div class="ui-item lifes">
             <ul>
               <li><i class="fa fa-heart"></i></li>
@@ -145,6 +155,10 @@
               <li><i class="fa fa-heart"></i></li>
             </ul>
           </div>
+
+
+          <div id="timeLeft"></div>
+        </div>
 
           <span class="points">0</span>
         </div>
