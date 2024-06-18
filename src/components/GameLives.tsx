@@ -12,13 +12,15 @@ function GameLives() {
       ? Number(localStorage.getItem("lives"))
       : 5;
 
-  if (livesFromLocal === 5) {
+  if (livesFromLocal > 5) {
     localStorage.removeItem("gameLiveStart");
   }
 
   const [lives, setLives] = useState(livesFromLocal);
-  const [rating, timeLeft, isStarted] = useTimer(+livesFromLocal);
+  const [rating, timeLeft, isStarted] = useTimer(+lives);
 
+
+localStorage.setItem('lives',rating.toString())
   const ratingArray = Array.from({ length: rating }, (_, index) => index + 1);
   const voidItems = Array.from({ length: 5 - rating }, (_, index) => index + 1);
 

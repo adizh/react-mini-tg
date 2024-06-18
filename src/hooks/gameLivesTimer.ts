@@ -11,7 +11,7 @@ function useTimer(initialRating: number): TimerHookReturnType {
     let startTimestamp: number;
     const storedStartTime = localStorage.getItem("gameLiveStart");
     if (!storedStartTime || isNaN(parseInt(storedStartTime))) {
-      startTimestamp = Math.floor(Date.now() / 1000);
+      //startTimestamp = Math.floor(Date.now() / 1000);
     } else {
       startTimestamp = parseInt(storedStartTime);
     }
@@ -24,17 +24,16 @@ function useTimer(initialRating: number): TimerHookReturnType {
         initialRating + Math.floor(elapsedTime / 15),
         5,
       );
-      if (newRating !== rating) {
+
         setRating(newRating);
-        console.log("newRating", newRating);
-        localStorage.setItem("lives", rating?.toString());
-      }
       const newTimeLeft = 15 - (elapsedTime % 15);
       setTimeLeft(newRating >= 5 ? null : newTimeLeft);
     };
 
     setIsStarted(true);
     const ratingInterval = setInterval(updateRatingAndTimeLeft, 1000);
+
+
     return () => clearInterval(ratingInterval);
   }, [initialRating]);
 
@@ -55,11 +54,11 @@ function useTimer(initialRating: number): TimerHookReturnType {
   }, [timeLeft]);
 
   useEffect(() => {
-    if (rating >= 5) {
+  if (rating >= 5) {
       localStorage.removeItem("gameLiveStart");
       setIsStarted(false);
       setTimeLeft(0);
-      localStorage.setItem("lives", (5)?.toString());
+     // localStorage.setItem("lives", (5)?.toString());
     }
   }, [rating]);
 
