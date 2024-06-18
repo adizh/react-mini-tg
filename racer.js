@@ -5,6 +5,13 @@ const timeLeftElement = document.getElementById("timeLeft");
 let _life;
 let _hearts;
 let rating;
+let myModal = new bootstrap.Modal(document.getElementById('myModal'))
+const modalPoints= document.getElementById('modal_points')
+
+if(+livesFromLocal>5){
+  _life=5
+  rating=5
+}
 if (livesFromLocal && livesFromLocal != undefined) {
   _life = +livesFromLocal;
   rating = +livesFromLocal;
@@ -17,11 +24,18 @@ function updateHearts(life = _life) {
   if (_life <= 5) {
     localStorage.setItem("lives", life.toString());
   }
+if(life===0){
+  myModal.show()
 }
+}
+
 
 if (_life >= 5) {
   localStorage.removeItem("gameLiveStart");
+  localStorage.setItem("lives", 5?.toString());
 }
+
+
 
 function refillLives() {
   let updatedRating = _life;
@@ -41,10 +55,16 @@ function refillLives() {
       let elapsedTime = currentTime - storedStartTime;
       if (elapsedTime >= seconds) {
         updatedRating = _life + Math.floor(elapsedTime / seconds);
-        console.log("elapsedTime", elapsedTime);
-        console.log("updatedRating in refillLives", updatedRating);
+     
+
         updateHearts(updatedRating);
-        // localStorage.setItem('gameLiveStart', currentTime?.toString());
+        if(updatedRating===0){
+         
+//           setTimeout(()=>{
+// window.location.reload()
+//           },1000)
+       //   myModal.show()
+        }
         if (updatedRating >= 5) {
           clearInterval(intervalId);
           localStorage.removeItem("gameLiveStart");
@@ -63,6 +83,9 @@ function refillLives() {
 if (_life < 5) {
   refillLives();
 }
+
+console.log("_LIFE ON MOUNTED",_life)
+
 
 Racer.Utils = (function () {
   let _that = this;
@@ -112,15 +135,10 @@ Racer.Utils = (function () {
  * @type {{init: Window.Racer.Game.init, restart: Window.Racer.Game.restart}}
  */
 
-// window.addEventListener('message', (event) => {
-//   console.log('even',event)
-//   if(typeof event?.data==='number'){
-//     _life=event.data;
-//     window.location.reload()
-//     updateHearts();
-//   }
-// });
 
+function onCarCrashed2 (){
+  console.log('onCarCrashed2 __LIFE',_life)
+}
 Racer.Game = (function () {
   let _track, _car;
   let _points = 0;
@@ -150,6 +168,7 @@ Racer.Game = (function () {
     //  _restartUI.addEventListener("click", restartGame);
 
     window.addEventListener("CarCrashed", onCarCrashed);
+    window.addEventListener("CarCrashed", onCarCrashed2);
     window.addEventListener("CarRunning", onCarRunning);
     window.addEventListener("CarCrashEnded", onCarCrashEnded);
 
@@ -186,6 +205,8 @@ Racer.Game = (function () {
       addListener();
       _car.afterCrash(true);
       refillLives();
+
+
     } else {
       TweenMax.to("a.start", 0.3, { ease: Cubic.easeInOut, autoAlpha: 1 });
       TweenMax.to("div.lifes", 0.4, { ease: Cubic.easeInOut, left: -200 });
@@ -246,20 +267,24 @@ Racer.Game = (function () {
   function onCarRunning(e) {
     _points += e.detail;
     _scoreUI.innerHTML = Math.floor(_points / 20) + " MDC";
+    modalPoints.innerHTML= Math.floor(_points / 20)
   }
 
   function onCarCrashed(e) {
     if (_life >= 0) {
+
       _life--;
       rating--;
-      updateHearts();
+
       removeListener();
+      updateHearts();
       if (_life === 0) {
-        window.history.pushState(null, null, "/react-mini-tg/home");
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+  //myModal.show()
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 1000);
       }
+      console.log('life in onCarCrashed',_life)
     }
     if (_life <= 5) {
       localStorage.setItem("lives", _life.toString());
