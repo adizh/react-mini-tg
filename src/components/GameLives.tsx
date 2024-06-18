@@ -4,21 +4,22 @@ import "@smastrom/react-rating/style.css";
 import heartFilled from "../assets/images/heart-filled.svg";
 import heartVoid from "../assets/images/heart-void.svg";
 import { useConvertUnixTime } from "../hooks/unixTimeConvert";
-import useTimer from '../hooks/gameLivesTimer'
-function GameLives() {
+import useTimer from '../hooks/gameLivesTimer';
 
+function GameLives() {
     const livesFromLocal =
     localStorage.getItem("lives") && localStorage.getItem("lives") !== null
       ? Number(localStorage.getItem("lives"))
       : 5;
 
-      
+    
       if(livesFromLocal===5){
         localStorage.removeItem('gameLiveStart')
+        localStorage.removeItem('gameLiveStartHome')
       }
 
   const [lives, setLives] = useState(livesFromLocal);
-const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
+  const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
 
 
   const ratingArray = Array.from({ length: rating }, (_, index) => index + 1);
@@ -31,8 +32,8 @@ const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
       setLives(+livesFromLoc);
     }
     if(rating===5){
-
       localStorage.removeItem('gameLiveStart')
+      localStorage.removeItem('gameLiveStartHome')
     }
 
     if(livesFromLocal>5){

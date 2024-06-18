@@ -32,6 +32,7 @@ if(_life>=5){
     if (!storedStartTime || isNaN(storedStartTime)) {
         storedStartTime = Math.floor(Date.now() / 1000);
         localStorage.setItem('gameLiveStart', storedStartTime.toString());
+        localStorage.setItem('gameLiveStartHome', storedStartTime.toString());
     }
     
     const seconds = 15;
