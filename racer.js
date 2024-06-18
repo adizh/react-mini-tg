@@ -1,6 +1,8 @@
 let Racer = window.Racer || {};
 
 let livesFromLocal = localStorage.getItem("lives");
+
+console.log('livesFromLocal in MOUNTED IN RACER',livesFromLocal)
 const timeLeftElement = document.getElementById("timeLeft");
 let _life;
 let _hearts;
@@ -15,6 +17,12 @@ if(+livesFromLocal>5){
 if (livesFromLocal && livesFromLocal != undefined) {
   _life = +livesFromLocal;
   rating = +livesFromLocal;
+  console.log('_LIFE ON MOUNREDEDDD in racer',_life)
+}
+if(!livesFromLocal || isNaN(livesFromLocal)){
+  _life=5;
+  rating=5;
+  localStorage.removeItem('lives')
 }
 function updateHearts(life = _life) {
   for (let i = 0; i < _hearts.length; i++) {
@@ -58,14 +66,9 @@ function refillLives() {
      
 
         updateHearts(updatedRating);
-        if(updatedRating===0){
-         
-//           setTimeout(()=>{
-// window.location.reload()
-//           },1000)
-       //   myModal.show()
-        }
-        if (updatedRating >= 5) {
+       
+        if
+         (updatedRating >= 5) {
           clearInterval(intervalId);
           localStorage.removeItem("gameLiveStart");
           timeLeftElement.style.display = "none";
@@ -81,7 +84,7 @@ function refillLives() {
 }
 
 if (_life < 5) {
-  refillLives();
+ refillLives();
 }
 
 console.log("_LIFE ON MOUNTED",_life)
