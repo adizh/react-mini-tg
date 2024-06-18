@@ -16,6 +16,8 @@ function GameLives() {
     localStorage.removeItem("gameLiveStart");
   }
 
+
+
   const [lives, setLives] = useState(livesFromLocal);
   const [rating, timeLeft, isStarted] = useTimer(+lives);
 
