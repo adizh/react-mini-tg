@@ -1,77 +1,67 @@
 let Racer = window.Racer || {};
 
 let livesFromLocal = localStorage.getItem("lives");
-const timeLeftElement = document.getElementById('timeLeft')
+const timeLeftElement = document.getElementById("timeLeft");
 let _life;
 let _hearts;
-let rating
+let rating;
 if (livesFromLocal && livesFromLocal != undefined) {
   _life = +livesFromLocal;
   rating = +livesFromLocal;
 }
-function updateHearts(life=_life) {
+function updateHearts(life = _life) {
   for (let i = 0; i < _hearts.length; i++) {
     if (i < life) _hearts[i].style.opacity = 1;
     else _hearts[i].style.opacity = 0.2;
   }
-  if(_life<=5){
+  if (_life <= 5) {
     localStorage.setItem("lives", life.toString());
   }
 }
 
-if(_life>=5){
-     localStorage.removeItem('gameLiveStart')
+if (_life >= 5) {
+  localStorage.removeItem("gameLiveStart");
 }
 
-
-
-
-  function refillLives(){
-    let updatedRating=_life;
-    let storedStartTime = parseInt(localStorage.getItem('gameLiveStart') || '');
-    if (!storedStartTime || isNaN(storedStartTime)) {
-        storedStartTime = Math.floor(Date.now() / 1000);
-        localStorage.setItem('gameLiveStart', storedStartTime.toString());
-        localStorage.setItem('gameLiveStartHome', storedStartTime.toString());
-    }
-    
-    const seconds = 15;
-  
-    let intervalId;
-
-    
-  if(updatedRating<5){
-     intervalId = setInterval(() => {
-      const currentTime = Math.floor(Date.now() / 1000);
-      let elapsedTime = currentTime - storedStartTime; 
-      if (elapsedTime >= seconds) { 
-           updatedRating = _life + Math.floor(elapsedTime / seconds);
-           console.log("elapsedTime",elapsedTime)
-           console.log('updatedRating in refillLives',updatedRating)
-           updateHearts(updatedRating);
-          // localStorage.setItem('gameLiveStart', currentTime?.toString());
-    if(updatedRating>=5){
-    clearInterval(intervalId)
-    localStorage.removeItem('gameLiveStart')
-    timeLeftElement.style.display='none';
-    window.location.reload()
+function refillLives() {
+  let updatedRating = _life;
+  let storedStartTime = parseInt(localStorage.getItem("gameLiveStart") || "");
+  if (!storedStartTime || isNaN(storedStartTime)) {
+    storedStartTime = Math.floor(Date.now() / 1000);
+    localStorage.setItem("gameLiveStart", storedStartTime.toString());
   }
 
+  const seconds = 15;
 
-  
-  } else { 
+  let intervalId;
 
+  if (updatedRating < 5) {
+    intervalId = setInterval(() => {
+      const currentTime = Math.floor(Date.now() / 1000);
+      let elapsedTime = currentTime - storedStartTime;
+      if (elapsedTime >= seconds) {
+        updatedRating = _life + Math.floor(elapsedTime / seconds);
+        console.log("elapsedTime", elapsedTime);
+        console.log("updatedRating in refillLives", updatedRating);
+        updateHearts(updatedRating);
+        // localStorage.setItem('gameLiveStart', currentTime?.toString());
+        if (updatedRating >= 5) {
+          clearInterval(intervalId);
+          localStorage.removeItem("gameLiveStart");
+          timeLeftElement.style.display = "none";
+          window.location.reload();
+        }
+      } else {
       }
 
       const remainingTime = seconds - (elapsedTime % seconds);
-      timeLeftElement.innerHTML=remainingTime  
-  }, 1000);
+      timeLeftElement.innerHTML = remainingTime;
+    }, 1000);
   }
+}
 
-  }
-
-if(_life<5){
-  refillLives()
+if (_life < 5) {
+  refillLives();
 }
 
 Racer.Utils = (function () {
@@ -122,11 +112,10 @@ Racer.Utils = (function () {
  * @type {{init: Window.Racer.Game.init, restart: Window.Racer.Game.restart}}
  */
 
-
 // window.addEventListener('message', (event) => {
 //   console.log('even',event)
 //   if(typeof event?.data==='number'){
-//     _life=event.data;    
+//     _life=event.data;
 //     window.location.reload()
 //     updateHearts();
 //   }
@@ -141,14 +130,15 @@ Racer.Game = (function () {
   function initialize() {
     paper.install(window);
     paper.setup("track_canvas");
-    
+
     Racer.Utils.init();
 
     _track = new Racer.Track();
     _car = new Racer.Car(_track.getPath());
-    _scoreUI = document.getElementsByClassName("points")[0];
-    _scoreUI.innerHTML = _points;
-    
+    _scoreUI = document.getElementById("mdc-coins");
+
+    _scoreUI.innerHTML = _points + " MDC";
+
     // _bestScoreUI = document.getElementsByClassName('best-points')[0];
 
     _hearts = document.querySelectorAll("div.lifes li");
@@ -190,13 +180,12 @@ Racer.Game = (function () {
       });
     }
   }
- 
 
   function onCarCrashEnded() {
     if (_life > 0) {
       addListener();
       _car.afterCrash(true);
-      refillLives()
+      refillLives();
     } else {
       TweenMax.to("a.start", 0.3, { ease: Cubic.easeInOut, autoAlpha: 1 });
       TweenMax.to("div.lifes", 0.4, { ease: Cubic.easeInOut, left: -200 });
@@ -220,8 +209,9 @@ Racer.Game = (function () {
     _car.reset();
     //  _life = 5;
     _points = 0;
-    _scoreUI.innerHTML = _points;
-   // updateHearts();
+    _scoreUI.innerHTML = _points + " MDC";
+
+    // updateHearts();
     addListener();
     TweenMax.to("a.start", 0.1, { ease: Cubic.easeInOut, autoAlpha: 0 });
     TweenMax.to("div.lifes", 0.6, { ease: Cubic.easeInOut, left: -20 });
@@ -252,26 +242,26 @@ Racer.Game = (function () {
     document.body.removeEventListener("touchstart", accelerate);
     document.body.removeEventListener("touchend", brake);
   }
-  
+
   function onCarRunning(e) {
     _points += e.detail;
-    _scoreUI.innerHTML = _points;
+    _scoreUI.innerHTML = Math.floor(_points / 20) + " MDC";
   }
 
   function onCarCrashed(e) {
     if (_life >= 0) {
       _life--;
-      rating--
+      rating--;
       updateHearts();
       removeListener();
-      if(_life===0){
-        window.history.pushState(null,null,'/react-mini-tg/home');
-        setTimeout(()=>{
-window.location.reload()
-        },1000)
+      if (_life === 0) {
+        window.history.pushState(null, null, "/react-mini-tg/home");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       }
     }
-    if(_life<=5){
+    if (_life <= 5) {
       localStorage.setItem("lives", _life.toString());
     }
   }
@@ -331,7 +321,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
   function initPosition() {
     _rotationExit = 0;
     _elapsedExit = 0;
-    _rotation =0;
+    _rotation = 0;
     _elapsed = 0;
     _velocity = new Point(0, 0);
     _velocity.length = 0;
@@ -408,7 +398,7 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     _position = _lastPoint;
     _position.x = parseFloat(_position?.x.toFixed(20));
     _position.y = parseFloat(_position?.y.toFixed(20));
-    _rotation=(103 + +_rotation)?.toString()
+    _rotation = (103 + +_rotation)?.toString();
 
     updateCarPosition();
   }
@@ -505,14 +495,12 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
     _rotation = _rotation.toFixed(10);
     _position = point;
 
-    _rotation = (+_rotation + 270+180).toString();
+    _rotation = (+_rotation + 270 + 180).toString();
 
     if (_position && _position.x && _position.y) {
       _position.x = _position?.x ? parseFloat(_position.x?.toFixed(20)) : 0;
       _position.y = _position?.y ? parseFloat(_position.y?.toFixed(20)) : 0;
     }
-
-
 
     updateCarPosition();
   }

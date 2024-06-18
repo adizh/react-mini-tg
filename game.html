@@ -13,14 +13,14 @@
       type="text/css"
     />
 
-<style>
+    <style>
       * {
         box-sizing: border-box;
         -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
 
       body {
@@ -106,31 +106,21 @@
       .bottom-ui {
         display: flex;
         gap: 15px;
-      
+
         align-items: center;
       }
 
-      #timeLeft{
-        color:white;
+      #timeLeft {
+        color: white;
       }
-      .lives-block{
+      .lives-block {
         display: flex;
         flex-direction: column;
       }
-    </style> 
+    </style>
   </head>
 
   <body>
-<!-- <iframe src="/react-mini-tg/home" frameborder="0" style="visibility: hidden;opacity: 0;"></iframe> -->
-    <button onclick="goBack()">BACK</button>
-    <!-- <svg width="321" height="475" viewBox="0 0 321 475" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M65.6837 40.831L215.617 24.0538C219.196 23.6534 222.704 22.7715 226.046 21.4322L260.803 7.50567C279.923 -0.155203 301.734 7.95549 311.203 26.2472L311.764 27.3306C321.459 46.0573 314.95 69.0934 296.89 79.9784L120.462 186.31C108.664 193.421 101.355 206.102 101.116 219.876L98.8109 352.767C98.4627 372.837 82.0935 388.925 62.0205 388.925V388.925C41.6986 388.925 25.2245 372.451 25.2245 352.129V169.182C25.2245 147.091 43.1331 129.182 65.2245 129.182H231.405C253.496 129.182 271.405 147.091 271.405 169.182V431C271.405 453.091 253.496 471 231.405 471H44C21.9086 471 4 453.091 4 431V85.4296C4 78.9675 5.5656 72.6017 8.56282 66.8768L9.3119 65.446C15.3334 53.9446 26.5621 46.0808 39.429 44.3542L65.6837 40.831Z" stroke="#7E848D" stroke-width="8"/>
-    </svg> -->
-
-<!-- <svg width="321" height="475" viewBox="0 0 321 475" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M65.6837 40.831L215.617 24.0538C219.196 23.6534 222.704 22.7715 226.046 21.4322L260.803 7.50567C279.923 -0.155203 301.734 7.95549 311.203 26.2472L311.764 27.3306C321.459 46.0573 314.95 69.0934 296.89 79.9784L120.462 186.31C108.664 193.421 101.355 206.102 101.116 219.876L98.8109 352.767C98.4627 372.837 82.0935 388.925 62.0205 388.925V388.925C41.6986 388.925 25.2245 372.451 25.2245 352.129V169.182C25.2245 147.091 43.1331 129.182 65.2245 129.182H231.405C253.496 129.182 271.405 147.091 271.405 169.182V431C271.405 453.091 253.496 471 231.405 471H44C21.9086 471 4 453.091 4 431V85.4296C4 78.9675 5.5656 72.6017 8.56282 66.8768L9.3119 65.446C15.3334 53.9446 26.5621 46.0808 39.429 44.3542L65.6837 40.831Z" stroke="#7E848D" stroke-width="8"/>
-  </svg> -->
-
     <div class="game-section">
       <svg id="track">
         <path
@@ -142,25 +132,22 @@
       </svg>
 
       <div class="ui">
-        <div id="mdc-coins">12 MDC</div>
+        <div id="mdc-coins"></div>
 
         <div class="bottom-ui">
-        <div class="lives-block">
-          <div class="ui-item lifes">
-            <ul>
-              <li><i class="fa fa-heart"></i></li>
-              <li><i class="fa fa-heart"></i></li>
-              <li><i class="fa fa-heart"></i></li>
-              <li><i class="fa fa-heart"></i></li>
-              <li><i class="fa fa-heart"></i></li>
-            </ul>
+          <div class="lives-block">
+            <div class="ui-item lifes">
+              <ul>
+                <li><i class="fa fa-heart"></i></li>
+                <li><i class="fa fa-heart"></i></li>
+                <li><i class="fa fa-heart"></i></li>
+                <li><i class="fa fa-heart"></i></li>
+                <li><i class="fa fa-heart"></i></li>
+              </ul>
+            </div>
+
+            <div id="timeLeft"></div>
           </div>
-
-
-          <div id="timeLeft"></div>
-        </div>
-
-          <span class="points">0</span>
         </div>
       </div>
 
@@ -180,13 +167,8 @@
       const tg = window.Telegram.WebApp;
       const btn = tg.BackButton;
       btn.show();
-     Racer.Game.init();
-     const goBack=()=>{
-      //  window.history.replaceState(null, null, "/react-mini-tg/home");
-      //   setTimeout(() => {
-      //     window.location.reload();
-      //   }, 100);
-     }
+      Racer.Game.init();
+
       btn.onClick((e) => {
         window.history.pushState(null, null, "/react-mini-tg/home");
         setTimeout(() => {
@@ -194,11 +176,11 @@
         }, 0);
       });
 
-      window.addEventListener('beforeunload', function (event) {
-setTimeout(()=>{
-  btn.hide()
-},300)
-});
+      window.addEventListener("beforeunload", function (event) {
+        setTimeout(() => {
+          btn.hide();
+        }, 300);
+      });
     </script>
   </body>
 </html>
