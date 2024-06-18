@@ -3,18 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { retrieveLaunchParams } from "@tma.js/sdk";
 
 function Register() {
-  
   const { initDataRaw, initData } = retrieveLaunchParams();
   const navigate = useNavigate();
   const tg = window.Telegram.WebApp;
 
   const makeRequest = () => {
-    fetch("https://peaceful-goose-possibly.ngrok-free.app/api/v1/User/authorize", {
-      method: "POST",
-      headers: {
-        Authorization: `tma ${initDataRaw}`,
+    fetch(
+      "https://peaceful-goose-possibly.ngrok-free.app/api/v1/User/authorize",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `tma ${initDataRaw}`,
+        },
       },
-    })
+    )
       .then((response) => response.json())
       .then((data) => console.log(data));
   };

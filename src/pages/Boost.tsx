@@ -43,7 +43,7 @@ function Boost() {
         );
         setAllBoosts(imgAddedBoosts);
 
-      //  console.log("imgAddedBoosts", imgAddedBoosts);
+        //  console.log("imgAddedBoosts", imgAddedBoosts);
       }
     } catch (err) {
       console.log(err);

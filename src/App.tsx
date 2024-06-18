@@ -5,7 +5,7 @@ import { on, off, type MiniAppsEventListener } from "@tma.js/sdk";
 import Main from "./pages/Main";
 import About from "./pages/About";
 
-import { initClosingBehavior } from '@tma.js/sdk';
+import { initClosingBehavior } from "@tma.js/sdk";
 import Login from "./pages/Login";
 
 import Register from "./pages/Register";
@@ -25,7 +25,7 @@ import { subscribe, unsubscribe } from "@tma.js/sdk";
 export const App: FC = () => {
   const scrollableRef = useRef<HTMLDivElement | null>(null);
   const telegram = window.Telegram.WebApp;
-//const [closingBehavior] = initClosingBehavior();
+  //const [closingBehavior] = initClosingBehavior();
 
   //closingBehavior.enableConfirmation();
   function ensureDocumentIsScrollable() {
@@ -50,7 +50,7 @@ export const App: FC = () => {
 
   useEffect(() => {
     ensureDocumentIsScrollable();
- //   preventCollapse()
+    //   preventCollapse()
   }, []);
 
   useEffect(() => {

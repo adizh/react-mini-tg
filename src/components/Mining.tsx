@@ -41,17 +41,17 @@ function Mining() {
     let formattedTime = "";
 
     if (hours > 0) {
-        formattedTime += hours + " hour" + (hours === 1 ? "" : "s") + " ";
+      formattedTime += hours + " hour" + (hours === 1 ? "" : "s") + " ";
     }
     if (minutes > 0) {
-        formattedTime += minutes + " minute" + (minutes === 1 ? "" : "s") + " ";
+      formattedTime += minutes + " minute" + (minutes === 1 ? "" : "s") + " ";
     }
     if (seconds > 0) {
-        formattedTime += seconds + " second" + (seconds === 1 ? "" : "s");
+      formattedTime += seconds + " second" + (seconds === 1 ? "" : "s");
     }
 
     return formattedTime.trim();
-}
+  }
 
   const startMining = () => {
     setStartMining(true);
@@ -94,7 +94,7 @@ function Mining() {
         localStorage.removeItem("twoMinutesLaterUnixTime");
         localStorage.removeItem("isMiningStarted");
       } else {
-          const formattedTime = formatUnixTime(newTimeLeft)
+        const formattedTime = formatUnixTime(newTimeLeft);
         setTimeLeft(formattedTime);
         const elapsed = totalDuration - newTimeLeft;
         const percentageComplete = +((elapsed / totalDuration) * 100).toFixed(

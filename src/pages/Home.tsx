@@ -24,19 +24,17 @@ function Home() {
   //const vp = useViewport();
   const tg = window.Telegram.WebApp;
   const livesFromLocal =
-  localStorage.getItem("lives") && localStorage.getItem("lives") !== null
-    ? Number(localStorage.getItem("lives"))
-    : 5;
+    localStorage.getItem("lives") && localStorage.getItem("lives") !== null
+      ? Number(localStorage.getItem("lives"))
+      : 5;
 
-    const [lives,setLives]=useState(livesFromLocal)
+  const [lives, setLives] = useState(livesFromLocal);
 
- 
+  const [rating, timeLeft, isStarted] = useTimer(+livesFromLocal);
 
-   const [rating, timeLeft,isStarted] = useTimer(+livesFromLocal);
-
-   useEffect(()=>{
-    setLives(rating)
-  },[rating])
+  useEffect(() => {
+    setLives(rating);
+  }, [rating]);
   // const cloasing = useClosingBehavior()
   // const close=initClosingBehavior()
   // cloasing.enableConfirmation
@@ -55,22 +53,21 @@ function Home() {
   // }, [cloasing,vp]);
 
   const [userName, setUserName] = useState("");
-  
 
   //console.log("TG",tg)
   useEffect(() => {
     setUserName(tg.initDataUnsafe.user?.first_name as string);
     tg.expand();
-    if(rating===5){
-    //  console.log('HOME COMPONENT rating',rating)
-      localStorage.removeItem('gameLiveStart')
+    if (rating === 5) {
+      //  console.log('HOME COMPONENT rating',rating)
+      localStorage.removeItem("gameLiveStart");
     }
   }, []);
 
   const handlePlayClick = () => {
     //window.open("game.html", "_blank");
-   // window.open('game.html')
-    location.href='game.html'
+    // window.open('game.html')
+    location.href = "game.html";
   };
 
   return (
@@ -125,12 +122,16 @@ function Home() {
               <p className="grey-text">Play to earn more MDC!</p>
               <GameLives />
 
-              <button className="white-btn" onClick={() => handlePlayClick()} disabled={lives<1 ? true :false}>
+              <button
+                className="white-btn"
+                onClick={() => handlePlayClick()}
+                disabled={lives < 1 ? true : false}
+              >
                 Play
               </button>
             </div>
             <div>
-              <img width={55} src={MiniBlue} alt="car" className='home-car' />
+              <img width={55} src={MiniBlue} alt="car" className="home-car" />
             </div>
           </div>
         </div>
