@@ -2,7 +2,7 @@ let Racer = window.Racer || {};
 
 let livesFromLocal = localStorage.getItem("lives");
 
-console.log('livesFromLocal in MOUNTED IN RACER',livesFromLocal)
+
 const timeLeftElement = document.getElementById("timeLeft");
 let _life;
 let _hearts;
@@ -17,7 +17,7 @@ if(+livesFromLocal>5){
 if (livesFromLocal && livesFromLocal != undefined) {
   _life = +livesFromLocal;
   rating = +livesFromLocal;
-  console.log('_LIFE ON MOUNREDEDDD in racer',_life)
+
 }
 if(!livesFromLocal || isNaN(livesFromLocal)){
   _life=5;
@@ -32,8 +32,10 @@ function updateHearts(life = _life) {
   if (_life <= 5) {
     localStorage.setItem("lives", life.toString());
   }
+
+  console.log('update hears life',life)
 if(life===0){
-  myModal.show()
+ // myModal.show()
 }
 }
 
@@ -66,7 +68,8 @@ function refillLives() {
      
 
         updateHearts(updatedRating);
-       
+       const  nowTime = Math.floor(Date.now() / 1000);
+        localStorage.setItem("gameLiveStart", nowTime.toString());
         if
          (updatedRating >= 5) {
           clearInterval(intervalId);
@@ -87,7 +90,7 @@ if (_life < 5) {
  refillLives();
 }
 
-console.log("_LIFE ON MOUNTED",_life)
+
 
 
 Racer.Utils = (function () {
@@ -140,7 +143,7 @@ Racer.Utils = (function () {
 
 
 function onCarCrashed2 (){
-  console.log('onCarCrashed2 __LIFE',_life)
+
 }
 Racer.Game = (function () {
   let _track, _car;
@@ -269,25 +272,16 @@ Racer.Game = (function () {
 
   function onCarRunning(e) {
     _points += e.detail;
-    _scoreUI.innerHTML = Math.floor(_points / 20) + " MDC";
-    modalPoints.innerHTML= Math.floor(_points / 20)
+    _scoreUI.innerHTML = Math.floor(_points / 40) + " MDC";
+    modalPoints.innerHTML= Math.floor(_points / 40)
   }
 
   function onCarCrashed(e) {
     if (_life >= 0) {
-
       _life--;
       rating--;
-
       removeListener();
       updateHearts();
-      if (_life === 0) {
-  //myModal.show()
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 1000);
-      }
-      console.log('life in onCarCrashed',_life)
     }
     if (_life <= 5) {
       localStorage.setItem("lives", _life.toString());
