@@ -6,7 +6,8 @@ function Register() {
   const { initDataRaw, initData } = retrieveLaunchParams();
   const navigate = useNavigate();
   const tg = window.Telegram.WebApp;
-
+console.log('initData',initData)
+console.log('initDataRaw',initDataRaw)
   const makeRequest = () => {
     fetch(
       "https://racing.mydatacoin.io/api/v1/User/authorize",
