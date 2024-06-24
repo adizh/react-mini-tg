@@ -13,7 +13,7 @@ function GameLives() {
       : 5;
 
   if (livesFromLocal > 5) {
-   // localStorage.removeItem("gameLiveStart");
+   localStorage.removeItem("gameLiveStart");
   }
 
 
@@ -22,22 +22,22 @@ function GameLives() {
   const [rating, timeLeft, isStarted] = useTimer(+lives);
 
 
-//localStorage.setItem('lives',rating.toString())
+localStorage.setItem('lives',rating.toString())
   const ratingArray = Array.from({ length: rating }, (_, index) => index + 1);
   const voidItems = Array.from({ length: 5 - rating }, (_, index) => index + 1);
 
   useEffect(() => {
- //   localStorage.setItem("lives", rating.toString());
+ localStorage.setItem("lives", rating.toString());
     let livesFromLoc = localStorage.getItem("lives");
     if (livesFromLoc && livesFromLoc !== undefined) {
       setLives(+livesFromLoc);
     }
     if (rating === 5) {
-    //  localStorage.removeItem("gameLiveStart");
+   localStorage.removeItem("gameLiveStart");
     }
 
     if (livesFromLocal > 5) {
-      //localStorage.removeItem("lives");
+      localStorage.removeItem("lives");
     }
   }, []);
 

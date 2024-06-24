@@ -126,7 +126,7 @@ function Home() {
               <button
                 className="white-btn"
                 onClick={() => handlePlayClick()}
-                disabled={lives < 1 ? true : false}
+                disabled={lives ===5 ? false : true}
               >
                 Play
               </button>
