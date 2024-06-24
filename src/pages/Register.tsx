@@ -13,7 +13,7 @@ function Register() {
       {
         method: "POST",
         headers: {
-          Authorization: `tma ${initDataRaw}`,
+          Authorization: `tma ${initData}`,
         },
       },
     )
