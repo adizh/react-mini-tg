@@ -2,10 +2,12 @@ let Racer = window.Racer || {};
 
 let livesFromLocal = localStorage.getItem("lives");
 
+const timeLeft = document.getElementById('timeLeft');
 
 let _life;
 let _hearts;
 let rating;
+var timerOver= false
 let myModal = new bootstrap.Modal(document.getElementById('myModal'))
 const modalPoints= document.getElementById('modal_points');
 
@@ -28,6 +30,56 @@ if (_life >= 5) {
   localStorage.setItem("lives", 5?.toString());
 }
 
+const useConvertUnixTime = (time) => {
+  const dateFromUnixTimestamp = new Date(time * 1000);
+  const hours = dateFromUnixTimestamp.getHours();
+  const minutes = dateFromUnixTimestamp.getMinutes();
+  const seconds = dateFromUnixTimestamp.getSeconds();
+  const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  return formattedTime;
+};
+
+const gameStartTime = Math.floor(Date.now() / 1000);
+const gameEndTime = gameStartTime + 60;
+
+console.log('gameStartTime',useConvertUnixTime(gameStartTime))
+console.log('gameEndTime',useConvertUnixTime(gameEndTime))
+
+localStorage.setItem('gameStartTime',gameStartTime?.toString())
+localStorage.setItem('gameEndTime',gameEndTime?.toString())
+
+// const gameInterval = setInterval(()=>{
+// const gameEndLocal = parseInt(localStorage.getItem('gameEndTime') || 0)
+// const currentTime = Math.floor(Date.now() / 1000);
+
+// if(currentTime===gameEndLocal){
+
+//   console.log('GAME OVER')
+//   clearInterval(gameInterval)
+//   localStorage.removeItem('gameStartTime')
+//   localStorage.removeItem('gameEndTime')
+//   timerOver=true
+//   myModal.show()
+// }
+// },1000)
+
+const gameInterval = setInterval(() => {
+  const gameEndLocal = parseInt(localStorage.getItem('gameEndTime') || 0);
+  const currentTime = Math.floor(Date.now() / 1000);
+  const timeLeftSeconds = gameEndLocal - currentTime;
+
+  if (timeLeftSeconds <= 0) {
+    console.log('GAME OVER');
+    clearInterval(gameInterval);
+    localStorage.removeItem('gameStartTime');
+    localStorage.removeItem('gameEndTime');
+    timerOver = true;
+    myModal.show();
+    timeLeft.textContent = '0'; 
+  } else {
+    timeLeft.textContent = timeLeftSeconds.toString() + ' seconds left'
+  }
+}, 1000);
 
 
 
@@ -43,6 +95,7 @@ function updateHearts(life) {
 
 
 }
+
 
 Racer.Utils = (function () {
   let _that = this;
@@ -156,10 +209,24 @@ Racer.Game=(function () {
   }
   
   function onCarCrashEnded() {
-   if (_life > 0) {
-      addListener();
+    if(_life===0){
+
+
+     myModal.show()
+    }
+    if(timerOver){
+      removeListener()
+    }
+   if (_life > 0  && !timerOver) {
+     addListener();
       _car.afterCrash(true);
-    } else {
+
+
+    } 
+    
+    
+    
+    else {
       TweenMax.to("a.start", 0.3, { ease: Cubic.easeInOut, autoAlpha: 1 });
       TweenMax.to("div.lifes", 0.4, { ease: Cubic.easeInOut, left: -200 });
       _car.afterCrash(false);
@@ -177,8 +244,6 @@ Racer.Game=(function () {
     }
   }
   
-  
-  
   function restartGame() {
     _car.reset();
     //  _life = 5;
@@ -192,8 +257,11 @@ Racer.Game=(function () {
   }
 
   function accelerate(e) {
-    _car.accelerate();
-    e.preventDefault();
+    if(!timerOver){
+      _car.accelerate();
+      e.preventDefault();
+    }
+
   }
 
   function brake(e) {

@@ -174,8 +174,14 @@
         line-height: 16px;
         font-weight: 400;
       }
+     .modal {
+       pointer-events: none; 
+       }
+   
     </style>
+
   </head>
+
 
   <body>
     <div class="game-section">
@@ -187,10 +193,8 @@
           fill="none"
         />
       </svg>
-
       <div class="ui">
         <div id="mdc-coins"></div>
-
         <div class="bottom-ui">
           <div class="lives-block">
             <div class="ui-item lifes">
@@ -214,10 +218,10 @@
         </div>
         <canvas id="track_canvas"></canvas>
       </div>
+
       <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-          
             <div class="modal-body">
     <div class="modal-info">
       <div class="header">Congratulations!</div>
