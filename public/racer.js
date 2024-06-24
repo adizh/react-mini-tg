@@ -29,7 +29,28 @@ if(!livesFromLocal || isNaN(livesFromLocal)){
 if (_life >= 5) {
   localStorage.setItem("lives", 5?.toString());
 }
+const tg = window.Telegram.WebApp;
+const btn = tg.BackButton;
+let warnModal = new bootstrap.Modal(document.getElementById('warnModal'))
 
+btn.onClick((e) => {
+  //warnModal.show()
+  //timerOver=true;
+  // window.history.pushState(null, null, "/react-mini-tg/home");
+  // setTimeout(() => {
+  //   window.location.reload();
+  // }, 0);
+});
+
+
+btn.show();
+
+
+window.addEventListener("beforeunload", function (event) {
+  setTimeout(() => {
+   btn.hide();
+  }, 300);
+});
 const useConvertUnixTime = (time) => {
   const dateFromUnixTimestamp = new Date(time * 1000);
   const hours = dateFromUnixTimestamp.getHours();

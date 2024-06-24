@@ -9,7 +9,7 @@ function Register() {
 
   const makeRequest = () => {
     fetch(
-      "https://peaceful-goose-possibly.ngrok-free.app/api/v1/User/authorize",
+      "https://racing.mydatacoin.io/api/v1/User/authorize",
       {
         method: "POST",
         headers: {
@@ -18,7 +18,7 @@ function Register() {
       },
     )
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log('register auth response',data));
   };
 
   tg.expand();

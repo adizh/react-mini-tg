@@ -6,6 +6,7 @@ import axios, { AxiosInstance, AxiosError } from "axios";
 //const { initDataRaw, initData } = retrieveLaunchParams();
 const url = "https://racing.mydatacoin.io";
 
+
 const http: AxiosInstance = axios.create({
   baseURL: url,
   // headers: {
