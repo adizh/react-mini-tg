@@ -178,6 +178,55 @@
        pointer-events: none; 
        }
    
+
+       .modal-body-exit{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding:16px 20px;
+        justify-self: center;
+       }
+
+       .exit-header{
+        font-size: 20px;
+        line-height: 26px;
+        color:#fff;
+        font-weight: 700;
+        margin-bottom: 4px;
+       }
+
+       .exit-text{
+        color:#7E848D;
+        text-align: center;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 400;
+        margin-bottom: 16px;
+       }
+
+       .exit-btns{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+       }
+       .exit-btns button{
+        color:#4361EE;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        border-radius: 12px;
+        padding:8px 20px;
+        width: 100%;
+        background: none;
+        outline: none;
+        border: none;
+        transition:.6s ease;
+       }
+       .exit-btns button:hover{
+        background: #fff;
+        transition:.6s ease;
+       }
     </style>
 
   </head>
@@ -241,12 +290,17 @@
       <div class="modal fade" id="warnModal" tabindex="-1" aria-labelledby="warnModal" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-body">
+            <div class="modal-body-exit">
+              <div class="exit-header">Exit the game</div>
+<p class="exit-text">Do you really want to quit 
+  the game?</p>
+  <div class="exit-btns">
+    <button id="stay-btn">Stay</button>
+    <button id="exit-btn">Exit</button>
+  </div>
 
-helllooo
 
             </div>
-         
           </div>
         </div>
       </div>
