@@ -72,6 +72,7 @@ function Home() {
 
   return (
     <div className="scroll-section">
+    
       <div className="home-section">
         <div className="home-header">
           <div className="profile">

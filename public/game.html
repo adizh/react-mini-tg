@@ -174,10 +174,18 @@
         line-height: 16px;
         font-weight: 400;
       }
+
+  
+
+.modal {
+  pointer-events: all; 
+}
+   
     </style>
   </head>
 
   <body>
+    <button>BACK TO</button>
     <div class="game-section">
       <svg id="track">
         <path
@@ -214,10 +222,10 @@
         </div>
         <canvas id="track_canvas"></canvas>
       </div>
+
       <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-          
             <div class="modal-body">
     <div class="modal-info">
       <div class="header">Congratulations!</div>

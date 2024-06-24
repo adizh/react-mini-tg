@@ -19,11 +19,12 @@ function useTimer(initialRating: number): TimerHookReturnType {
     } else {
       startTimestamp = parseInt(storedStartTime);
     }
+    const seconds =5;
 
     const updateRatingAndTimeLeft = () => {
       const currentTime = Math.floor(Date.now() / 1000);
       const elapsedTime = currentTime - startTimestamp;
-      const newRating = Math.min(initialRating + Math.floor(elapsedTime / 15), 5);
+      const newRating = Math.min(initialRating + Math.floor(elapsedTime / seconds), 5);
 
       if (newRating !== rating) {
         setRating(newRating);
@@ -31,7 +32,7 @@ function useTimer(initialRating: number): TimerHookReturnType {
         //localStorage.setItem("gameLiveStart", nowTime.toString());
       }
 
-      const newTimeLeft = 15 - (elapsedTime % 15);
+      const newTimeLeft = seconds - (elapsedTime % seconds);
       setTimeLeft(newRating >= 5 ? null : newTimeLeft);
     };
 
