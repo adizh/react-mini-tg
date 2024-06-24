@@ -32,20 +32,28 @@ if (_life >= 5) {
 const tg = window.Telegram.WebApp;
 const btn = tg.BackButton;
 let warnModal = new bootstrap.Modal(document.getElementById('warnModal'))
+const stayBtn = document.getElementById('stay-btn');
+const exitBtn = document.getElementById('exit-btn');
 
 btn.onClick((e) => {
-  //warnModal.show()
-  //timerOver=true;
-  // window.history.pushState(null, null, "/react-mini-tg/home");
-  // setTimeout(() => {
-  //   window.location.reload();
-  // }, 0);
+  warnModal.show()
+  timerOver=true;
 });
+
+stayBtn.addEventListener('click',()=>{
+  warnModal.hide()
+  timerOver=false;
+})
+
+exitBtn.addEventListener('click',()=>{
+    window.history.pushState(null, null, "/react-mini-tg/home");
+  setTimeout(() => {
+    window.location.reload();
+  },0);
+})
 
 
 btn.show();
-
-
 window.addEventListener("beforeunload", function (event) {
   setTimeout(() => {
    btn.hide();
