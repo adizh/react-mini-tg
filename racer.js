@@ -316,8 +316,9 @@ Racer.Game=(function () {
 
   function onCarRunning(e) {
     _points += e.detail;
-    _scoreUI.innerHTML = Math.floor(_points / 40) + " MDC";
-    modalPoints.innerHTML= Math.floor(_points / 40)
+  _scoreUI.innerHTML = (_points / 1440).toFixed(2) + " MDC";
+   
+    modalPoints.innerHTML= (_points / 1440).toFixed(2)
   }
 
   function onCarCrashed(e) {
@@ -559,7 +560,8 @@ Racer.Car = function (path, acceleration, friction, speed, sliding_friction) {
 
     paper.view.draw();
 
-    let score = Math.round(5 * _velocity.length) - 1;
+  //  let score = Math.round(5 * _velocity.length) - 1;
+    let score = Math.round(5*_velocity.length) - 1;
     let carRunningEvent = new CustomEvent("CarRunning", { detail: score });
     window.dispatchEvent(carRunningEvent);
 
