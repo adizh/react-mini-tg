@@ -2,6 +2,7 @@ let Racer = window.Racer || {};
 
 let livesFromLocal = localStorage.getItem("lives");
 
+const timeLeft = document.getElementById('timeLeft');
 
 let _life;
 let _hearts;
@@ -39,7 +40,7 @@ const useConvertUnixTime = (time) => {
 };
 
 const gameStartTime = Math.floor(Date.now() / 1000);
-const gameEndTime = gameStartTime + 10;
+const gameEndTime = gameStartTime + 60;
 
 console.log('gameStartTime',useConvertUnixTime(gameStartTime))
 console.log('gameEndTime',useConvertUnixTime(gameEndTime))
@@ -47,22 +48,38 @@ console.log('gameEndTime',useConvertUnixTime(gameEndTime))
 localStorage.setItem('gameStartTime',gameStartTime?.toString())
 localStorage.setItem('gameEndTime',gameEndTime?.toString())
 
-const gameInterval = setInterval(()=>{
-const gameEndLocal = parseInt(localStorage.getItem('gameEndTime') || 0)
-const currentTime = Math.floor(Date.now() / 1000);
+// const gameInterval = setInterval(()=>{
+// const gameEndLocal = parseInt(localStorage.getItem('gameEndTime') || 0)
+// const currentTime = Math.floor(Date.now() / 1000);
 
-if(currentTime===gameEndLocal){
-  console.log('GAME OVER')
-  clearInterval(currentTime)
-  localStorage.removeItem('gameStartTime')
-  localStorage.removeItem('gameEndTime')
-  timerOver=true
-  myModal.show()
-  const overlay = document.getElementById('overlay');
- // overlay.style.display = 'block';
-}
-},1000)
+// if(currentTime===gameEndLocal){
 
+//   console.log('GAME OVER')
+//   clearInterval(gameInterval)
+//   localStorage.removeItem('gameStartTime')
+//   localStorage.removeItem('gameEndTime')
+//   timerOver=true
+//   myModal.show()
+// }
+// },1000)
+
+const gameInterval = setInterval(() => {
+  const gameEndLocal = parseInt(localStorage.getItem('gameEndTime') || 0);
+  const currentTime = Math.floor(Date.now() / 1000);
+  const timeLeftSeconds = gameEndLocal - currentTime;
+
+  if (timeLeftSeconds <= 0) {
+    console.log('GAME OVER');
+    clearInterval(gameInterval);
+    localStorage.removeItem('gameStartTime');
+    localStorage.removeItem('gameEndTime');
+    timerOver = true;
+    myModal.show();
+    timeLeft.textContent = '0'; 
+  } else {
+    timeLeft.textContent = timeLeftSeconds.toString() + ' seconds left'
+  }
+}, 1000);
 
 
 
