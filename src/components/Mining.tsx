@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import PercentageLine from "./PercentageLine";
 
-function Mining() {
+interface MiningProps {
+  setMdcPoints: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Mining: React.FC<MiningProps> = ({ setMdcPoints }) => {
   const getTwelveHoursLaterFromStorage = () => {
     const storedValue = localStorage.getItem("unixTimestampTwelveHoursLater");
     return storedValue ? parseInt(storedValue, 10) : 0;
@@ -31,7 +35,7 @@ function Mining() {
   const [claim, setClaim] = useState(localSavedClaim);
 
   function formatUnixTime(unixTime: number): string {
-    const milliseconds = unixTime * 1000; // Convert Unix time to milliseconds
+    const milliseconds = unixTime * 1000;
     const date = new Date(milliseconds);
 
     const hours = date.getUTCHours();
@@ -59,13 +63,13 @@ function Mining() {
     setIsMiningLoading(false);
     localStorage.setItem("isMiningStarted", "true");
     const twelveHoursLaterUnixTime = currentUnixTime + 12 * 60 * 60;
-    const twoMinutesLaterUnixTime = currentUnixTime + 2 * 60;
-    setTwelveHoursLater(twelveHoursLaterUnixTime);
+    const oneMinuteLater = currentUnixTime + 1 * 60;
+    setTwelveHoursLater(oneMinuteLater);
     setCurrentTime(currentUnixTime);
     localStorage.setItem("currentUnixTime", currentUnixTime.toString());
     localStorage.setItem(
       "unixTimestampTwelveHoursLater",
-      twelveHoursLaterUnixTime.toString(),
+      oneMinuteLater.toString(),
     );
   };
 
@@ -76,7 +80,7 @@ function Mining() {
     }
 
     const totalDuration = 12 * 60 * 60;
-    const totalDuration2 = 2 * 60;
+    const totalDuration2 = 1 * 60;
     const intervalId = setInterval(() => {
       const currentUnixTime = Math.floor(new Date().getTime() / 1000);
       const newTimeLeft = twelveHoursLater - currentUnixTime;
@@ -96,8 +100,8 @@ function Mining() {
       } else {
         const formattedTime = formatUnixTime(newTimeLeft);
         setTimeLeft(formattedTime);
-        const elapsed = totalDuration - newTimeLeft;
-        const percentageComplete = +((elapsed / totalDuration) * 100).toFixed(
+        const elapsed = totalDuration2 - newTimeLeft;
+        const percentageComplete = +((elapsed / totalDuration2) * 100).toFixed(
           2,
         );
         setPercentage(+percentageComplete);
@@ -110,6 +114,16 @@ function Mining() {
     };
   }, [isMiningStarted, twelveHoursLater]);
 
+  const claimMdc =()=>{
+    setMdcPoints((prev) => {
+      const updatedPoints = Number((prev + 100).toFixed(2));
+      localStorage.setItem('mdcPoints', updatedPoints.toString());
+      return updatedPoints;
+    });
+
+startMining()
+  }
+
   return (
     <>
       {!isMiningLoading ? (
@@ -117,7 +131,7 @@ function Mining() {
           {isMiningStarted ? (
             <PercentageLine percentage={percentage} />
           ) : claim ? (
-            <button className="blue-btn" onClick={startMining}>
+            <button className="blue-btn" onClick={claimMdc}>
               Claim
             </button>
           ) : (

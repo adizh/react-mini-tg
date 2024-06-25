@@ -52,11 +52,15 @@ function Home() {
       const storedMdcPoints = localStorage.getItem('mdcPoints');
       return storedMdcPoints ? Number(storedMdcPoints) : 0;
     };
+    const getStoredMdcClaimPoints = () => {
+      const storedMdcClaim = localStorage.getItem('mdcPointsClaim');
+      return storedMdcClaim ? Number(storedMdcClaim) : 0;
+    };
     const initialPoints = getMdcPointsFromLocalStorage();
     const storedMdcPoints = getStoredMdcPoints();
+    const storedMdcClaim = getStoredMdcClaimPoints();
     const updatedMdcPoints = Number((storedMdcPoints + initialPoints).toFixed(2));
     setMdcPoints(updatedMdcPoints);
-  
     localStorage.setItem('mdcPoints', updatedMdcPoints?.toString());
     localStorage.setItem('totalPoints', '0');
   }, []);
@@ -71,7 +75,6 @@ function Home() {
 
   return (
     <div className="scroll-section">
-    
       <div className="home-section">
         <div className="home-header">
           <div className="profile">
@@ -114,7 +117,7 @@ function Home() {
             <p>{mdcPoints} MDC</p>
           </div>
 
-          <Mining />
+          <Mining setMdcPoints={setMdcPoints} />
 
           <div className="home-game">
             <div>
