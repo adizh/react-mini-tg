@@ -316,9 +316,12 @@ Racer.Game=(function () {
 
   function onCarRunning(e) {
     _points += e.detail;
-  _scoreUI.innerHTML = (_points / 1440).toFixed(2) + " MDC";
+const totalPoints = (_points / 1440).toFixed(2) 
+
+  _scoreUI.innerHTML = totalPoints || 0 + " MDC";
    
-    modalPoints.innerHTML= (_points / 1440).toFixed(2)
+    modalPoints.innerHTML=totalPoints;
+    localStorage.setItem('totalPoints',totalPoints?.toString())
   }
 
   function onCarCrashed(e) {
