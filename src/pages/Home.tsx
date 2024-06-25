@@ -2,71 +2,70 @@ import Footer from "../components/Footer";
 import "../styles/home.scss";
 import MiniBlue from "../assets/images/cars/mini-blue.png";
 import { useEffect, useState, useRef } from "react";
-
 import { useNavigate } from "react-router-dom";
-import {
-  useBackButton,
-  useBackButtonRaw,
-  useViewport,
-  useViewportRaw,
-  useBiometryManagerRaw,
-  useClosingBehavior,
-} from "@tma.js/sdk-react";
-
-import { initClosingBehavior } from "@tma.js/sdk";
-import { initMiniApp } from "@tma.js/sdk";
 import Mining from "../components/Mining";
 import GameLives from "../components/GameLives";
 import useTimer from "../hooks/gameLivesTimer";
 function Home() {
   const navigate = useNavigate();
-
-  //const vp = useViewport();
   const tg = window.Telegram.WebApp;
   const livesFromLocal =
     localStorage.getItem("lives") && localStorage.getItem("lives") !== null
       ? Number(localStorage.getItem("lives"))
       : 5;
 
+      const mdcPointsFromLocal =
+      localStorage.getItem("totalPoints") && localStorage.getItem("totalPoints") !== null
+        ? Number(localStorage.getItem("totalPoints"))
+        : 0;
+
+      const localMdc =   localStorage.getItem("mdcPoints") && localStorage.getItem("mdcPoints") !== null
+      ? Number(localStorage.getItem("mdcPoints"))
+      : 0;
+
   const [lives, setLives] = useState(livesFromLocal);
 
   const [rating, timeLeft, isStarted] = useTimer(+livesFromLocal);
 
+  const [mdcPoints,setMdcPoints]=useState<number>(0)
+
+
   useEffect(() => {
     setLives(rating);
   }, [rating]);
-  // const cloasing = useClosingBehavior()
-  // const close=initClosingBehavior()
-  // cloasing.enableConfirmation
-  // const miniApp = initMiniApp();
 
-  // useEffect(() => {
-
-  // vp?.on('change',()=>{
-  //   tg.expand();
-  //   vp.expand()
-  //   miniApp[0].ready()
-
-  //   tg.isExpanded=true
-
-  // })
-  // }, [cloasing,vp]);
 
   const [userName, setUserName] = useState("");
 
-  //console.log("TG",tg)
   useEffect(() => {
     setUserName(tg.initDataUnsafe.user?.first_name as string);
     tg.expand();
     if (rating === 5) {
-      //  console.log('HOME COMPONENT rating',rating)
       localStorage.removeItem("gameLiveStart");
     }
+
+    const getMdcPointsFromLocalStorage = () => {
+      const storedPoints = localStorage.getItem('totalPoints');
+      return storedPoints ? Number(storedPoints) : 0;
+    };
+    const getStoredMdcPoints = () => {
+      const storedMdcPoints = localStorage.getItem('mdcPoints');
+      return storedMdcPoints ? Number(storedMdcPoints) : 0;
+    };
+    const initialPoints = getMdcPointsFromLocalStorage();
+    const storedMdcPoints = getStoredMdcPoints();
+    const updatedMdcPoints = Number((storedMdcPoints + initialPoints).toFixed(2));
+    setMdcPoints(updatedMdcPoints);
+  
+    localStorage.setItem('mdcPoints', updatedMdcPoints?.toString());
+    localStorage.setItem('totalPoints', '0');
   }, []);
 
+
+
+
+
   const handlePlayClick = () => {
-    //window.open("game.html", "_blank");
-    // window.open('game.html')
     location.href = "game.html";
   };
 
@@ -112,7 +111,7 @@ function Home() {
         <div className="main-content">
           <div className="main-logo-content">
             <span>Balance</span>
-            <p>0 MDC</p>
+            <p>{mdcPoints} MDC</p>
           </div>
 
           <Mining />
