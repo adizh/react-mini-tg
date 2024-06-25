@@ -10,7 +10,7 @@ let rating;
 var timerOver= false
 let myModal = new bootstrap.Modal(document.getElementById('myModal'))
 const modalPoints= document.getElementById('modal_points');
-
+let totalPoints;
 if(+livesFromLocal>5){
   _life=5
   rating=5
@@ -77,20 +77,6 @@ console.log('gameEndTime',useConvertUnixTime(gameEndTime))
 localStorage.setItem('gameStartTime',gameStartTime?.toString())
 localStorage.setItem('gameEndTime',gameEndTime?.toString())
 
-// const gameInterval = setInterval(()=>{
-// const gameEndLocal = parseInt(localStorage.getItem('gameEndTime') || 0)
-// const currentTime = Math.floor(Date.now() / 1000);
-
-// if(currentTime===gameEndLocal){
-
-//   console.log('GAME OVER')
-//   clearInterval(gameInterval)
-//   localStorage.removeItem('gameStartTime')
-//   localStorage.removeItem('gameEndTime')
-//   timerOver=true
-//   myModal.show()
-// }
-// },1000)
 
 const gameInterval = setInterval(() => {
   const gameEndLocal = parseInt(localStorage.getItem('gameEndTime') || 0);
@@ -103,6 +89,10 @@ const gameInterval = setInterval(() => {
     localStorage.removeItem('gameStartTime');
     localStorage.removeItem('gameEndTime');
     timerOver = true;
+    console.log('totalPoints',totalPoints)
+    if(!totalPoints || totalPoints ===undefined){
+      modalPoints.innerHTML='0'
+    }
     myModal.show();
     timeLeft.textContent = '0'; 
   } else {
@@ -268,7 +258,7 @@ Racer.Game=(function () {
           });
         }
         _maxPoints = _points;
-        localStorage.setItem("bestScore", _maxPoints);
+       //localStorage.setItem("bestScore", _maxPoints);
       }
     }
   }
@@ -316,11 +306,13 @@ Racer.Game=(function () {
 
   function onCarRunning(e) {
     _points += e.detail;
-const totalPoints = (_points / 1440).toFixed(2) 
+ totalPoints = (_points / 1440).toFixed(2) 
 
-  _scoreUI.innerHTML = totalPoints || 0 + " MDC";
+  _scoreUI.innerHTML = totalPoints + " MDC";
    
-    modalPoints.innerHTML=totalPoints;
+    modalPoints.innerHTML=totalPoints || '0'
+
+    
     localStorage.setItem('totalPoints',totalPoints?.toString())
   }
 
