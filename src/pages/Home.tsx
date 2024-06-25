@@ -59,7 +59,7 @@ function Home() {
     const initialPoints = getMdcPointsFromLocalStorage();
     const storedMdcPoints = getStoredMdcPoints();
     const storedMdcClaim = getStoredMdcClaimPoints();
-    const updatedMdcPoints = Number((storedMdcPoints + initialPoints).toFixed(2));
+    const updatedMdcPoints = Number((storedMdcPoints + initialPoints).toFixed(4));
     setMdcPoints(updatedMdcPoints);
     localStorage.setItem('mdcPoints', updatedMdcPoints?.toString());
     localStorage.setItem('totalPoints', '0');

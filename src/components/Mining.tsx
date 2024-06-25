@@ -116,12 +116,12 @@ const Mining: React.FC<MiningProps> = ({ setMdcPoints }) => {
 
   const claimMdc =()=>{
     setMdcPoints((prev) => {
-      const updatedPoints = Number((prev + 100).toFixed(2));
+      const updatedPoints = Number((prev + 5).toFixed(4));
       localStorage.setItem('mdcPoints', updatedPoints.toString());
       return updatedPoints;
     });
 
-startMining()
+setClaim(false)
   }
 
   return (

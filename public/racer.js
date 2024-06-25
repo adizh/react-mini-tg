@@ -2,6 +2,15 @@ let Racer = window.Racer || {};
 
 let livesFromLocal = localStorage.getItem("lives");
 
+
+if(!livesFromLocal || Number(livesFromLocal)<5 ){
+  window.history.pushState(null, null, "/react-mini-tg/home");
+  setTimeout(() => {
+    window.location.reload();
+  },0);
+}
+
+
 const timeLeft = document.getElementById('timeLeft');
 
 let _life;
@@ -306,7 +315,7 @@ Racer.Game=(function () {
 
   function onCarRunning(e) {
     _points += e.detail;
- totalPoints = (_points / 1440).toFixed(2) 
+ totalPoints = (_points / 1440).toFixed(4) 
 
   _scoreUI.innerHTML = totalPoints + " MDC";
    
