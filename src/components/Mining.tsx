@@ -132,10 +132,10 @@ setClaim(false)
             <PercentageLine percentage={percentage} />
           ) : claim ? (
             <button className="blue-btn" onClick={claimMdc}>
-              Claim
+              Claim 5 MDC
             </button>
           ) : (
-            <button className="blue-btn" onClick={startMining}>
+            <button className="white-btn" onClick={startMining}>
               Start mining
             </button>
           )}

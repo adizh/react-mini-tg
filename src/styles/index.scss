@@ -32,6 +32,9 @@ button:disabled {
   padding: 16px;
   margin-bottom: $margin-bottom;
 }
+button{
+  font-weight: 500 !important;
+}
 
 .loader {
   @include flex(column, center, center);
