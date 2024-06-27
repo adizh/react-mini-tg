@@ -26,7 +26,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100%;
+
 
       }
       * {
@@ -312,26 +312,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="./racer.js"></script>
     <script>
-    
-      //const tg = window.Telegram.WebApp;
-      //const btn = tg.BackButton;
-     // let warnModal = new bootstrap.Modal(document.getElementById('warnModal'))
-     // btn.show();
-      Racer.Game.init();
-
-      // btn.onClick((e) => {
-      //   warnModal.show()
-      //   // window.history.pushState(null, null, "/react-mini-tg/home");
-      //   // setTimeout(() => {
-      //   //   window.location.reload();
-      //   // }, 0);
-      // });
-
-      // window.addEventListener("beforeunload", function (event) {
-      //   setTimeout(() => {
-      //   //  btn.hide();
-      //   }, 300);
-      // });
+      Racer.Game.init()
       const claimBtn =document.getElementById('claim-coins')
       claimBtn.addEventListener('click',(e)=>{
         window.history.pushState(null,null,'/react-mini-tg/home')
